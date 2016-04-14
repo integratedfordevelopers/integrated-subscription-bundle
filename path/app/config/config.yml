@@ -1,0 +1,160 @@
+imports:
+    - { resource: parameters.yml }
+    - { resource: security.yml }
+
+framework:
+    #esi:             ~
+    #translator:      { fallback: %locale% }
+    secret:          %secret%
+    router:
+        resource: "%kernel.root_dir%/config/routing.yml"
+        strict_requirements: ~
+    form:            ~
+    csrf_protection: ~
+    validation:      { enable_annotations: true }
+    templating:
+        engines: ['twig']
+        #assets_version: SomeVersionScheme
+    default_locale:  "%locale%"
+    trusted_proxies: ~
+    session:
+        # handler_id set to null will use default session handler from php.ini
+        handler_id:  ~
+        save_path:   ~
+    fragments:       ~
+    http_method_override: true
+
+# Twig Configuration
+twig:
+    debug:            %kernel.debug%
+    strict_variables: %kernel.debug%
+    form_themes:
+        - 'VihuvacRecaptchaBundle:Form:vihuvac_recaptcha_widget.html.twig'
+        - 'IntegratedWebsiteBundle:Form:form_div_layout.html.twig'
+
+services:
+    twig.extension.intl:
+        class: Twig_Extensions_Extension_Intl
+        tags:
+            - { name: twig.extension }
+
+# Assetic Configuration
+assetic:
+    debug:          %kernel.debug%
+    use_controller: true
+    filters:
+        less:
+            node_paths: [/usr/local/lib/node_modules]
+            compress: true
+            apply_to: "\.less$"
+        cssrewrite: ~
+        scssphp:
+            formatter: 'Leafo\ScssPhp\Formatter\Compressed'
+
+    assets:
+        integrated_css:
+            inputs:
+                - @IntegratedContentBundle/Resources/public/sass/main.scss
+            filters:
+                - scssphp
+            output: css/main.css
+        integrated_js:
+            inputs:
+                - @IntegratedFormTypeBundle/Resources/public/components/smalot-bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js
+                - @IntegratedFormTypeBundle/Resources/public/js/datetimepicker.js
+
+
+# Bootstrap Configuration
+braincrafted_bootstrap:
+    jquery_path: %kernel.root_dir%/../vendor/components/jquery/jquery.js
+
+# Doctrine Configuration
+doctrine:
+    dbal:
+        driver:   %database_driver%
+        host:     %database_host%
+        port:     %database_port%
+        dbname:   %database_name%
+        user:     %database_user%
+        password: %database_password%
+        charset:  UTF8
+        # if using pdo_sqlite as your database driver, add the path in parameters.yml
+        # e.g. database_path: %kernel.root_dir%/data/data.db3
+        # path:     %database_path%
+
+    orm:
+        auto_generate_proxy_classes: %kernel.debug%
+        auto_mapping: true
+
+doctrine_mongodb:
+    connections:
+        default:
+            server: %mongodb_server%
+            options: %mongodb_options%
+    default_database: %mongodb_database%
+    document_managers:
+        default:
+            auto_mapping: true
+
+# Swiftmailer Configuration
+swiftmailer:
+    transport: %mailer_transport%
+    host:      %mailer_host%
+    username:  %mailer_user%
+    password:  %mailer_password%
+    spool:     { type: memory }
+
+# Storage Configuration
+knp_gaufrette:
+    adapters:
+        local:
+            local:
+                directory: %kernel.root_dir%/../web/files
+    filesystems:
+        integrated:
+            adapter: local
+
+integrated_storage:
+    resolver:
+        integrated:
+            public: /files
+
+# Solr Configuration
+integrated_solr:
+    endpoints:
+        default:
+            host: %solr_host%
+            port: %solr_port%
+            core: %solr_core%
+            timeout: %solr_timeout%
+
+# Bower Configuration
+sp_bower:
+    bundles:
+        IntegratedContentBundle:
+            cache:
+                %kernel.cache_dir%/../sp_bower/IntegratedContentBundle
+        IntegratedFormTypeBundle:
+            cache:
+                %kernel.cache_dir%/../sp_bower/IntegratedFormTypeBundle
+        IntegratedWebsiteBundle:
+            cache:
+                %kernel.cache_dir%/../sp_bower/IntegratedWebsiteBundle
+    bin: %bower_bin%
+    install_on_warmup: true
+    assetic:
+        enabled: false
+
+# Theme Configuration
+integrated_theme:
+    themes:
+        default:
+            paths:
+                - @IntegratedWebsiteBundle/Resources/views/themes/default
+
+vihuvac_recaptcha:
+    site_key:   %recaptcha_site_key%
+    secret_key: %recaptcha_secret_key%
+    secure:     true
+    enabled:    true
+    locale_key: kernel.default_locale
