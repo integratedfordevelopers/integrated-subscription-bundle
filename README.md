@@ -1,4 +1,4 @@
-# IntegratedBlockBundle #
+# IntegratedBlockBundles #
 This bundle provides block management
 
 ## Requirements ##
