@@ -15,8 +15,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 /**
  * Entity\Continent
  *
- * @ORM\Entity(repositoryClass="ContinentRepository")
- * @ORM\Table(name="continent")
+ * @ORM\Entity
+ * @ORM\Table(name="vat_continent")
  */
 class Continent
 {
@@ -27,7 +27,7 @@ class Continent
     protected $continentcode;
 
     /**
-     * @ORM\Column(type="decimal", precision=2, scale=3, nullable=true)
+     * @ORM\Column(type="decimal", precision=5, scale=3, nullable=false)
      */
     protected $percentage;
 

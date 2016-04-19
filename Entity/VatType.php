@@ -27,7 +27,7 @@ class VatType
     protected $id;
 
     /**
-     * @ORM\Column(name="`name`", type="string", length=45, nullable=true)
+     * @ORM\Column(name="`name`", type="string", length=45, nullable=false)
      */
     protected $name;
 
@@ -52,7 +52,7 @@ class VatType
     protected $country;
 
     /**
-     * @ORM\Column(type="string", length=3)
+     * @ORM\Column(type="string", length=2)
      */
     protected $continent;
 

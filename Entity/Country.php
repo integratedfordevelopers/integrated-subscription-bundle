@@ -16,7 +16,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * Entity\Country
  *
  * @ORM\Entity(repositoryClass="CountryRepository")
- * @ORM\Table(name="country")
+ * @ORM\Table(name="vat_country")
  */
 class Country
 {
@@ -27,12 +27,12 @@ class Country
     protected $countrycode;
 
     /**
-     * @ORM\Column(type="string", length=45, nullable=true)
+     * @ORM\Column(type="string", length=45, nullable=false)
      */
     protected $percentage;
 
     /**
-     * @ORM\Column(type="string", length=45, nullable=true)
+     * @ORM\Column(type="decimal", precision=5, scale=3, nullable=true)
      */
     protected $code;
 

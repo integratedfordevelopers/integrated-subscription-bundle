@@ -51,7 +51,7 @@ class Subscription
     protected $discountprice;
 
     /**
-     * @ORM\Column(type="decimal", precision=2, scale=3, nullable=true)
+     * @ORM\Column(type="decimal", precision=5, scale=3, nullable=true)
      */
     protected $discountpercentage;
 

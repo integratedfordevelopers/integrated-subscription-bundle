@@ -27,7 +27,7 @@ class SubscriptionType
     protected $id;
 
     /**
-     * @ORM\Column(name="`name`", type="string", length=200, nullable=true)
+     * @ORM\Column(name="`name`", type="string", length=200, nullable=false)
      */
     protected $name;
 
@@ -47,7 +47,7 @@ class SubscriptionType
     protected $enddate;
 
     /**
-     * @ORM\Column(name="`type`", type="string", nullable=true)
+     * @ORM\Column(name="`type`", type="string", nullable=false)
      */
     protected $type;
 
