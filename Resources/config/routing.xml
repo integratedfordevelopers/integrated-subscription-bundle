@@ -7,8 +7,8 @@
     <route id="integrated_subscription_homepage" path="/hello/{name}">
         <default key="_controller">IntegratedSubscriptionBundle:Default:index</default>
     </route>
-    <route id="integrated_subscription_add_wall" path="/wall/add">
-        <default key="_controller">IntegratedSubscriptionBundle:SubscriptionWall:add</default>
+    <route id="integrated_subscription_create_wall" path="/wall/create">
+        <default key="_controller">IntegratedSubscriptionBundle:SubscriptionWall:create</default>
     </route>
     <route id="integrated_subscription_show_wall" path="/wall/show">
         <default key="_controller">IntegratedSubscriptionBundle:SubscriptionWall:show</default>

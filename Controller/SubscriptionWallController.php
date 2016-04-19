@@ -10,14 +10,14 @@ namespace Integrated\Bundle\SubscriptionBundle\Controller;
 
 use Integrated\Bundle\SubscriptionBundle\Entity\SubscriptionWall;
 
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Form\Forms;
 
-
-class SubscriptionWallController
+class SubscriptionWallController extends Controller
 {
-    public function addAction(Request $request) {
+    public function createAction(Request $request) {
 
         $wall = new SubscriptionWall();
 
@@ -35,6 +35,6 @@ class SubscriptionWallController
         }
 
         $build['form'] = $form->createView();
-        return $this->render('SubscriptionBundle:SubscriptionWall:wall_add.html.twig', $build);
+        return $this->render('IntegratedSubscriptionBundle:Wall:create.html.twig', $build);
     }
 }
