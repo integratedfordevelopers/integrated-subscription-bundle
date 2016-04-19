@@ -7,7 +7,7 @@
  * information.
  */
 
-namespace Entity;
+namespace Integrated\Bundle\SubscriptionBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -16,7 +16,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * Entity\Continent
  *
  * @ORM\Entity(repositoryClass="ContinentRepository")
- * @ORM\Table(name="Continent")
+ * @ORM\Table(name="continent")
  */
 class Continent
 {

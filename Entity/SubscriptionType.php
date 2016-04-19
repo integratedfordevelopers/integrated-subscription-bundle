@@ -7,7 +7,7 @@
  * information.
  */
 
-namespace Entity;
+namespace Integrated\Bundle\SubscriptionBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -16,7 +16,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * Entity\SubscriptionType
  *
  * @ORM\Entity(repositoryClass="SubscriptionTypeRepository")
- * @ORM\Table(name="SubscriptionType", indexes={@ORM\Index(name="fk_SubscriptionType_vattype1_idx", columns={"vattype"})})
+ * @ORM\Table(name="subscription_type", indexes={@ORM\Index(name="fk_SubscriptionType_vattype1_idx", columns={"vattype"})})
  */
 class SubscriptionType
 {
@@ -479,29 +479,6 @@ class SubscriptionType
     public function getSubscriptionWalls()
     {
         return $this->subscriptionWalls;
-    }
-
-    /**
-     * Set VatType entity (many to one).
-     *
-     * @param \Entity\VatType $vatType
-     * @return \Entity\SubscriptionType
-     */
-    public function setVatType(VatType $vatType = null)
-    {
-        $this->vatType = $vatType;
-
-        return $this;
-    }
-
-    /**
-     * Get VatType entity (many to one).
-     *
-     * @return \Entity\VatType
-     */
-    public function getVatType()
-    {
-        return $this->vatType;
     }
 
     public function __sleep()

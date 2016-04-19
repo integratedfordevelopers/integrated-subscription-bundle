@@ -7,7 +7,7 @@
  * information.
  */
 
-namespace Entity;
+namespace Integrated\Bundle\SubscriptionBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -16,7 +16,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * Entity\VatType
  *
  * @ORM\Entity(repositoryClass="VatTypeRepository")
- * @ORM\Table(name="VatType", indexes={@ORM\Index(name="fk_vattype_Country1_idx", columns={"country"}), @ORM\Index(name="fk_vattype_Continent1_idx", columns={"continent"})})
+ * @ORM\Table(name="vat_type", indexes={@ORM\Index(name="fk_vattype_Country1_idx", columns={"country"}), @ORM\Index(name="fk_vattype_Continent1_idx", columns={"continent"})})
  */
 class VatType
 {
@@ -32,7 +32,7 @@ class VatType
     protected $name;
 
     /**
-     * @ORM\Column(type="decimal", precision=2, scale=3, nullable=true)
+     * @ORM\Column(type="decimal", precision=5, scale=3, nullable=true)
      */
     protected $percentage;
 
@@ -61,18 +61,6 @@ class VatType
      * @ORM\JoinColumn(name="id", referencedColumnName="vattype", nullable=false)
      */
     protected $subscriptionTypes;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Country", inversedBy="vatTypes")
-     * @ORM\JoinColumn(name="country", referencedColumnName="countrycode", nullable=false)
-     */
-    protected $country;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Continent", inversedBy="vatTypes")
-     * @ORM\JoinColumn(name="continent", referencedColumnName="continentcode", nullable=false)
-     */
-    protected $continent;
 
     public function __construct()
     {
@@ -274,52 +262,6 @@ class VatType
     public function getSubscriptionTypes()
     {
         return $this->subscriptionTypes;
-    }
-
-    /**
-     * Set Country entity (many to one).
-     *
-     * @param \Entity\Country $country
-     * @return \Entity\VatType
-     */
-    public function setCountry(Country $country = null)
-    {
-        $this->country = $country;
-
-        return $this;
-    }
-
-    /**
-     * Get Country entity (many to one).
-     *
-     * @return \Entity\Country
-     */
-    public function getCountry()
-    {
-        return $this->country;
-    }
-
-    /**
-     * Set Continent entity (many to one).
-     *
-     * @param \Entity\Continent $continent
-     * @return \Entity\VatType
-     */
-    public function setContinent(Continent $continent = null)
-    {
-        $this->continent = $continent;
-
-        return $this;
-    }
-
-    /**
-     * Get Continent entity (many to one).
-     *
-     * @return \Entity\Continent
-     */
-    public function getContinent()
-    {
-        return $this->continent;
     }
 
     public function __sleep()

@@ -7,7 +7,7 @@
  * information.
  */
 
-namespace Entity;
+namespace Integrated\Bundle\SubscriptionBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -15,7 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Entity\Subscription
  *
  * @ORM\Entity(repositoryClass="SubscriptionRepository")
- * @ORM\Table(name="Subscription", indexes={@ORM\Index(name="fk_Subscription_SubscriptionType1_idx", columns={"`type`"})})
+ * @ORM\Table(name="subscription", indexes={@ORM\Index(name="fk_Subscription_SubscriptionType1_idx", columns={"`type`"})})
  */
 class Subscription
 {
