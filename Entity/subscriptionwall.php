@@ -7,7 +7,7 @@
  * information.
  */
 
-namespace Entity;
+namespace Integrated\Bundle\SubscriptionBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -15,7 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Entity\SubscriptionWall
  *
  * @ORM\Entity(repositoryClass="SubscriptionWallRepository")
- * @ORM\Table(name="SubscriptionWall", indexes={@ORM\Index(name="fk_SubscriptionWall_SubscriptionType1_idx", columns={"`type`"})})
+ * @ORM\Table(name="subscription_wall", indexes={@ORM\Index(name="fk_SubscriptionWall_SubscriptionType1_idx", columns={"`type`"})})
  */
 class SubscriptionWall
 {
@@ -51,7 +51,7 @@ class SubscriptionWall
     protected $channels;
 
     /**
-     * @ORM\Column(name="`type`", type="integer")
+     * @ORM\Column(name="`type`", type="string", length=45)
      */
     protected $type;
 
