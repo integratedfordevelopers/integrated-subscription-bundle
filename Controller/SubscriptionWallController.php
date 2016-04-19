@@ -11,5 +11,5 @@ namespace Integrated\Bundle\SubscriptionBundle\Controller;
 
 class SubscriptionWallController
 {
-
+    
 }
