@@ -11,7 +11,7 @@ namespace Integrated\Bundle\SubscriptionBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
-
+ 
 /**
  * Entity\SubscriptionType
  *
@@ -21,8 +21,9 @@ use Doctrine\Common\Collections\ArrayCollection;
 class SubscriptionType
 {
     /**
+     * @ORM\Column(type="guid")
      * @ORM\Id
-     * @ORM\Column(type="string", length=45)
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
 
