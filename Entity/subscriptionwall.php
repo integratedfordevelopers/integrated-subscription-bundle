@@ -51,7 +51,7 @@ class SubscriptionWall
     protected $channels;
 
     /**
-     * @ORM\Column(name="`type`", type="string", length=45)
+     * @ORM\Column(name="`type`", type="string", length=45, nullable=true)
      */
     protected $type;
 
