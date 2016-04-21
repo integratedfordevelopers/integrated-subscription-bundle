@@ -26,7 +26,7 @@ class Subscription
     protected $id;
 
     /**
-     * @ORM\Column(name="`type`", type="string", length=45)
+     * @ORM\Column(name="`type`", type="string", length=45, nullable=false)
      */
     protected $type;
 

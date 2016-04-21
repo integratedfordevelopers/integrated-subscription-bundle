@@ -78,7 +78,7 @@ class SubscriptionType
     protected $channels;
 
     /**
-     * @ORM\Column(type="string", length=45, nullable=true)
+     * @ORM\Column(type="string", length=45)
      */
     protected $vattype;
 

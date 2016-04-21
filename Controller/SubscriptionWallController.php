@@ -13,7 +13,7 @@ use Integrated\Bundle\SubscriptionBundle\Entity\SubscriptionWall;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Form\Forms;
+    use Symfony\Component\Form\Forms;
 
 class SubscriptionWallController extends Controller
 {
@@ -35,6 +35,6 @@ class SubscriptionWallController extends Controller
         }
 
         $build['form'] = $form->createView();
-        return $this->render('IntegratedSubscriptionBundle:Wall:create.html.twig', $build);
+        return $this->render('IntegratedSubscriptionBundle:SubscriptionWall:create.html.twig', $build);
     }
 }
