@@ -31,7 +31,7 @@ class Subscription
     protected $type;
 
     /**
-     * @ORM\Column(type="string", length=45, nullable=true)
+     * @ORM\Column(type="string", length=45, nullable=false)
      */
     protected $relation;
 
