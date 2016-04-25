@@ -4,17 +4,14 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
-    <route id="integrated_subscription_homepage" path="/hello/{name}">
-        <default key="_controller">IntegratedSubscriptionBundle:Default:index</default>
+    <!--<route id="integrated_subscription_homepage" path="/hello/{name}">-->
+        <!--<default key="_controller">IntegratedSubscriptionBundle:Default:index</default>-->
+    <!--</route>-->
+    <route id="integrated_subscription_show_wall" path="/wall">
+        <default key="_controller">IntegratedSubscriptionBundle:SubscriptionWall:index</default>
     </route>
     <route id="integrated_subscription_create_wall" path="/wall/create">
         <default key="_controller">IntegratedSubscriptionBundle:SubscriptionWall:create</default>
-    </route>
-    <route id="integrated_subscription_show_wall" path="/wall/show">
-        <default key="_controller">IntegratedSubscriptionBundle:SubscriptionWall:show</default>
-    </route>
-    <route id="integrated_subscription_show_wall" path="/wall/show">
-        <default key="_controller">IntegratedSubscriptionBundle:SubscriptionWall:show</default>
     </route>
 
     <route id="integrated_subscription_create_type" path="/type/create">

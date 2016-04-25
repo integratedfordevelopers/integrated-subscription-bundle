@@ -17,6 +17,18 @@ use Symfony\Component\HttpFoundation\Request;
 
 class SubscriptionWallController extends Controller
 {
+//    public function indexAction(){
+//        $news = $this->getDoctrine()
+//            ->getRepository('Integrated\Bundle\SubscriptionBundle\Entity\SubscriptionWall')
+//            ->find('1c285820-088c-11e6-86ad-080027d8aa75');
+//        if (!$news) {
+//            throw $this->createNotFoundException('No news found by id ');
+//        }
+//
+//        $build['news_item'] = $news;
+//        return $this->render('IntegratedSubscriptionBundle:SubscriptionWall:news_show.html.twig', $build);
+////        return $this->render('IntegratedSubscriptionBundle:SubscriptionWall:index.html.twig');
+//    }
     public function createAction(Request $request) {
 
         $wall = new SubscriptionWall();
