@@ -13,6 +13,12 @@
     <route id="integrated_subscription_create_wall" path="/wall/create">
         <default key="_controller">IntegratedSubscriptionBundle:SubscriptionWall:create</default>
     </route>
+    <route id="integrated_subscription_edit_wall" path="/wall/edit/{id}">
+        <default key="_controller">IntegratedSubscriptionBundle:SubscriptionWall:edit</default>
+    </route>
+    <route id="integrated_subscription_delete_wall" path="/wall/delete/{id}">
+        <default key="_controller">IntegratedSubscriptionBundle:SubscriptionWall:delete</default>
+    </route>
 
     <route id="integrated_subscription_create_type" path="/type/create">
         <default key="_controller">IntegratedSubscriptionBundle:SubscriptionType:create</default>

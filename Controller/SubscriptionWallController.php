@@ -17,18 +17,23 @@ use Symfony\Component\HttpFoundation\Request;
 
 class SubscriptionWallController extends Controller
 {
-//    public function indexAction(){
+    public function indexAction(){
 //        $news = $this->getDoctrine()
 //            ->getRepository('Integrated\Bundle\SubscriptionBundle\Entity\SubscriptionWall')
 //            ->find('1c285820-088c-11e6-86ad-080027d8aa75');
 //        if (!$news) {
 //            throw $this->createNotFoundException('No news found by id ');
 //        }
-//
-//        $build['news_item'] = $news;
-//        return $this->render('IntegratedSubscriptionBundle:SubscriptionWall:news_show.html.twig', $build);
-////        return $this->render('IntegratedSubscriptionBundle:SubscriptionWall:index.html.twig');
-//    }
+
+        $walls = $this->getDoctrine()
+            ->getRepository('IntegratedSubscriptionBundle:SubscriptionWall')
+            ->findAll();
+        if (!$walls) {
+            throw $this->createNotFoundException('No walls found!');
+        }
+
+        return $this->render('IntegratedSubscriptionBundle:SubscriptionWall:index.html.twig', array('walls' => $walls));
+    }
     public function createAction(Request $request) {
 
         $wall = new SubscriptionWall();
@@ -48,5 +53,27 @@ class SubscriptionWallController extends Controller
 
         $build['form'] = $form->createView();
         return $this->render('IntegratedSubscriptionBundle:SubscriptionWall:create.html.twig', $build);
+    }
+    public function editAction()
+    {
+        $walls = $this->getDoctrine()
+            ->getRepository('IntegratedSubscriptionBundle:SubscriptionWall')
+            ->findAll();
+        if (!$walls) {
+            throw $this->createNotFoundException('No walls found!');
+        }
+
+        return $this->render('IntegratedSubscriptionBundle:SubscriptionWall:index.html.twig', array('walls' => $walls));
+    }
+    public function deleteAction()
+    {
+        $walls = $this->getDoctrine()
+            ->getRepository('IntegratedSubscriptionBundle:SubscriptionWall')
+            ->findAll();
+        if (!$walls) {
+            throw $this->createNotFoundException('No walls found!');
+        }
+
+        return $this->render('IntegratedSubscriptionBundle:SubscriptionWall:index.html.twig', array('walls' => $walls));
     }
 }
