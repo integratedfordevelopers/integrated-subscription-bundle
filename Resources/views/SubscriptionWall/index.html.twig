@@ -1,0 +1,57 @@
+{% extends 'IntegratedSubscriptionBundle::base.html.twig' %}
+
+{% block body %}
+<div id="wrapper-holder">
+    <div class="container">
+        <div class="filters_row">
+            <ul class="nav nav-pills">
+                <li class="dropdown">
+                    <a href="#" data-toggle="dropdown" role="button" id="drop_1">Options <b class="caret"></b></a>
+                    <ul aria-labelledby="drop_1" role="menu" class="dropdown-menu" id="menu_1">
+                        <li role="presentation"><a href="/admin/new" tabindex="-1" role="menuitem">New</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="content_columns_holder">
+
+            <div class="content_column_inner">
+                <div class="results">
+                    <table class="table table-striped table-hover">
+                        <colgroup>
+                            <col style="width: 20%"/>
+                            <col />
+                            <col style="width: 5em" />
+                        </colgroup>
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Teaser</th>
+                            <th>Disabled</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for data in walls %}
+                            <tr>
+                                <td>{{ data.name }}</td>
+                                <td>{{ data.teaser }}</td>
+                                <td>{{ data.disabled }}</td>
+                                <td>
+                                    <a href="{{ path('integrated_subscription_edit_wall', {'id': data.id}) }}" title="{% trans %}Edit{% endtrans %}"><span class="glyphicon glyphicon-edit"></span></a>
+                                    <a href="{{ path('integrated_subscription_delete_wall', {'id': data.id}) }}" title="{% trans %}Delete{% endtrans %}"><span class="glyphicon glyphicon-remove-circle"></span></a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock body %}
+
+
+
+
