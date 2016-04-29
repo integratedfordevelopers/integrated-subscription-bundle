@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Forms;
+use Symfony\Component\Intl\Data\Util\ArrayAccessibleResourceBundle;
 
 class SubscriptionWallController extends Controller
 {
@@ -22,8 +23,6 @@ class SubscriptionWallController extends Controller
         $walls = $this->getDoctrine()
             ->getRepository('IntegratedSubscriptionBundle:SubscriptionWall')
             ->findAll();
-
-        var_dump($walls[0]);
 
         if (!$walls) {
             throw $this->createNotFoundException('No walls found!');
@@ -39,29 +38,31 @@ class SubscriptionWallController extends Controller
             ->add('name', 'text')
             ->add('teaser', 'textarea', array('label' => 'Description'))
             ->add('disabled', 'checkbox', array('required' => false))
-            ->add('freetier', 'text', array('required' => false))
-//            ->add('channels', 'integrated_channel_choice', ['multiple'=> true, 'expanded'=> true])
+            ->add('freetier', 'integer', array('required' => false))
+            ->add('channel', 'integrated_channel_choice', ['multiple'=> true, 'expanded'=> true, 'mapped' => false])
             ->add('save', 'submit')
             ->getForm();
+
+//        $form->add('wallChannel', 'integrated_channel_choice', ['multiple'=> true, 'expanded'=> true]);
+//        $form->getForm();
 
 
         $form->handleRequest($request);
         if ($form->isValid()) {
-//            $channels = $wall->getChannels();
-//            $wall->setChannels(null);
+//            var_dump($request->request->get("form")["channel"]);
             $em = $this->getDoctrine()->getManager();
             $em->persist($wall);
             $em->flush();
-//            foreach($channels as $channel) {
-//                $wallchannel = new WallChannel();
-//                $wallchannel->setChannel($channel->getId());
-//                $wallchannel->setWall($wall->getId());
-//                $wallchannel->setSubscriptionWall($wall);
-//                $em2 = $this->getDoctrine()->getManager();
-//                $em2->persist($wallchannel);
-//                $em2->flush();
-//            }
-
+            foreach($request->request->get("form")["channel"] as $channel) {
+                $wallchannel = new WallChannel();
+                $wallchannel->setChannel($channel);
+                $wallchannel->setWall($wall->getId());
+                $wallchannel->setSubscriptionWall($wall);
+                $em2 = $this->getDoctrine()->getManager();
+                $em2->persist($wallchannel);
+                $em2->flush();
+            }
+            
             $this->addFlash(
                 'notice',
                 'Your wall is created!'
