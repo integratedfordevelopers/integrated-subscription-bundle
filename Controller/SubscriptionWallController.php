@@ -10,24 +10,19 @@ namespace Integrated\Bundle\SubscriptionBundle\Controller;
 
 use Integrated\Bundle\SubscriptionBundle\Entity\SubscriptionWall;
 
+use Integrated\Bundle\SubscriptionBundle\Entity\WallChannel;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-    use Symfony\Component\Form\Forms;
+use Symfony\Component\Form\Forms;
 
 class SubscriptionWallController extends Controller
 {
     public function indexAction(){
-//        $news = $this->getDoctrine()
-//            ->getRepository('Integrated\Bundle\SubscriptionBundle\Entity\SubscriptionWall')
-//            ->find('1c285820-088c-11e6-86ad-080027d8aa75');
-//        if (!$news) {
-//            throw $this->createNotFoundException('No news found by id ');
-//        }
-
         $walls = $this->getDoctrine()
             ->getRepository('IntegratedSubscriptionBundle:SubscriptionWall')
             ->findAll();
+
         if (!$walls) {
             throw $this->createNotFoundException('No walls found!');
         }
@@ -40,14 +35,32 @@ class SubscriptionWallController extends Controller
 
         $form = $this->createFormBuilder($wall)
             ->add('name', 'text')
+            ->add('channels', 'integrated_channel_choice', ['multiple'=> true, 'expanded'=> true])
             ->add('save', 'submit')
             ->getForm();
 
         $form->handleRequest($request);
         if ($form->isValid()) {
+
+            $channels = $wall->getChannels();
+
+            $wall->setChannels(null);
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($wall);
             $em->flush();
+
+            foreach($channels as $channel) {
+                $wallchannel = new WallChannel();
+                $wallchannel->setChannel($channel->getId());
+                $wallchannel->setWall($wall->getId());
+                $wallchannel->setSubscriptionWall($wall);
+
+                $em2 = $this->getDoctrine()->getManager();
+                $em2->persist($wallchannel);
+                $em2->flush();
+            }
+
             return new Response('Wall added successfuly');
         }
 
