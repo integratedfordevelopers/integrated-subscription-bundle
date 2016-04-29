@@ -43,13 +43,8 @@ class SubscriptionWallController extends Controller
             ->add('save', 'submit')
             ->getForm();
 
-//        $form->add('wallChannel', 'integrated_channel_choice', ['multiple'=> true, 'expanded'=> true]);
-//        $form->getForm();
-
-
         $form->handleRequest($request);
         if ($form->isValid()) {
-//            var_dump($request->request->get("form")["channel"]);
             $em = $this->getDoctrine()->getManager();
             $em->persist($wall);
             $em->flush();
