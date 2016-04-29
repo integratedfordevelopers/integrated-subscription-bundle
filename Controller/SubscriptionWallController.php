@@ -23,6 +23,8 @@ class SubscriptionWallController extends Controller
             ->getRepository('IntegratedSubscriptionBundle:SubscriptionWall')
             ->findAll();
 
+        var_dump($walls[0]);
+
         if (!$walls) {
             throw $this->createNotFoundException('No walls found!');
         }
@@ -35,33 +37,36 @@ class SubscriptionWallController extends Controller
 
         $form = $this->createFormBuilder($wall)
             ->add('name', 'text')
-            ->add('channels', 'integrated_channel_choice', ['multiple'=> true, 'expanded'=> true])
+            ->add('teaser', 'textarea', array('label' => 'Description'))
+            ->add('disabled', 'checkbox', array('required' => false))
+            ->add('freetier', 'text', array('required' => false))
+//            ->add('channels', 'integrated_channel_choice', ['multiple'=> true, 'expanded'=> true])
             ->add('save', 'submit')
             ->getForm();
 
+
         $form->handleRequest($request);
         if ($form->isValid()) {
-
-            $channels = $wall->getChannels();
-
-            $wall->setChannels(null);
-
+//            $channels = $wall->getChannels();
+//            $wall->setChannels(null);
             $em = $this->getDoctrine()->getManager();
             $em->persist($wall);
             $em->flush();
+//            foreach($channels as $channel) {
+//                $wallchannel = new WallChannel();
+//                $wallchannel->setChannel($channel->getId());
+//                $wallchannel->setWall($wall->getId());
+//                $wallchannel->setSubscriptionWall($wall);
+//                $em2 = $this->getDoctrine()->getManager();
+//                $em2->persist($wallchannel);
+//                $em2->flush();
+//            }
 
-            foreach($channels as $channel) {
-                $wallchannel = new WallChannel();
-                $wallchannel->setChannel($channel->getId());
-                $wallchannel->setWall($wall->getId());
-                $wallchannel->setSubscriptionWall($wall);
-
-                $em2 = $this->getDoctrine()->getManager();
-                $em2->persist($wallchannel);
-                $em2->flush();
-            }
-
-            return new Response('Wall added successfuly');
+            $this->addFlash(
+                'notice',
+                'Your wall is created!'
+            );
+            return $this->redirectToRoute('integrated_subscription_show_wall');
         }
 
         $build['form'] = $form->createView();
