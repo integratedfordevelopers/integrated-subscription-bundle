@@ -79,15 +79,30 @@ class SubscriptionWallController extends Controller
 
         return $this->render('IntegratedSubscriptionBundle:SubscriptionWall:index.html.twig', array('walls' => $walls));
     }
-    public function deleteAction()
+    public function deleteAction($id, Request $request)
     {
-        $walls = $this->getDoctrine()
-            ->getRepository('IntegratedSubscriptionBundle:SubscriptionWall')
-            ->findAll();
-        if (!$walls) {
-            throw $this->createNotFoundException('No walls found!');
-        }
+//        $em = $this->getDoctrine()->getManager();
+//        $news = $em->getRepository('FooNewsBundle:News')->find($id);
+//        if (!$news) {
+//            throw $this->createNotFoundException(
+//                'No news found for id ' . $id
+//            );
+//        }
+//
+//        $form = $this->createFormBuilder($news)
+//            ->add('delete', 'submit')
+//            ->getForm();
+//
+//        $form->handleRequest($request);
+//
+//        if ($form->isValid()) {
+//            $em->remove($news);
+//            $em->flush();
+//            return new Response('News deleted successfully');
+//        }
+//
+//        $build['form'] = $form->createView();
+//        return $this->render('FooNewsBundle:Default:news_add.html.twig', $build);
 
-        return $this->render('IntegratedSubscriptionBundle:SubscriptionWall:index.html.twig', array('walls' => $walls));
     }
 }
