@@ -81,28 +81,31 @@ class SubscriptionWallController extends Controller
     }
     public function deleteAction($id, Request $request)
     {
-//        $em = $this->getDoctrine()->getManager();
-//        $news = $em->getRepository('FooNewsBundle:News')->find($id);
-//        if (!$news) {
-//            throw $this->createNotFoundException(
-//                'No news found for id ' . $id
-//            );
-//        }
-//
-//        $form = $this->createFormBuilder($news)
-//            ->add('delete', 'submit')
-//            ->getForm();
-//
-//        $form->handleRequest($request);
-//
-//        if ($form->isValid()) {
-//            $em->remove($news);
-//            $em->flush();
-//            return new Response('News deleted successfully');
-//        }
-//
-//        $build['form'] = $form->createView();
-//        return $this->render('FooNewsBundle:Default:news_add.html.twig', $build);
+        $em = $this->getDoctrine()->getManager();
+        $wall = $em->getRepository('IntegratedSubscriptionBundle:SubscriptionWall')->find($id);
+        if (!$wall) {
+            throw $this->createNotFoundException(
+                'No wall found for id ' . $id
+            );
+        }
 
+        $form = $this->createFormBuilder($wall)
+            ->add('delete', 'submit')
+            ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $em->remove($wall);
+            $em->flush();
+            $this->addFlash(
+                'notice',
+                'The wall was deleted'
+            );
+            return $this->redirectToRoute('integrated_subscription_show_wall');
+        }
+
+        $build['form'] = $form->createView();
+        return $this->render('IntegratedSubscriptionBundle:SubscriptionWall:delete.html.twig', $build);
     }
 }

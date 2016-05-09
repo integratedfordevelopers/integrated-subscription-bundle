@@ -48,13 +48,13 @@ class SubscriptionWall
     protected $freetier;
 
     /**
-     * @ORM\OneToMany(targetEntity="WallChannel", mappedBy="subscriptionWall")
+     * @ORM\OneToMany(targetEntity="WallChannel", mappedBy="subscriptionWall", cascade={"remove"})
      * @ORM\JoinColumn(name="id", referencedColumnName="wall", nullable=false)
      */
     public $wallChannels;
 
     /**
-     * @ORM\ManyToMany(targetEntity="SubscriptionType", mappedBy="subscriptionWalls")
+     * @ORM\ManyToMany(targetEntity="SubscriptionType", mappedBy="subscriptionWalls",)
      */
     protected $subscriptionTypes;
 

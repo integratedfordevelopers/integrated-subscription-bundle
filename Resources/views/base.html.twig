@@ -167,14 +167,29 @@
 <div class="breadcrumb-holder">
     <div class="container">
         <ol class="breadcrumb">
-            <li class="active">
-                Home                </li>
+            <li>Home</li>
+            <li><a href="{{ path('integrated_subscription_show_wall') }}">Wall</a></li>
         </ol>
     </div>
 </div>
 
-{% block body %}
-{% endblock body %}
+
+<div id="wrapper-holder">
+    <div class="container">
+        {% block filter %}
+        {% endblock filter %}
+
+        {% for flash_message in app.session.flashBag.get('notice') %}
+            <div class="flash-notice alert alert-success">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>{{ flash_message }}</strong>
+            </div>
+        {% endfor %}
+
+        {% block body %}
+        {% endblock body %}
+    </div>
+</div>
 
 <script src="//code.jquery.com/jquery.js"></script>
 <script src="/js/bootstrap.js"></script>
