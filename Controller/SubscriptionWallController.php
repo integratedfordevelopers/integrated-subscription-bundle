@@ -90,7 +90,8 @@ class SubscriptionWallController extends Controller
         }
 
         $form = $this->createFormBuilder($wall)
-            ->add('delete', 'submit')
+            ->add('Delete', 'submit')
+            ->add('Cancel', 'button' , array('attr' => array('')))
             ->getForm();
 
         $form->handleRequest($request);
