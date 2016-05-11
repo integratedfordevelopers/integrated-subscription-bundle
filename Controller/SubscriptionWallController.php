@@ -33,13 +33,18 @@ class SubscriptionWallController extends Controller
     public function createAction(Request $request) {
 
         $wall = new SubscriptionWall();
+        $channels = $channels = $this->get("integrated_content.channel.manager")->findAll();
+        $channelNames = array();
+        foreach($channels as $channel){
+            $channelNames[] = $channel->getName();
+        }
 
         $form = $this->createFormBuilder($wall)
             ->add('name', 'text')
             ->add('teaser', 'textarea', array('label' => 'Description'))
             ->add('disabled', 'checkbox', array('required' => false))
             ->add('freetier', 'integer', array('required' => false))
-            ->add('channel', 'integrated_channel_choice', ['multiple'=> true, 'expanded'=> true, 'mapped' => false])
+            ->add('channel', 'choice', ['choices'=>$channelNames,'multiple'=> true, 'expanded'=> true, 'mapped' => false])
             ->add('save', 'submit')
             ->getForm();
 
@@ -50,7 +55,7 @@ class SubscriptionWallController extends Controller
             $em->flush();
             foreach($request->request->get("form")["channel"] as $channel) {
                 $wallChannel = new WallChannel();
-                $wallChannel->setChannel($channel);
+                $wallChannel->setChannel($channelNames[$channel]);
                 $wallChannel->setWall($wall->getId());
                 $wallChannel->setSubscriptionWall($wall);
                 $em->persist($wallChannel);
