@@ -34,7 +34,7 @@ This bundle can be installed following these steps:
     # app/config/routing.yml
     integrated_block:
         resource: "@IntegratedSubscriptionBundle/Resources/config/routing.xml"
-        prefix: /
+        prefix: "/admin"
 
 ## License ##
 This bundle is under the MIT license. See the complete license in the bundle:
