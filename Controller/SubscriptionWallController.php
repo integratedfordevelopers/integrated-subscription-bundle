@@ -49,13 +49,12 @@ class SubscriptionWallController extends Controller
             $em->persist($wall);
             $em->flush();
             foreach($request->request->get("form")["channel"] as $channel) {
-                $wallchannel = new WallChannel();
-                $wallchannel->setChannel($channel);
-                $wallchannel->setWall($wall->getId());
-                $wallchannel->setSubscriptionWall($wall);
-                $em2 = $this->getDoctrine()->getManager();
-                $em2->persist($wallchannel);
-                $em2->flush();
+                $wallChannel = new WallChannel();
+                $wallChannel->setChannel($channel);
+                $wallChannel->setWall($wall->getId());
+                $wallChannel->setSubscriptionWall($wall);
+                $em->persist($wallChannel);
+                $em->flush();
             }
             
             $this->addFlash(
