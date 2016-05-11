@@ -56,10 +56,6 @@ class SubscriptionTypeVariant
      */
     protected $subscriptionType;
 
-    public function __construct()
-    {
-    }
-
     /**
      * Set the value of subscription_type_id.
      *

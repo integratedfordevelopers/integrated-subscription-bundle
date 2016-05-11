@@ -261,7 +261,7 @@ class Subscription
      * @param \Integrated\Bundle\SubscriptionBundle\Entity\SubscriptionType $subscriptionType
      * @return \Integrated\Bundle\SubscriptionBundle\Entity\Subscription
      */
-    public function setSubscriptionType(SubscriptionType $subscriptionType = null)
+    public function setSubscriptionType(SubscriptionType $subscriptionType)
     {
         $this->subscriptionType = $subscriptionType;
 
