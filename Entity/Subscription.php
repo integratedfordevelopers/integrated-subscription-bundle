@@ -36,7 +36,7 @@ class Subscription
 
     /**
      * @param string $id
-     * @return \Subscription
+     * @return Subscription
      */
     public function setId($id)
     {
