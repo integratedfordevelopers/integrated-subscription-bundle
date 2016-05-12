@@ -152,7 +152,7 @@ class VatCountry
      */
     public function addVatType(VatType $vatType)
     {
-        $this->vatTypes[] = $vatType;
+        $this->vatTypes->add($vatType);
 
         return $this;
     }
