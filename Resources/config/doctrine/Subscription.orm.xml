@@ -1,34 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
   <entity name="Integrated\Bundle\SubscriptionBundle\Entity\Subscription" table="subscription">
+
     <indexes>
       <index columns="type"/>
     </indexes>
+
     <id name="id" type="string" column="id" length="36">
       <generator strategy="UUID"/>
     </id>
+
     <field name="relation" type="string" column="relation" length="45" nullable="true">
       <options>
         <option name="fixed"/>
       </options>
     </field>
+
     <field name="contact" type="string" column="contact" length="45" nullable="true">
       <options>
         <option name="fixed"/>
       </options>
     </field>
+
     <field name="customPrice" type="decimal" column="custom_price" precision="6" scale="2" nullable="true"/>
+
     <field name="discountPrice" type="decimal" column="discount_price" precision="6" scale="2" nullable="true"/>
+
     <field name="discountPercentage" type="decimal" column="discount_percentage" precision="5" scale="3" nullable="true"/>
+
     <field name="status" type="string" column="status" length="255" nullable="true">
       <options>
         <option name="fixed"/>
       </options>
     </field>
+
     <many-to-one field="type" target-entity="SubscriptionType" fetch="LAZY">
       <join-columns>
         <join-column name="type" referenced-column-name="id"/>
       </join-columns>
     </many-to-one>
+
   </entity>
+
 </doctrine-mapping>
