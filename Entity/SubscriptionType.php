@@ -440,9 +440,4 @@ class SubscriptionType
     {
         return $this->subscriptionWalls;
     }
-
-    public function __sleep()
-    {
-        return array('id', 'name', 'teaser', 'startDate', 'endDate', 'condition', 'disabled', 'channels', 'typevat');
-    }
 }

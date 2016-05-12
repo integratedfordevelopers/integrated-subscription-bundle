@@ -277,9 +277,4 @@ class Subscription
     {
         return $this->subscriptionType;
     }
-
-    public function __sleep()
-    {
-        return array('id', 'type', 'relation', 'contact', 'customPrice', 'discountPrice', 'discountPercentage', 'status');
-    }
 }

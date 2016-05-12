@@ -322,9 +322,4 @@ class VatType
     {
         return $this->vatContinent;
     }
-
-    public function __sleep()
-    {
-        return array('id', 'name', 'percentage', 'code', 'disableWithVatId', 'country', 'continent');
-    }
 }

@@ -179,9 +179,4 @@ class VatCountry
     {
         return $this->vatTypes;
     }
-
-    public function __sleep()
-    {
-        return array('countryCode', 'percentage', 'code', 'disableWithVatId');
-    }
 }

@@ -216,9 +216,4 @@ class SubscriptionTypeVariant
     {
         return $this->subscriptionType;
     }
-
-    public function __sleep()
-    {
-        return array('subscription_type_id', 'price', 'vat', 'priceVat', 'periodType', 'periodLength');
-    }
 }

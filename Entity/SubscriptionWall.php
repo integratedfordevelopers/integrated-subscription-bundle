@@ -250,9 +250,4 @@ class SubscriptionWall
     {
         return $this->subscriptionTypes;
     }
-
-    public function __sleep()
-    {
-        return array('id', 'name', 'teaser', 'disabled', 'freetier');
-    }
 }

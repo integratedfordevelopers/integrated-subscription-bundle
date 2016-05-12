@@ -109,9 +109,4 @@ class WallChannel
     {
         return $this->subscriptionWall;
     }
-
-    public function __sleep()
-    {
-        return array('wall', 'channel');
-    }
 }

@@ -179,9 +179,4 @@ class VatContinent
     {
         return $this->vatTypes;
     }
-
-    public function __sleep()
-    {
-        return array('continentCode', 'percentage', 'code', 'disableWithVatId');
-    }
 }
