@@ -91,7 +91,7 @@ class SubscriptionWall
      * Set the value of name.
      *
      * @param string $name
-     * @return \Integrated\Bundle\SubscriptionBundle\Entity\SubscriptionWall
+     * @return SubscriptionWall
      */
     public function setName($name)
     {
@@ -114,7 +114,7 @@ class SubscriptionWall
      * Set the value of teaser.
      *
      * @param string $teaser
-     * @return \Integrated\Bundle\SubscriptionBundle\Entity\SubscriptionWall
+     * @return SubscriptionWall
      */
     public function setTeaser($teaser)
     {
@@ -137,7 +137,7 @@ class SubscriptionWall
      * Set the value of disabled.
      *
      * @param boolean $disabled
-     * @return \Integrated\Bundle\SubscriptionBundle\Entity\SubscriptionWall
+     * @return SubscriptionWall
      */
     public function setDisabled($disabled)
     {
@@ -160,7 +160,7 @@ class SubscriptionWall
      * Set the value of freetier.
      *
      * @param string $freetier
-     * @return \Integrated\Bundle\SubscriptionBundle\Entity\SubscriptionWall
+     * @return SubscriptionWall
      */
     public function setFreetier($freetier)
     {
@@ -182,8 +182,8 @@ class SubscriptionWall
     /**
      * Add WallChannel entity to collection (one to many).
      *
-     * @param \Integrated\Bundle\SubscriptionBundle\Entity\WallChannel $wallChannel
-     * @return \Integrated\Bundle\SubscriptionBundle\Entity\SubscriptionWall
+     * @param WallChannel $wallChannel
+     * @return SubscriptionWall
      */
     public function addWallChannel(WallChannel $wallChannel)
     {
@@ -195,8 +195,8 @@ class SubscriptionWall
     /**
      * Remove WallChannel entity from collection (one to many).
      *
-     * @param \Integrated\Bundle\SubscriptionBundle\Entity\WallChannel $wallChannel
-     * @return \Integrated\Bundle\SubscriptionBundle\Entity\SubscriptionWall
+     * @param WallChannel $wallChannel
+     * @return SubscriptionWall
      */
     public function removeWallChannel(WallChannel $wallChannel)
     {
@@ -218,8 +218,8 @@ class SubscriptionWall
     /**
      * Add SubscriptionType entity to collection.
      *
-     * @param \Integrated\Bundle\SubscriptionBundle\Entity\SubscriptionType $subscriptionType
-     * @return \Integrated\Bundle\SubscriptionBundle\Entity\SubscriptionWall
+     * @param SubscriptionType $subscriptionType
+     * @return SubscriptionWall
      */
     public function addSubscriptionType(SubscriptionType $subscriptionType)
     {
@@ -231,8 +231,8 @@ class SubscriptionWall
     /**
      * Remove SubscriptionType entity from collection.
      *
-     * @param \Integrated\Bundle\SubscriptionBundle\Entity\SubscriptionType $subscriptionType
-     * @return \Integrated\Bundle\SubscriptionBundle\Entity\SubscriptionWall
+     * @param SubscriptionType $subscriptionType
+     * @return SubscriptionWall
      */
     public function removeSubscriptionType(SubscriptionType $subscriptionType)
     {

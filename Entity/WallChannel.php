@@ -45,7 +45,7 @@ class WallChannel
      * Set the value of wall.
      *
      * @param string $wall
-     * @return \Integrated\Bundle\SubscriptionBundle\Entity\WallChannel
+     * @return WallChannel
      */
     public function setWall($wall)
     {
@@ -68,7 +68,7 @@ class WallChannel
      * Set the value of channel.
      *
      * @param string $channel
-     * @return \Integrated\Bundle\SubscriptionBundle\Entity\WallChannel
+     * @return WallChannel
      */
     public function setChannel($channel)
     {
@@ -90,8 +90,8 @@ class WallChannel
     /**
      * Set SubscriptionWall entity (many to one).
      *
-     * @param \Integrated\Bundle\SubscriptionBundle\Entity\SubscriptionWall $subscriptionWall
-     * @return \Integrated\Bundle\SubscriptionBundle\Entity\WallChannel
+     * @param SubscriptionWall $subscriptionWall
+     * @return WallChannel
      */
     public function setSubscriptionWall(SubscriptionWall $subscriptionWall = null)
     {
@@ -103,7 +103,7 @@ class WallChannel
     /**
      * Get SubscriptionWall entity (many to one).
      *
-     * @return \Integrated\Bundle\SubscriptionBundle\Entity\SubscriptionWall
+     * @return SubscriptionWall
      */
     public function getSubscriptionWall()
     {

@@ -75,7 +75,7 @@ class Subscription
      * Set the value of id.
      *
      * @param string $id
-     * @return \Integrated\Bundle\SubscriptionBundle\Entity\Subscription
+     * @return \Subscription
      */
     public function setId($id)
     {
@@ -98,7 +98,7 @@ class Subscription
      * Set the value of type.
      *
      * @param string $type
-     * @return \Integrated\Bundle\SubscriptionBundle\Entity\Subscription
+     * @return Subscription
      */
     public function setType($type)
     {
@@ -121,7 +121,7 @@ class Subscription
      * Set the value of relation.
      *
      * @param string $relation
-     * @return \Integrated\Bundle\SubscriptionBundle\Entity\Subscription
+     * @return Subscription
      */
     public function setRelation($relation)
     {
@@ -144,7 +144,7 @@ class Subscription
      * Set the value of contact.
      *
      * @param string $contact
-     * @return \Integrated\Bundle\SubscriptionBundle\Entity\Subscription
+     * @return Subscription
      */
     public function setContact($contact)
     {
@@ -167,7 +167,7 @@ class Subscription
      * Set the value of customPrice.
      *
      * @param float $customPrice
-     * @return \Integrated\Bundle\SubscriptionBundle\Entity\Subscription
+     * @return Subscription
      */
     public function setCustomPrice($customPrice)
     {
@@ -190,7 +190,7 @@ class Subscription
      * Set the value of discountPrice.
      *
      * @param float $discountPrice
-     * @return \Integrated\Bundle\SubscriptionBundle\Entity\Subscription
+     * @return Subscription
      */
     public function setDiscountPrice($discountPrice)
     {
@@ -213,7 +213,7 @@ class Subscription
      * Set the value of discountPercentage.
      *
      * @param float $discountPercentage
-     * @return \Integrated\Bundle\SubscriptionBundle\Entity\Subscription
+     * @return Subscription
      */
     public function setDiscountPercentage($discountPercentage)
     {
@@ -236,7 +236,7 @@ class Subscription
      * Set the value of status.
      *
      * @param string $status
-     * @return \Integrated\Bundle\SubscriptionBundle\Entity\Subscription
+     * @return Subscription
      */
     public function setStatus($status)
     {
@@ -258,8 +258,8 @@ class Subscription
     /**
      * Set SubscriptionType entity (many to one).
      *
-     * @param \Integrated\Bundle\SubscriptionBundle\Entity\SubscriptionType $subscriptionType
-     * @return \Integrated\Bundle\SubscriptionBundle\Entity\Subscription
+     * @param SubscriptionType $subscriptionType
+     * @return Subscription
      */
     public function setSubscriptionType(SubscriptionType $subscriptionType)
     {
@@ -271,7 +271,7 @@ class Subscription
     /**
      * Get SubscriptionType entity (many to one).
      *
-     * @return \Integrated\Bundle\SubscriptionBundle\Entity\SubscriptionType
+     * @return SubscriptionType
      */
     public function getSubscriptionType()
     {

@@ -105,7 +105,7 @@ class SubscriptionType
      * Set the value of id.
      *
      * @param string $id
-     * @return \Integrated\Bundle\SubscriptionBundle\Entity\SubscriptionType
+     * @return SubscriptionType
      */
     public function setId($id)
     {
@@ -128,7 +128,7 @@ class SubscriptionType
      * Set the value of name.
      *
      * @param string $name
-     * @return \Integrated\Bundle\SubscriptionBundle\Entity\SubscriptionType
+     * @return SubscriptionType
      */
     public function setName($name)
     {
@@ -151,7 +151,7 @@ class SubscriptionType
      * Set the value of teaser.
      *
      * @param string $teaser
-     * @return \Integrated\Bundle\SubscriptionBundle\Entity\SubscriptionType
+     * @return SubscriptionType
      */
     public function setTeaser($teaser)
     {
@@ -174,7 +174,7 @@ class SubscriptionType
      * Set the value of startDate.
      *
      * @param \DateTime $startDate
-     * @return \Integrated\Bundle\SubscriptionBundle\Entity\SubscriptionType
+     * @return SubscriptionType
      */
     public function setStartDate($startDate)
     {
@@ -197,7 +197,7 @@ class SubscriptionType
      * Set the value of endDate.
      *
      * @param \DateTime $endDate
-     * @return \Integrated\Bundle\SubscriptionBundle\Entity\SubscriptionType
+     * @return SubscriptionType
      */
     public function setEndDate($endDate)
     {
@@ -220,7 +220,7 @@ class SubscriptionType
      * Set the value of condition.
      *
      * @param string $condition
-     * @return \Integrated\Bundle\SubscriptionBundle\Entity\SubscriptionType
+     * @return SubscriptionType
      */
     public function setCondition($condition)
     {
@@ -243,7 +243,7 @@ class SubscriptionType
      * Set the value of disabled.
      *
      * @param boolean $disabled
-     * @return \Integrated\Bundle\SubscriptionBundle\Entity\SubscriptionType
+     * @return SubscriptionType
      */
     public function setDisabled($disabled)
     {
@@ -266,7 +266,7 @@ class SubscriptionType
      * Set the value of channels.
      *
      * @param string $channels
-     * @return \Integrated\Bundle\SubscriptionBundle\Entity\SubscriptionType
+     * @return SubscriptionType
      */
     public function setChannels($channels)
     {
@@ -289,7 +289,7 @@ class SubscriptionType
      * Set the value of typevat.
      *
      * @param string $typevat
-     * @return \Integrated\Bundle\SubscriptionBundle\Entity\SubscriptionType
+     * @return SubscriptionType
      */
     public function setTypevat($typevat)
     {
@@ -311,8 +311,8 @@ class SubscriptionType
     /**
      * Add Subscription entity to collection (one to many).
      *
-     * @param \Integrated\Bundle\SubscriptionBundle\Entity\Subscription $subscription
-     * @return \Integrated\Bundle\SubscriptionBundle\Entity\SubscriptionType
+     * @param Subscription $subscription
+     * @return SubscriptionType
      */
     public function addSubscription(Subscription $subscription)
     {
@@ -324,8 +324,8 @@ class SubscriptionType
     /**
      * Remove Subscription entity from collection (one to many).
      *
-     * @param \Integrated\Bundle\SubscriptionBundle\Entity\Subscription $subscription
-     * @return \Integrated\Bundle\SubscriptionBundle\Entity\SubscriptionType
+     * @param Subscription $subscription
+     * @return SubscriptionType
      */
     public function removeSubscription(Subscription $subscription)
     {
@@ -347,8 +347,8 @@ class SubscriptionType
     /**
      * Add SubscriptionTypeVariant entity to collection (one to many).
      *
-     * @param \Integrated\Bundle\SubscriptionBundle\Entity\SubscriptionTypeVariant $subscriptionTypeVariant
-     * @return \Integrated\Bundle\SubscriptionBundle\Entity\SubscriptionType
+     * @param SubscriptionTypeVariant $subscriptionTypeVariant
+     * @return SubscriptionType
      */
     public function addSubscriptionTypeVariant(SubscriptionTypeVariant $subscriptionTypeVariant)
     {
@@ -360,8 +360,8 @@ class SubscriptionType
     /**
      * Remove SubscriptionTypeVariant entity from collection (one to many).
      *
-     * @param \Integrated\Bundle\SubscriptionBundle\Entity\SubscriptionTypeVariant $subscriptionTypeVariant
-     * @return \Integrated\Bundle\SubscriptionBundle\Entity\SubscriptionType
+     * @param SubscriptionTypeVariant $subscriptionTypeVariant
+     * @return SubscriptionType
      */
     public function removeSubscriptionTypeVariant(SubscriptionTypeVariant $subscriptionTypeVariant)
     {
@@ -383,8 +383,8 @@ class SubscriptionType
     /**
      * Set VatType entity (many to one).
      *
-     * @param \Integrated\Bundle\SubscriptionBundle\Entity\VatType $vatType
-     * @return \Integrated\Bundle\SubscriptionBundle\Entity\SubscriptionType
+     * @param VatType $vatType
+     * @return SubscriptionType
      */
     public function setVatType(VatType $vatType = null)
     {
@@ -396,7 +396,7 @@ class SubscriptionType
     /**
      * Get VatType entity (many to one).
      *
-     * @return \Integrated\Bundle\SubscriptionBundle\Entity\VatType
+     * @return VatType
      */
     public function getVatType()
     {
@@ -406,8 +406,8 @@ class SubscriptionType
     /**
      * Add SubscriptionWall entity to collection.
      *
-     * @param \Integrated\Bundle\SubscriptionBundle\Entity\SubscriptionWall $subscriptionWall
-     * @return \Integrated\Bundle\SubscriptionBundle\Entity\SubscriptionType
+     * @param SubscriptionWall $subscriptionWall
+     * @return SubscriptionType
      */
     public function addSubscriptionWall(SubscriptionWall $subscriptionWall)
     {
@@ -420,8 +420,8 @@ class SubscriptionType
     /**
      * Remove SubscriptionWall entity from collection.
      *
-     * @param \Integrated\Bundle\SubscriptionBundle\Entity\SubscriptionWall $subscriptionWall
-     * @return \Integrated\Bundle\SubscriptionBundle\Entity\SubscriptionType
+     * @param SubscriptionWall $subscriptionWall
+     * @return SubscriptionType
      */
     public function removeSubscriptionWall(SubscriptionWall $subscriptionWall)
     {

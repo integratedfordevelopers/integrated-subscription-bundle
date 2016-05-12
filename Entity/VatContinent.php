@@ -56,7 +56,7 @@ class VatContinent
      * Set the value of continentCode.
      *
      * @param string $continentCode
-     * @return \Integrated\Bundle\SubscriptionBundle\Entity\VatContinent
+     * @return VatContinent
      */
     public function setContinentCode($continentCode)
     {
@@ -79,7 +79,7 @@ class VatContinent
      * Set the value of percentage.
      *
      * @param float $percentage
-     * @return \Integrated\Bundle\SubscriptionBundle\Entity\VatContinent
+     * @return VatContinent
      */
     public function setPercentage($percentage)
     {
@@ -102,7 +102,7 @@ class VatContinent
      * Set the value of code.
      *
      * @param string $code
-     * @return \Integrated\Bundle\SubscriptionBundle\Entity\VatContinent
+     * @return VatContinent
      */
     public function setCode($code)
     {
@@ -125,7 +125,7 @@ class VatContinent
      * Set the value of disableWithVatId.
      *
      * @param boolean $disableWithVatId
-     * @return \Integrated\Bundle\SubscriptionBundle\Entity\VatContinent
+     * @return VatContinent
      */
     public function setDisableWithVatId($disableWithVatId)
     {
@@ -147,8 +147,8 @@ class VatContinent
     /**
      * Add VatType entity to collection (one to many).
      *
-     * @param \Integrated\Bundle\SubscriptionBundle\Entity\VatType $vatType
-     * @return \Integrated\Bundle\SubscriptionBundle\Entity\VatContinent
+     * @param VatType $vatType
+     * @return VatContinent
      */
     public function addVatType(VatType $vatType)
     {
@@ -160,8 +160,8 @@ class VatContinent
     /**
      * Remove VatType entity from collection (one to many).
      *
-     * @param \Integrated\Bundle\SubscriptionBundle\Entity\VatType $vatType
-     * @return \Integrated\Bundle\SubscriptionBundle\Entity\VatContinent
+     * @param VatType $vatType
+     * @return VatContinent
      */
     public function removeVatType(VatType $vatType)
     {

@@ -60,7 +60,7 @@ class SubscriptionTypeVariant
      * Set the value of subscription_type_id.
      *
      * @param string $subscription_type_id
-     * @return \Integrated\Bundle\SubscriptionBundle\Entity\SubscriptionTypeVariant
+     * @return SubscriptionTypeVariant
      */
     public function setSubscriptionTypeId($subscription_type_id)
     {
@@ -83,7 +83,7 @@ class SubscriptionTypeVariant
      * Set the value of price.
      *
      * @param float $price
-     * @return \Integrated\Bundle\SubscriptionBundle\Entity\SubscriptionTypeVariant
+     * @return SubscriptionTypeVariant
      */
     public function setPrice($price)
     {
@@ -106,7 +106,7 @@ class SubscriptionTypeVariant
      * Set the value of vat.
      *
      * @param float $vat
-     * @return \Integrated\Bundle\SubscriptionBundle\Entity\SubscriptionTypeVariant
+     * @return SubscriptionTypeVariant
      */
     public function setVat($vat)
     {
@@ -129,7 +129,7 @@ class SubscriptionTypeVariant
      * Set the value of priceVat.
      *
      * @param float $priceVat
-     * @return \Integrated\Bundle\SubscriptionBundle\Entity\SubscriptionTypeVariant
+     * @return SubscriptionTypeVariant
      */
     public function setPriceVat($priceVat)
     {
@@ -152,7 +152,7 @@ class SubscriptionTypeVariant
      * Set the value of periodType.
      *
      * @param string $periodType
-     * @return \Integrated\Bundle\SubscriptionBundle\Entity\SubscriptionTypeVariant
+     * @return SubscriptionTypeVariant
      */
     public function setPeriodType($periodType)
     {
@@ -175,7 +175,7 @@ class SubscriptionTypeVariant
      * Set the value of periodLength.
      *
      * @param integer $periodLength
-     * @return \Integrated\Bundle\SubscriptionBundle\Entity\SubscriptionTypeVariant
+     * @return SubscriptionTypeVariant
      */
     public function setPeriodlength($periodLength)
     {
@@ -197,8 +197,8 @@ class SubscriptionTypeVariant
     /**
      * Set SubscriptionType entity (many to one).
      *
-     * @param \Integrated\Bundle\SubscriptionBundle\Entity\SubscriptionType $subscriptionType
-     * @return \Integrated\Bundle\SubscriptionBundle\Entity\SubscriptionTypeVariant
+     * @param SubscriptionType $subscriptionType
+     * @return SubscriptionTypeVariant
      */
     public function setSubscriptionType(SubscriptionType $subscriptionType = null)
     {
@@ -210,7 +210,7 @@ class SubscriptionTypeVariant
     /**
      * Get SubscriptionType entity (many to one).
      *
-     * @return \Integrated\Bundle\SubscriptionBundle\Entity\SubscriptionType
+     * @return SubscriptionType
      */
     public function getSubscriptionType()
     {
