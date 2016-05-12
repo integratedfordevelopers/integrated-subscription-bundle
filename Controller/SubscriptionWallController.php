@@ -92,6 +92,8 @@ class SubscriptionWallController extends Controller
             $selectedChannels[] = array_search($selectedChannelName, $channelNames);
         }
 
+        sort($channelNames);
+
         $form = $this->createFormBuilder($wall)
             ->add('name', 'text')
             ->add('teaser', 'textarea', array('label' => 'Description'))
