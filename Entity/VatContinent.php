@@ -14,37 +14,17 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Integrated\Bundle\SubscriptionBundle\Entity\VatContinent
- *
- * @ORM\Entity()
- * @ORM\Table(name="vat_continent")
  */
 class VatContinent
 {
-    /**
-     * @ORM\Id
-     * @ORM\Column(type="string", length=2)
-     */
     protected $continentCode;
 
-    /**
-     * @ORM\Column(type="decimal", precision=5, scale=3)
-     */
     protected $percentage;
 
-    /**
-     * @ORM\Column(type="string", length=45, nullable=true)
-     */
     protected $code;
 
-    /**
-     * @ORM\Column(type="boolean", nullable=true)
-     */
     protected $disableWithVatId;
 
-    /**
-     * @ORM\OneToMany(targetEntity="VatType", mappedBy="vatContinent")
-     * @ORM\JoinColumn(name="continentCode", referencedColumnName="continent", nullable=false)
-     */
     protected $vatTypes;
 
     public function __construct()

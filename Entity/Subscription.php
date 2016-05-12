@@ -13,63 +13,26 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Integrated\Bundle\SubscriptionBundle\Entity\Subscription
- *
- * @ORM\Entity()
- * @ORM\Table(name="subscription", indexes={@ORM\Index(name="fk_Subscription_SubscriptionType1_idx", columns={"`type`"})})
  */
 class Subscription
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="UUID")
-     * @ORM\Column(type="string", length=36)
-     */
     protected $id;
 
-    /**
-     * @ORM\Column(name="`type`", type="string", length=36)
-     */
     protected $type;
 
-    /**
-     * @ORM\Column(type="string", length=45, nullable=true)
-     */
     protected $relation;
 
-    /**
-     * @ORM\Column(type="string", length=45, nullable=true)
-     */
     protected $contact;
 
-    /**
-     * @ORM\Column(type="decimal", precision=6, scale=2, nullable=true)
-     */
     protected $customPrice;
 
-    /**
-     * @ORM\Column(type="decimal", precision=6, scale=2, nullable=true)
-     */
     protected $discountPrice;
 
-    /**
-     * @ORM\Column(type="decimal", precision=5, scale=3, nullable=true)
-     */
     protected $discountPercentage;
 
-    /**
-     * @ORM\Column(name="`status`", type="string", length=255, nullable=true)
-     */
     protected $status;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="SubscriptionType", inversedBy="subscriptions")
-     * @ORM\JoinColumn(name="`type`", referencedColumnName="id", nullable=false)
-     */
     protected $subscriptionType;
-
-    public function __construct()
-    {
-    }
 
     /**
      * @param string $id

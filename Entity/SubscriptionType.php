@@ -14,84 +14,33 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Integrated\Bundle\SubscriptionBundle\Entity\SubscriptionType
- *
- * @ORM\Entity()
- * @ORM\Table(name="subscription_type", indexes={@ORM\Index(name="fk_subscription_type_vat_type1_idx", columns={"typevat"})})
  */
 class SubscriptionType
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="UUID")
-     * @ORM\Column(type="string", length=36)
-     */
     protected $id;
 
-    /**
-     * @ORM\Column(name="`name`", type="string", length=200)
-     */
     protected $name;
 
-    /**
-     * @ORM\Column(type="string", length=1000, nullable=true)
-     */
     protected $teaser;
 
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     */
     protected $startDate;
 
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     */
     protected $endDate;
 
-    /**
-     * @ORM\Column(name="`condition`", type="string", length=255)
-     */
     protected $condition;
 
-    /**
-     * @ORM\Column(type="boolean", nullable=true)
-     */
     protected $disabled;
 
-    /**
-     * @ORM\Column(type="string", length=45, nullable=true)
-     */
     protected $channels;
 
-    /**
-     * @ORM\Column(type="string", length=36, nullable=true)
-     */
     protected $typeVat;
 
-    /**
-     * @ORM\OneToMany(targetEntity="Subscription", mappedBy="subscriptionType")
-     * @ORM\JoinColumn(name="id", referencedColumnName="`type`", nullable=false)
-     */
     protected $subscriptions;
 
-    /**
-     * @ORM\OneToMany(targetEntity="SubscriptionTypeVariant", mappedBy="subscriptionType")
-     * @ORM\JoinColumn(name="id", referencedColumnName="subscription_type_id", nullable=false)
-     */
     protected $subscriptionTypeVariants;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="VatType", inversedBy="subscriptionTypes")
-     * @ORM\JoinColumn(name="typevat", referencedColumnName="id")
-     */
     protected $vatType;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="SubscriptionWall", inversedBy="subscriptionTypes")
-     * @ORM\JoinTable(name="subscription_configuration",
-     *     joinColumns={@ORM\JoinColumn(name="subscription_type", referencedColumnName="id", nullable=false)},
-     *     inverseJoinColumns={@ORM\JoinColumn(name="subscription_wall", referencedColumnName="id", nullable=false)}
-     * )
-     */
     protected $subscriptionWalls;
 
     public function __construct()

@@ -14,65 +14,27 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Integrated\Bundle\SubscriptionBundle\Entity\VatType
- *
- * @ORM\Entity()
- * @ORM\Table(name="vat_type", indexes={@ORM\Index(name="fk_vat_type_vat_country1_idx", columns={"country"}), @ORM\Index(name="fk_vat_type_vat_continent1_idx", columns={"continent"})})
  */
 class VatType
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="UUID")
-     * @ORM\Column(type="string", length=36)
-     */
     protected $id;
 
-    /**
-     * @ORM\Column(name="`name`", type="string", length=45)
-     */
     protected $name;
 
-    /**
-     * @ORM\Column(type="decimal", precision=5, scale=3, nullable=true)
-     */
     protected $percentage;
 
-    /**
-     * @ORM\Column(type="string", length=45, nullable=true)
-     */
     protected $code;
 
-    /**
-     * @ORM\Column(type="boolean", nullable=true)
-     */
     protected $disableWithVatId;
 
-    /**
-     * @ORM\Column(type="string", length=3, nullable=true)
-     */
     protected $country;
 
-    /**
-     * @ORM\Column(type="string", length=2, nullable=true)
-     */
     protected $continent;
 
-    /**
-     * @ORM\OneToMany(targetEntity="SubscriptionType", mappedBy="vatType")
-     * @ORM\JoinColumn(name="id", referencedColumnName="typevat", nullable=false)
-     */
     protected $subscriptionTypes;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="VatCountry", inversedBy="vatTypes")
-     * @ORM\JoinColumn(name="country", referencedColumnName="countryCode")
-     */
     protected $vatCountry;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="VatContinent", inversedBy="vatTypes")
-     * @ORM\JoinColumn(name="continent", referencedColumnName="continentCode")
-     */
     protected $vatContinent;
 
     public function __construct()

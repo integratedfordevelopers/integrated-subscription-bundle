@@ -13,28 +13,13 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Integrated\Bundle\SubscriptionBundle\Entity\WallChannel
- *
- * @ORM\Entity()
- * @ORM\Table(name="wall_channel", indexes={@ORM\Index(name="fk_subscription_wall_has_categories_subscription_wall1_idx", columns={"wall"})})
  */
 class WallChannel
 {
-    /**
-     * @ORM\Id
-     * @ORM\Column(type="string", length=36)
-     */
     protected $wall;
 
-    /**
-     * @ORM\Id
-     * @ORM\Column(type="string", length=255)
-     */
     protected $channel;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="SubscriptionWall", inversedBy="wallChannels")
-     * @ORM\JoinColumn(name="wall", referencedColumnName="id", nullable=false)
-     */
     protected $subscriptionWall;
 
     public function __construct()

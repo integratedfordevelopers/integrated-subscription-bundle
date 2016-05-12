@@ -14,48 +14,21 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Integrated\Bundle\SubscriptionBundle\Entity\SubscriptionWall
- *
- * @ORM\Entity()
- * @ORM\Table(name="subscription_wall")
  */
 class SubscriptionWall
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="UUID")
-     * @ORM\Column(type="string", length=36)
-     */
     protected $id;
 
-    /**
-     * @ORM\Column(name="`name`", type="string", length=200)
-     */
     protected $name;
 
-    /**
-     * @ORM\Column(type="string", length=1000, nullable=true)
-     */
     protected $teaser;
 
-    /**
-     * @ORM\Column(type="boolean", nullable=true)
-     */
     protected $disabled;
 
-    /**
-     * @ORM\Column(type="string", length=45, nullable=true)
-     */
     protected $freetier;
 
-    /**
-     * @ORM\OneToMany(targetEntity="WallChannel", mappedBy="subscriptionWall")
-     * @ORM\JoinColumn(name="id", referencedColumnName="wall", nullable=false)
-     */
     protected $wallChannels;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="SubscriptionType", mappedBy="subscriptionWalls")
-     */
     protected $subscriptionTypes;
 
     public function __construct()

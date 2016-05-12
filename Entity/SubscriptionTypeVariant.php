@@ -13,47 +13,21 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Integrated\Bundle\SubscriptionBundle\Entity\SubscriptionTypeVariant
- *
- * @ORM\Entity()
- * @ORM\Table(name="subscription_type_variant")
  */
 class SubscriptionTypeVariant
 {
-    /**
-     * @ORM\Id
-     * @ORM\Column(type="string", length=36, nullable=true)
-     */
     protected $subscription_type_id;
 
-    /**
-     * @ORM\Column(type="decimal", precision=6, scale=2)
-     */
     protected $price;
 
-    /**
-     * @ORM\Column(type="decimal", precision=5, scale=3, nullable=true)
-     */
     protected $vat;
 
-    /**
-     * @ORM\Column(type="decimal", precision=6, scale=2, nullable=true)
-     */
     protected $priceVat;
 
-    /**
-     * @ORM\Column(type="string", nullable=true)
-     */
     protected $periodType;
 
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
     protected $periodLength;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="SubscriptionType", inversedBy="subscriptionTypeVariants")
-     * @ORM\JoinColumn(name="subscription_type_id", referencedColumnName="id")
-     */
     protected $subscriptionType;
 
     /**
