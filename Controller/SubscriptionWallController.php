@@ -75,50 +75,45 @@ class SubscriptionWallController extends Controller
 
     public function editAction(SubscriptionWall $wall, Request $request)
     {
-        $channelNames = array();
-        $selectedChannelNames = array();
-        $selectedChannelIDs = array();
+        $channelNames = $selectedChannelNames = $selectedChannels = array();
 
         $em = $this->getDoctrine()->getManager();
         $channels = $this->get("integrated_content.channel.manager")->findAll();
 
         foreach($channels as $channel) {
-            $channelNames[] = $channel->getId();
+            $channelNames[] = $channel->getName();
         }
-
-        sort($channelNames);
 
         foreach($wall->getWallChannels() as $wallChannel) {
             $selectedChannelNames[] = $wallChannel->getChannel();
         }
 
         foreach($selectedChannelNames as $selectedChannelName) {
-            $selectedChannelIDs[] = array_search($selectedChannelName, $channelNames);
+            $selectedChannels[] = array_search($selectedChannelName, $channelNames);
         }
 
         $form = $this->createFormBuilder($wall)
             ->add('name', 'text')
             ->add('teaser', 'textarea', array('label' => 'Description'))
             ->add('disabled', 'checkbox', array('required' => false))
-            ->add('freetier', 'integer', array('required' => false,'data'=> 0))
-            ->add('channel', 'choice', ['choices' => $channelNames, 'multiple'=> true, 'expanded'=> true, 'mapped' => false, 'data' => $selectedChannelIDs])
+            ->add('freetier', 'integer', array('required' => false))
+            ->add('channel', 'choice', ['choices' => $channelNames, 'multiple'=> true, 'expanded'=> true, 'mapped' => false, 'data' => $selectedChannels])
             ->add('save', 'submit')
             ->getForm();
 
         $form->handleRequest($request);
 
-        // form posted
+        // Form Posted
         if ($form->isValid()) {
-            $em->flush();
-
-            $wall->setName($request->request->get("form")["name"]);
-            $wall->setTeaser($request->request->get("form")["teaser"]);
-            if(isset($request->request->get("form")["disabled"])) {
-                $wall->setDisabled($request->request->get("form")["disabled"]);
+            // Store changed data
+            $wall->setName($request->get("form")["name"]);
+            $wall->setTeaser($request->get("form")["teaser"]);
+            if(isset($request->get("form")["disabled"])) {
+                $wall->setDisabled($request->get("form")["disabled"]);
             }
-            $wall->setFreetier($request->request->get("form")["freetier"]);
+            $wall->setFreetier($request->get("form")["freetier"]);
 
-            // Delete part
+            // Delete all existing WallChannel records
             $entities = $em->getRepository('IntegratedSubscriptionBundle:WallChannel')->findBy(array('wall' => $wall->getId()));
             foreach($entities as $entity) {
                 if ($entity != null){
@@ -127,14 +122,12 @@ class SubscriptionWallController extends Controller
                 }
             }
 
-
-            // Add part
-            foreach($request->request->get("form")["channel"] as $channel) {
+            // Store new WallChannel data
+            foreach($request->get("form")["channel"] as $channel) {
                 $wallChannel = new WallChannel();
                 $wallChannel->setWall($wall->getId());
                 $wallChannel->setChannel($channelNames[$channel]);
                 $wallChannel->setSubscriptionWall($wall);
-                dump($wallChannel);
                 $em->persist($wallChannel);
                 $em->flush();
             }
@@ -149,6 +142,7 @@ class SubscriptionWallController extends Controller
         $build['form'] = $form->createView();
         return $this->render('IntegratedSubscriptionBundle:SubscriptionWall:edit.html.twig', $build);
     }
+
     public function deleteAction($id, Request $request)
     {
         $em = $this->getDoctrine()->getManager();
