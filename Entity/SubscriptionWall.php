@@ -65,8 +65,6 @@ class SubscriptionWall
     }
 
     /**
-     * Set the value of id.
-     *
      * @param string $id
      * @return \Integrated\Bundle\SubscriptionBundle\Entity\SubscriptionWall
      */
@@ -78,8 +76,6 @@ class SubscriptionWall
     }
 
     /**
-     * Get the value of id.
-     *
      * @return string
      */
     public function getId()
@@ -88,8 +84,6 @@ class SubscriptionWall
     }
 
     /**
-     * Set the value of name.
-     *
      * @param string $name
      * @return SubscriptionWall
      */
@@ -101,8 +95,6 @@ class SubscriptionWall
     }
 
     /**
-     * Get the value of name.
-     *
      * @return string
      */
     public function getName()
@@ -111,8 +103,6 @@ class SubscriptionWall
     }
 
     /**
-     * Set the value of teaser.
-     *
      * @param string $teaser
      * @return SubscriptionWall
      */
@@ -124,8 +114,6 @@ class SubscriptionWall
     }
 
     /**
-     * Get the value of teaser.
-     *
      * @return string
      */
     public function getTeaser()
@@ -134,8 +122,6 @@ class SubscriptionWall
     }
 
     /**
-     * Set the value of disabled.
-     *
      * @param boolean $disabled
      * @return SubscriptionWall
      */
@@ -147,8 +133,6 @@ class SubscriptionWall
     }
 
     /**
-     * Get the value of disabled.
-     *
      * @return boolean
      */
     public function getDisabled()
@@ -157,8 +141,6 @@ class SubscriptionWall
     }
 
     /**
-     * Set the value of freetier.
-     *
      * @param string $freetier
      * @return SubscriptionWall
      */
@@ -170,8 +152,6 @@ class SubscriptionWall
     }
 
     /**
-     * Get the value of freetier.
-     *
      * @return string
      */
     public function getFreetier()

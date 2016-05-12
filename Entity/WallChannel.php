@@ -42,8 +42,6 @@ class WallChannel
     }
 
     /**
-     * Set the value of wall.
-     *
      * @param string $wall
      * @return WallChannel
      */
@@ -55,8 +53,6 @@ class WallChannel
     }
 
     /**
-     * Get the value of wall.
-     *
      * @return string
      */
     public function getWall()
@@ -65,8 +61,6 @@ class WallChannel
     }
 
     /**
-     * Set the value of channel.
-     *
      * @param string $channel
      * @return WallChannel
      */
@@ -78,8 +72,6 @@ class WallChannel
     }
 
     /**
-     * Get the value of channel.
-     *
      * @return string
      */
     public function getChannel()

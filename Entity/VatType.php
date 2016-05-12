@@ -81,8 +81,6 @@ class VatType
     }
 
     /**
-     * Set the value of id.
-     *
      * @param string $id
      * @return VatType
      */
@@ -94,8 +92,6 @@ class VatType
     }
 
     /**
-     * Get the value of id.
-     *
      * @return string
      */
     public function getId()
@@ -104,8 +100,6 @@ class VatType
     }
 
     /**
-     * Set the value of name.
-     *
      * @param string $name
      * @return VatType
      */
@@ -117,8 +111,6 @@ class VatType
     }
 
     /**
-     * Get the value of name.
-     *
      * @return string
      */
     public function getName()
@@ -127,8 +119,6 @@ class VatType
     }
 
     /**
-     * Set the value of percentage.
-     *
      * @param float $percentage
      * @return VatType
      */
@@ -140,8 +130,6 @@ class VatType
     }
 
     /**
-     * Get the value of percentage.
-     *
      * @return float
      */
     public function getPercentage()
@@ -150,8 +138,6 @@ class VatType
     }
 
     /**
-     * Set the value of code.
-     *
      * @param string $code
      * @return VatType
      */
@@ -163,8 +149,6 @@ class VatType
     }
 
     /**
-     * Get the value of code.
-     *
      * @return string
      */
     public function getCode()
@@ -173,8 +157,6 @@ class VatType
     }
 
     /**
-     * Set the value of disableWithVatId.
-     *
      * @param boolean $disableWithVatId
      * @return VatType
      */
@@ -186,8 +168,6 @@ class VatType
     }
 
     /**
-     * Get the value of disableWithVatId.
-     *
      * @return boolean
      */
     public function getDisableWithVatId()
@@ -196,8 +176,6 @@ class VatType
     }
 
     /**
-     * Set the value of country.
-     *
      * @param string $country
      * @return VatType
      */
@@ -209,8 +187,6 @@ class VatType
     }
 
     /**
-     * Get the value of country.
-     *
      * @return string
      */
     public function getCountry()
@@ -219,8 +195,6 @@ class VatType
     }
 
     /**
-     * Set the value of continent.
-     *
      * @param string $continent
      * @return VatType
      */
@@ -232,8 +206,6 @@ class VatType
     }
 
     /**
-     * Get the value of continent.
-     *
      * @return string
      */
     public function getContinent()

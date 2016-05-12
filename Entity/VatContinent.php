@@ -53,8 +53,6 @@ class VatContinent
     }
 
     /**
-     * Set the value of continentCode.
-     *
      * @param string $continentCode
      * @return VatContinent
      */
@@ -66,8 +64,6 @@ class VatContinent
     }
 
     /**
-     * Get the value of continentCode.
-     *
      * @return string
      */
     public function getContinentCode()
@@ -76,8 +72,6 @@ class VatContinent
     }
 
     /**
-     * Set the value of percentage.
-     *
      * @param float $percentage
      * @return VatContinent
      */
@@ -89,8 +83,6 @@ class VatContinent
     }
 
     /**
-     * Get the value of percentage.
-     *
      * @return float
      */
     public function getPercentage()
@@ -99,8 +91,6 @@ class VatContinent
     }
 
     /**
-     * Set the value of code.
-     *
      * @param string $code
      * @return VatContinent
      */
@@ -112,8 +102,6 @@ class VatContinent
     }
 
     /**
-     * Get the value of code.
-     *
      * @return string
      */
     public function getCode()
@@ -122,8 +110,6 @@ class VatContinent
     }
 
     /**
-     * Set the value of disableWithVatId.
-     *
      * @param boolean $disableWithVatId
      * @return VatContinent
      */
@@ -135,8 +121,6 @@ class VatContinent
     }
 
     /**
-     * Get the value of disableWithVatId.
-     *
      * @return boolean
      */
     public function getDisableWithVatId()

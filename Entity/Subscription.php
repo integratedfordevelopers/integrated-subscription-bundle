@@ -72,8 +72,6 @@ class Subscription
     }
 
     /**
-     * Set the value of id.
-     *
      * @param string $id
      * @return \Subscription
      */
@@ -85,8 +83,6 @@ class Subscription
     }
 
     /**
-     * Get the value of id.
-     *
      * @return string
      */
     public function getId()
@@ -95,8 +91,6 @@ class Subscription
     }
 
     /**
-     * Set the value of type.
-     *
      * @param string $type
      * @return Subscription
      */
@@ -108,8 +102,6 @@ class Subscription
     }
 
     /**
-     * Get the value of type.
-     *
      * @return string
      */
     public function getType()
@@ -118,8 +110,6 @@ class Subscription
     }
 
     /**
-     * Set the value of relation.
-     *
      * @param string $relation
      * @return Subscription
      */
@@ -131,8 +121,6 @@ class Subscription
     }
 
     /**
-     * Get the value of relation.
-     *
      * @return string
      */
     public function getRelation()
@@ -141,8 +129,6 @@ class Subscription
     }
 
     /**
-     * Set the value of contact.
-     *
      * @param string $contact
      * @return Subscription
      */
@@ -154,8 +140,6 @@ class Subscription
     }
 
     /**
-     * Get the value of contact.
-     *
      * @return string
      */
     public function getContact()
@@ -164,8 +148,6 @@ class Subscription
     }
 
     /**
-     * Set the value of customPrice.
-     *
      * @param float $customPrice
      * @return Subscription
      */
@@ -177,8 +159,6 @@ class Subscription
     }
 
     /**
-     * Get the value of customPrice.
-     *
      * @return float
      */
     public function getCustomPrice()
@@ -187,8 +167,6 @@ class Subscription
     }
 
     /**
-     * Set the value of discountPrice.
-     *
      * @param float $discountPrice
      * @return Subscription
      */
@@ -200,8 +178,6 @@ class Subscription
     }
 
     /**
-     * Get the value of discountPrice.
-     *
      * @return float
      */
     public function getDiscountPrice()
@@ -210,8 +186,6 @@ class Subscription
     }
 
     /**
-     * Set the value of discountPercentage.
-     *
      * @param float $discountPercentage
      * @return Subscription
      */
@@ -223,8 +197,6 @@ class Subscription
     }
 
     /**
-     * Get the value of discountPercentage.
-     *
      * @return float
      */
     public function getDiscountPercentage()
@@ -233,8 +205,6 @@ class Subscription
     }
 
     /**
-     * Set the value of status.
-     *
      * @param string $status
      * @return Subscription
      */
@@ -246,8 +216,6 @@ class Subscription
     }
 
     /**
-     * Get the value of status.
-     *
      * @return string
      */
     public function getStatus()

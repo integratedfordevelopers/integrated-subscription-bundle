@@ -53,8 +53,6 @@ class VatCountry
     }
 
     /**
-     * Set the value of countryCode.
-     *
      * @param string $countryCode
      * @return VatCountry
      */
@@ -66,8 +64,6 @@ class VatCountry
     }
 
     /**
-     * Get the value of countryCode.
-     *
      * @return string
      */
     public function getCountryCode()
@@ -76,8 +72,6 @@ class VatCountry
     }
 
     /**
-     * Set the value of percentage.
-     *
      * @param float $percentage
      * @return VatCountry
      */
@@ -89,8 +83,6 @@ class VatCountry
     }
 
     /**
-     * Get the value of percentage.
-     *
      * @return float
      */
     public function getPercentage()
@@ -99,8 +91,6 @@ class VatCountry
     }
 
     /**
-     * Set the value of code.
-     *
      * @param string $code
      * @return VatCountry
      */
@@ -112,8 +102,6 @@ class VatCountry
     }
 
     /**
-     * Get the value of code.
-     *
      * @return string
      */
     public function getCode()
@@ -122,8 +110,6 @@ class VatCountry
     }
 
     /**
-     * Set the value of disableWithVatId.
-     *
      * @param boolean $disableWithVatId
      * @return VatCountry
      */
@@ -135,8 +121,6 @@ class VatCountry
     }
 
     /**
-     * Get the value of disableWithVatId.
-     *
      * @return boolean
      */
     public function getDisableWithVatId()

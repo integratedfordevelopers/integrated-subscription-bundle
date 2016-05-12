@@ -102,8 +102,6 @@ class SubscriptionType
     }
 
     /**
-     * Set the value of id.
-     *
      * @param string $id
      * @return SubscriptionType
      */
@@ -115,8 +113,6 @@ class SubscriptionType
     }
 
     /**
-     * Get the value of id.
-     *
      * @return string
      */
     public function getId()
@@ -125,8 +121,6 @@ class SubscriptionType
     }
 
     /**
-     * Set the value of name.
-     *
      * @param string $name
      * @return SubscriptionType
      */
@@ -138,8 +132,6 @@ class SubscriptionType
     }
 
     /**
-     * Get the value of name.
-     *
      * @return string
      */
     public function getName()
@@ -148,8 +140,6 @@ class SubscriptionType
     }
 
     /**
-     * Set the value of teaser.
-     *
      * @param string $teaser
      * @return SubscriptionType
      */
@@ -161,8 +151,6 @@ class SubscriptionType
     }
 
     /**
-     * Get the value of teaser.
-     *
      * @return string
      */
     public function getTeaser()
@@ -171,8 +159,6 @@ class SubscriptionType
     }
 
     /**
-     * Set the value of startDate.
-     *
      * @param \DateTime $startDate
      * @return SubscriptionType
      */
@@ -184,8 +170,6 @@ class SubscriptionType
     }
 
     /**
-     * Get the value of startDate.
-     *
      * @return \DateTime
      */
     public function getStartDate()
@@ -194,8 +178,6 @@ class SubscriptionType
     }
 
     /**
-     * Set the value of endDate.
-     *
      * @param \DateTime $endDate
      * @return SubscriptionType
      */
@@ -207,8 +189,6 @@ class SubscriptionType
     }
 
     /**
-     * Get the value of endDate.
-     *
      * @return \DateTime
      */
     public function getEndDate()
@@ -217,8 +197,6 @@ class SubscriptionType
     }
 
     /**
-     * Set the value of condition.
-     *
      * @param string $condition
      * @return SubscriptionType
      */
@@ -230,8 +208,6 @@ class SubscriptionType
     }
 
     /**
-     * Get the value of condition.
-     *
      * @return string
      */
     public function getCondition()
@@ -240,8 +216,6 @@ class SubscriptionType
     }
 
     /**
-     * Set the value of disabled.
-     *
      * @param boolean $disabled
      * @return SubscriptionType
      */
@@ -253,8 +227,6 @@ class SubscriptionType
     }
 
     /**
-     * Get the value of disabled.
-     *
      * @return boolean
      */
     public function getDisabled()
@@ -263,8 +235,6 @@ class SubscriptionType
     }
 
     /**
-     * Set the value of channels.
-     *
      * @param string $channels
      * @return SubscriptionType
      */
@@ -276,8 +246,6 @@ class SubscriptionType
     }
 
     /**
-     * Get the value of channels.
-     *
      * @return string
      */
     public function getChannels()
@@ -286,8 +254,6 @@ class SubscriptionType
     }
 
     /**
-     * Set the value of typevat.
-     *
      * @param string $typevat
      * @return SubscriptionType
      */
@@ -299,8 +265,6 @@ class SubscriptionType
     }
 
     /**
-     * Get the value of typevat.
-     *
      * @return string
      */
     public function getTypevat()

@@ -57,8 +57,6 @@ class SubscriptionTypeVariant
     protected $subscriptionType;
 
     /**
-     * Set the value of subscription_type_id.
-     *
      * @param string $subscription_type_id
      * @return SubscriptionTypeVariant
      */
@@ -70,8 +68,6 @@ class SubscriptionTypeVariant
     }
 
     /**
-     * Get the value of subscription_type_id.
-     *
      * @return string
      */
     public function getSubscriptionTypeId()
@@ -80,8 +76,6 @@ class SubscriptionTypeVariant
     }
 
     /**
-     * Set the value of price.
-     *
      * @param float $price
      * @return SubscriptionTypeVariant
      */
@@ -93,8 +87,6 @@ class SubscriptionTypeVariant
     }
 
     /**
-     * Get the value of price.
-     *
      * @return float
      */
     public function getPrice()
@@ -103,8 +95,6 @@ class SubscriptionTypeVariant
     }
 
     /**
-     * Set the value of vat.
-     *
      * @param float $vat
      * @return SubscriptionTypeVariant
      */
@@ -116,8 +106,6 @@ class SubscriptionTypeVariant
     }
 
     /**
-     * Get the value of vat.
-     *
      * @return float
      */
     public function getVat()
@@ -126,8 +114,6 @@ class SubscriptionTypeVariant
     }
 
     /**
-     * Set the value of priceVat.
-     *
      * @param float $priceVat
      * @return SubscriptionTypeVariant
      */
@@ -139,8 +125,6 @@ class SubscriptionTypeVariant
     }
 
     /**
-     * Get the value of priceVat.
-     *
      * @return float
      */
     public function getPriceVat()
@@ -149,8 +133,6 @@ class SubscriptionTypeVariant
     }
 
     /**
-     * Set the value of periodType.
-     *
      * @param string $periodType
      * @return SubscriptionTypeVariant
      */
@@ -162,8 +144,6 @@ class SubscriptionTypeVariant
     }
 
     /**
-     * Get the value of periodType.
-     *
      * @return string
      */
     public function getPeriodType()
@@ -172,8 +152,6 @@ class SubscriptionTypeVariant
     }
 
     /**
-     * Set the value of periodLength.
-     *
      * @param integer $periodLength
      * @return SubscriptionTypeVariant
      */
@@ -185,8 +163,6 @@ class SubscriptionTypeVariant
     }
 
     /**
-     * Get the value of periodLength.
-     *
      * @return integer
      */
     public function getPeriodLength()
