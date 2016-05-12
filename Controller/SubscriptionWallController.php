@@ -11,15 +11,13 @@ namespace Integrated\Bundle\SubscriptionBundle\Controller;
 use Integrated\Bundle\SubscriptionBundle\Entity\SubscriptionWall;
 
 use Integrated\Bundle\SubscriptionBundle\Entity\WallChannel;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Form\Forms;
-use Symfony\Component\Intl\Data\Util\ArrayAccessibleResourceBundle;
 
 class SubscriptionWallController extends Controller
 {
-    public function indexAction(){
+    public function indexAction()
+    {
         $walls = $this->getDoctrine()
             ->getRepository('IntegratedSubscriptionBundle:SubscriptionWall')
             ->findAll();
@@ -30,7 +28,9 @@ class SubscriptionWallController extends Controller
 
         return $this->render('IntegratedSubscriptionBundle:SubscriptionWall:index.html.twig', array('walls' => $walls));
     }
-    public function createAction(Request $request) {
+
+    public function createAction(Request $request)
+    {
 
         $wall = new SubscriptionWall();
         $channels = $channels = $this->get("integrated_content.channel.manager")->findAll();
@@ -61,7 +61,7 @@ class SubscriptionWallController extends Controller
                 $em->persist($wallChannel);
                 $em->flush();
             }
-            
+
             $this->addFlash(
                 'notice',
                 'Your wall is created!'
@@ -87,7 +87,7 @@ class SubscriptionWallController extends Controller
         }
 
         sort($channelNames);
-
+        
         foreach($wall->getWallChannels() as $wallChannel) {
             $selectedChannelNames[] = $wallChannel->getChannel();
         }
@@ -127,7 +127,6 @@ class SubscriptionWallController extends Controller
                 }
             }
 
-
             // Add part
             foreach($request->request->get("form")["channel"] as $channel) {
                 $wallChannel = new WallChannel();
@@ -149,6 +148,7 @@ class SubscriptionWallController extends Controller
         $build['form'] = $form->createView();
         return $this->render('IntegratedSubscriptionBundle:SubscriptionWall:edit.html.twig', $build);
     }
+    
     public function deleteAction($id, Request $request)
     {
         $em = $this->getDoctrine()->getManager();
