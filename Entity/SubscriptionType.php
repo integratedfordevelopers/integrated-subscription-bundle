@@ -17,12 +17,24 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class SubscriptionType
 {
+    /**
+     * @var string
+     */
     protected $id;
 
+    /**
+     * @var string
+     */
     protected $name;
 
+    /**
+     * @var string
+     */
     protected $teaser;
 
+    /**
+     * @var \DateTime
+     */
     protected $startDate;
 
     protected $endDate;

@@ -16,22 +16,49 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Subscription
 {
+    /**
+     * @var string
+     */
     protected $id;
 
+    /**
+     * @var string
+     */
     protected $type;
 
+    /**
+     * @var string
+     */
     protected $relation;
 
+    /**
+     * @var string
+     */
     protected $contact;
 
+    /**
+     * @var string
+     */
     protected $customPrice;
 
+    /**
+     * @var float
+     */
     protected $discountPrice;
 
+    /**
+     * @var float
+     */
     protected $discountPercentage;
 
+    /**
+     * @var float
+     */
     protected $status;
 
+    /**
+     * @var string
+     */
     protected $subscriptionType;
 
     /**

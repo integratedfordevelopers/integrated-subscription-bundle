@@ -1,4 +1,4 @@
-# IntegratedSubscriptionWallBundles #
+# IntegratedSubscriptionWallBundle #
 This bundle provides SubscriptionWall management
 
 ## Requirements ##
@@ -32,7 +32,7 @@ This bundle can be installed following these steps:
 ### Import the routing ###
 
     # app/config/routing.yml
-    integrated_block:
+    integrated_subscription:
         resource: "@IntegratedSubscriptionBundle/Resources/config/routing.xml"
         prefix: "/admin"
 
