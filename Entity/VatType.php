@@ -45,7 +45,7 @@ class VatType
     /**
      * @ORM\Column(type="boolean", nullable=true)
      */
-    protected $disablewithvatid;
+    protected $disableWithVatId;
 
     /**
      * @ORM\Column(type="string", length=3, nullable=true)
@@ -65,13 +65,13 @@ class VatType
 
     /**
      * @ORM\ManyToOne(targetEntity="VatCountry", inversedBy="vatTypes")
-     * @ORM\JoinColumn(name="country", referencedColumnName="countrycode")
+     * @ORM\JoinColumn(name="country", referencedColumnName="countryCode")
      */
     protected $vatCountry;
 
     /**
      * @ORM\ManyToOne(targetEntity="VatContinent", inversedBy="vatTypes")
-     * @ORM\JoinColumn(name="continent", referencedColumnName="continentcode")
+     * @ORM\JoinColumn(name="continent", referencedColumnName="continentCode")
      */
     protected $vatContinent;
 
@@ -173,26 +173,26 @@ class VatType
     }
 
     /**
-     * Set the value of disablewithvatid.
+     * Set the value of disableWithVatId.
      *
-     * @param boolean $disablewithvatid
+     * @param boolean $disableWithVatId
      * @return \Integrated\Bundle\SubscriptionBundle\Entity\VatType
      */
-    public function setDisablewithvatid($disablewithvatid)
+    public function setDisableWithVatId($disableWithVatId)
     {
-        $this->disablewithvatid = $disablewithvatid;
+        $this->disableWithVatId = $disableWithVatId;
 
         return $this;
     }
 
     /**
-     * Get the value of disablewithvatid.
+     * Get the value of disableWithVatId.
      *
      * @return boolean
      */
-    public function getDisablewithvatid()
+    public function getDisableWithVatId()
     {
-        return $this->disablewithvatid;
+        return $this->disableWithVatId;
     }
 
     /**
@@ -249,7 +249,7 @@ class VatType
      */
     public function addSubscriptionType(SubscriptionType $subscriptionType)
     {
-        $this->subscriptionTypes[] = $subscriptionType;
+        $this->subscriptionTypes->add($subscriptionType);
 
         return $this;
     }
@@ -325,6 +325,6 @@ class VatType
 
     public function __sleep()
     {
-        return array('id', 'name', 'percentage', 'code', 'disablewithvatid', 'country', 'continent');
+        return array('id', 'name', 'percentage', 'code', 'disableWithVatId', 'country', 'continent');
     }
 }

@@ -24,7 +24,7 @@ class VatCountry
      * @ORM\Id
      * @ORM\Column(type="string", length=3)
      */
-    protected $countrycode;
+    protected $countryCode;
 
     /**
      * @ORM\Column(type="decimal", precision=5, scale=3)
@@ -39,11 +39,11 @@ class VatCountry
     /**
      * @ORM\Column(type="boolean", nullable=true)
      */
-    protected $disablewithvatid;
+    protected $disableWithVatId;
 
     /**
      * @ORM\OneToMany(targetEntity="VatType", mappedBy="vatCountry")
-     * @ORM\JoinColumn(name="countrycode", referencedColumnName="country", nullable=false)
+     * @ORM\JoinColumn(name="countryCode", referencedColumnName="country", nullable=false)
      */
     protected $vatTypes;
 
@@ -53,26 +53,26 @@ class VatCountry
     }
 
     /**
-     * Set the value of countrycode.
+     * Set the value of countryCode.
      *
-     * @param string $countrycode
+     * @param string $countryCode
      * @return \Integrated\Bundle\SubscriptionBundle\Entity\VatCountry
      */
-    public function setCountrycode($countrycode)
+    public function setCountryCode($countryCode)
     {
-        $this->countrycode = $countrycode;
+        $this->countryCode = $countryCode;
 
         return $this;
     }
 
     /**
-     * Get the value of countrycode.
+     * Get the value of countryCode.
      *
      * @return string
      */
-    public function getCountrycode()
+    public function getCountryCode()
     {
-        return $this->countrycode;
+        return $this->countryCode;
     }
 
     /**
@@ -122,26 +122,26 @@ class VatCountry
     }
 
     /**
-     * Set the value of disablewithvatid.
+     * Set the value of disableWithVatId.
      *
-     * @param boolean $disablewithvatid
+     * @param boolean $disableWithVatId
      * @return \Integrated\Bundle\SubscriptionBundle\Entity\VatCountry
      */
-    public function setDisablewithvatid($disablewithvatid)
+    public function setDisableWithVatId($disableWithVatId)
     {
-        $this->disablewithvatid = $disablewithvatid;
+        $this->disableWithVatId = $disableWithVatId;
 
         return $this;
     }
 
     /**
-     * Get the value of disablewithvatid.
+     * Get the value of disableWithVatId.
      *
      * @return boolean
      */
-    public function getDisablewithvatid()
+    public function getDisableWithVatId()
     {
-        return $this->disablewithvatid;
+        return $this->disableWithVatId;
     }
 
     /**
@@ -152,7 +152,7 @@ class VatCountry
      */
     public function addVatType(VatType $vatType)
     {
-        $this->vatTypes[] = $vatType;
+        $this->vatTypes->add($vatType);
 
         return $this;
     }
@@ -182,6 +182,6 @@ class VatCountry
 
     public function __sleep()
     {
-        return array('countrycode', 'percentage', 'code', 'disablewithvatid');
+        return array('countryCode', 'percentage', 'code', 'disableWithVatId');
     }
 }

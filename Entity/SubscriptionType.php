@@ -40,12 +40,12 @@ class SubscriptionType
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    protected $startdate;
+    protected $startDate;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    protected $enddate;
+    protected $endDate;
 
     /**
      * @ORM\Column(name="`condition`", type="string", length=255)
@@ -65,7 +65,7 @@ class SubscriptionType
     /**
      * @ORM\Column(type="string", length=36, nullable=true)
      */
-    protected $typevat;
+    protected $typeVat;
 
     /**
      * @ORM\OneToMany(targetEntity="Subscription", mappedBy="subscriptionType")
@@ -171,49 +171,49 @@ class SubscriptionType
     }
 
     /**
-     * Set the value of startdate.
+     * Set the value of startDate.
      *
-     * @param \DateTime $startdate
+     * @param \DateTime $startDate
      * @return \Integrated\Bundle\SubscriptionBundle\Entity\SubscriptionType
      */
-    public function setStartdate($startdate)
+    public function setStartDate($startDate)
     {
-        $this->startdate = $startdate;
+        $this->startDate = $startDate;
 
         return $this;
     }
 
     /**
-     * Get the value of startdate.
+     * Get the value of startDate.
      *
      * @return \DateTime
      */
-    public function getStartdate()
+    public function getStartDate()
     {
-        return $this->startdate;
+        return $this->startDate;
     }
 
     /**
-     * Set the value of enddate.
+     * Set the value of endDate.
      *
-     * @param \DateTime $enddate
+     * @param \DateTime $endDate
      * @return \Integrated\Bundle\SubscriptionBundle\Entity\SubscriptionType
      */
-    public function setEnddate($enddate)
+    public function setEndDate($endDate)
     {
-        $this->enddate = $enddate;
+        $this->endDate = $endDate;
 
         return $this;
     }
 
     /**
-     * Get the value of enddate.
+     * Get the value of endDate.
      *
      * @return \DateTime
      */
-    public function getEnddate()
+    public function getEndDate()
     {
-        return $this->enddate;
+        return $this->endDate;
     }
 
     /**
@@ -316,7 +316,7 @@ class SubscriptionType
      */
     public function addSubscription(Subscription $subscription)
     {
-        $this->subscriptions[] = $subscription;
+        $this->subscriptions->add($subscription);
 
         return $this;
     }
@@ -352,7 +352,7 @@ class SubscriptionType
      */
     public function addSubscriptionTypeVariant(SubscriptionTypeVariant $subscriptionTypeVariant)
     {
-        $this->subscriptionTypeVariants[] = $subscriptionTypeVariant;
+        $this->subscriptionTypeVariants->add($subscriptionTypeVariant);
 
         return $this;
     }
@@ -412,7 +412,7 @@ class SubscriptionType
     public function addSubscriptionWall(SubscriptionWall $subscriptionWall)
     {
         $subscriptionWall->addSubscriptionType($this);
-        $this->subscriptionWalls[] = $subscriptionWall;
+        $this->subscriptionWalls->add($subscriptionWall);
 
         return $this;
     }
@@ -443,6 +443,6 @@ class SubscriptionType
 
     public function __sleep()
     {
-        return array('id', 'name', 'teaser', 'startdate', 'enddate', 'condition', 'disabled', 'channels', 'typevat');
+        return array('id', 'name', 'teaser', 'startDate', 'endDate', 'condition', 'disabled', 'channels', 'typevat');
     }
 }

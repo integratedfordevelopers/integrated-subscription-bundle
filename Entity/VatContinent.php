@@ -24,7 +24,7 @@ class VatContinent
      * @ORM\Id
      * @ORM\Column(type="string", length=2)
      */
-    protected $continentcode;
+    protected $continentCode;
 
     /**
      * @ORM\Column(type="decimal", precision=5, scale=3)
@@ -39,11 +39,11 @@ class VatContinent
     /**
      * @ORM\Column(type="boolean", nullable=true)
      */
-    protected $disablewithvatid;
+    protected $disableWithVatId;
 
     /**
      * @ORM\OneToMany(targetEntity="VatType", mappedBy="vatContinent")
-     * @ORM\JoinColumn(name="continentcode", referencedColumnName="continent", nullable=false)
+     * @ORM\JoinColumn(name="continentCode", referencedColumnName="continent", nullable=false)
      */
     protected $vatTypes;
 
@@ -53,26 +53,26 @@ class VatContinent
     }
 
     /**
-     * Set the value of continentcode.
+     * Set the value of continentCode.
      *
-     * @param string $continentcode
+     * @param string $continentCode
      * @return \Integrated\Bundle\SubscriptionBundle\Entity\VatContinent
      */
-    public function setContinentcode($continentcode)
+    public function setContinentCode($continentCode)
     {
-        $this->continentcode = $continentcode;
+        $this->continentCode = $continentCode;
 
         return $this;
     }
 
     /**
-     * Get the value of continentcode.
+     * Get the value of continentCode.
      *
      * @return string
      */
-    public function getContinentcode()
+    public function getContinentCode()
     {
-        return $this->continentcode;
+        return $this->continentCode;
     }
 
     /**
@@ -122,26 +122,26 @@ class VatContinent
     }
 
     /**
-     * Set the value of disablewithvatid.
+     * Set the value of disableWithVatId.
      *
-     * @param boolean $disablewithvatid
+     * @param boolean $disableWithVatId
      * @return \Integrated\Bundle\SubscriptionBundle\Entity\VatContinent
      */
-    public function setDisablewithvatid($disablewithvatid)
+    public function setDisableWithVatId($disableWithVatId)
     {
-        $this->disablewithvatid = $disablewithvatid;
+        $this->disableWithVatId = $disableWithVatId;
 
         return $this;
     }
 
     /**
-     * Get the value of disablewithvatid.
+     * Get the value of disableWithVatId.
      *
      * @return boolean
      */
-    public function getDisablewithvatid()
+    public function getDisableWithVatId()
     {
-        return $this->disablewithvatid;
+        return $this->disableWithVatId;
     }
 
     /**
@@ -152,7 +152,7 @@ class VatContinent
      */
     public function addVatType(VatType $vatType)
     {
-        $this->vatTypes[] = $vatType;
+        $this->vatTypes->add($vatType);
 
         return $this;
     }
@@ -182,6 +182,6 @@ class VatContinent
 
     public function __sleep()
     {
-        return array('continentcode', 'percentage', 'code', 'disablewithvatid');
+        return array('continentCode', 'percentage', 'code', 'disableWithVatId');
     }
 }

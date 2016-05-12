@@ -38,17 +38,17 @@ class SubscriptionTypeVariant
     /**
      * @ORM\Column(type="decimal", precision=6, scale=2, nullable=true)
      */
-    protected $pricevat;
+    protected $priceVat;
 
     /**
      * @ORM\Column(type="string", nullable=true)
      */
-    protected $periodtype;
+    protected $periodType;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    protected $periodlentgh;
+    protected $periodLength;
 
     /**
      * @ORM\ManyToOne(targetEntity="SubscriptionType", inversedBy="subscriptionTypeVariants")
@@ -126,72 +126,72 @@ class SubscriptionTypeVariant
     }
 
     /**
-     * Set the value of pricevat.
+     * Set the value of priceVat.
      *
-     * @param float $pricevat
+     * @param float $priceVat
      * @return \Integrated\Bundle\SubscriptionBundle\Entity\SubscriptionTypeVariant
      */
-    public function setPricevat($pricevat)
+    public function setPriceVat($priceVat)
     {
-        $this->pricevat = $pricevat;
+        $this->priceVat = $priceVat;
 
         return $this;
     }
 
     /**
-     * Get the value of pricevat.
+     * Get the value of priceVat.
      *
      * @return float
      */
-    public function getPricevat()
+    public function getPriceVat()
     {
-        return $this->pricevat;
+        return $this->priceVat;
     }
 
     /**
-     * Set the value of periodtype.
+     * Set the value of periodType.
      *
-     * @param string $periodtype
+     * @param string $periodType
      * @return \Integrated\Bundle\SubscriptionBundle\Entity\SubscriptionTypeVariant
      */
-    public function setPeriodtype($periodtype)
+    public function setPeriodType($periodType)
     {
-        $this->periodtype = $periodtype;
+        $this->periodType = $periodType;
 
         return $this;
     }
 
     /**
-     * Get the value of periodtype.
+     * Get the value of periodType.
      *
      * @return string
      */
-    public function getPeriodtype()
+    public function getPeriodType()
     {
-        return $this->periodtype;
+        return $this->periodType;
     }
 
     /**
-     * Set the value of periodlentgh.
+     * Set the value of periodLength.
      *
-     * @param integer $periodlentgh
+     * @param integer $periodLength
      * @return \Integrated\Bundle\SubscriptionBundle\Entity\SubscriptionTypeVariant
      */
-    public function setPeriodlentgh($periodlentgh)
+    public function setPeriodlength($periodLength)
     {
-        $this->periodlentgh = $periodlentgh;
+        $this->periodLength = $periodLength;
 
         return $this;
     }
 
     /**
-     * Get the value of periodlentgh.
+     * Get the value of periodLength.
      *
      * @return integer
      */
-    public function getPeriodlentgh()
+    public function getPeriodLength()
     {
-        return $this->periodlentgh;
+        return $this->periodLength;
     }
 
     /**
@@ -219,6 +219,6 @@ class SubscriptionTypeVariant
 
     public function __sleep()
     {
-        return array('subscription_type_id', 'price', 'vat', 'pricevat', 'periodtype', 'periodlentgh');
+        return array('subscription_type_id', 'price', 'vat', 'priceVat', 'periodType', 'periodLength');
     }
 }

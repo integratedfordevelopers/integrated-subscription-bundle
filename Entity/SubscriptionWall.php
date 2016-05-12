@@ -187,7 +187,7 @@ class SubscriptionWall
      */
     public function addWallChannel(WallChannel $wallChannel)
     {
-        $this->wallChannels[] = $wallChannel;
+        $this->wallChannels->add($wallChannel);
 
         return $this;
     }
@@ -223,7 +223,7 @@ class SubscriptionWall
      */
     public function addSubscriptionType(SubscriptionType $subscriptionType)
     {
-        $this->subscriptionTypes[] = $subscriptionType;
+        $this->subscriptionTypes->add($subscriptionType);
 
         return $this;
     }

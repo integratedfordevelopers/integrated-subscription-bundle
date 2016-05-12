@@ -44,17 +44,17 @@ class Subscription
     /**
      * @ORM\Column(type="decimal", precision=6, scale=2, nullable=true)
      */
-    protected $customprice;
+    protected $customPrice;
 
     /**
      * @ORM\Column(type="decimal", precision=6, scale=2, nullable=true)
      */
-    protected $discountprice;
+    protected $discountPrice;
 
     /**
      * @ORM\Column(type="decimal", precision=5, scale=3, nullable=true)
      */
-    protected $discountpercentage;
+    protected $discountPercentage;
 
     /**
      * @ORM\Column(name="`status`", type="string", length=255, nullable=true)
@@ -164,72 +164,72 @@ class Subscription
     }
 
     /**
-     * Set the value of customprice.
+     * Set the value of customPrice.
      *
-     * @param float $customprice
+     * @param float $customPrice
      * @return \Integrated\Bundle\SubscriptionBundle\Entity\Subscription
      */
-    public function setCustomprice($customprice)
+    public function setCustomPrice($customPrice)
     {
-        $this->customprice = $customprice;
+        $this->customPrice = $customPrice;
 
         return $this;
     }
 
     /**
-     * Get the value of customprice.
+     * Get the value of customPrice.
      *
      * @return float
      */
-    public function getCustomprice()
+    public function getCustomPrice()
     {
-        return $this->customprice;
+        return $this->customPrice;
     }
 
     /**
-     * Set the value of discountprice.
+     * Set the value of discountPrice.
      *
-     * @param float $discountprice
+     * @param float $discountPrice
      * @return \Integrated\Bundle\SubscriptionBundle\Entity\Subscription
      */
-    public function setDiscountprice($discountprice)
+    public function setDiscountPrice($discountPrice)
     {
-        $this->discountprice = $discountprice;
+        $this->discountPrice = $discountPrice;
 
         return $this;
     }
 
     /**
-     * Get the value of discountprice.
+     * Get the value of discountPrice.
      *
      * @return float
      */
-    public function getDiscountprice()
+    public function getDiscountPrice()
     {
-        return $this->discountprice;
+        return $this->discountPrice;
     }
 
     /**
-     * Set the value of discountpercentage.
+     * Set the value of discountPercentage.
      *
-     * @param float $discountpercentage
+     * @param float $discountPercentage
      * @return \Integrated\Bundle\SubscriptionBundle\Entity\Subscription
      */
-    public function setDiscountpercentage($discountpercentage)
+    public function setDiscountPercentage($discountPercentage)
     {
-        $this->discountpercentage = $discountpercentage;
+        $this->discountPercentage = $discountPercentage;
 
         return $this;
     }
 
     /**
-     * Get the value of discountpercentage.
+     * Get the value of discountPercentage.
      *
      * @return float
      */
-    public function getDiscountpercentage()
+    public function getDiscountPercentage()
     {
-        return $this->discountpercentage;
+        return $this->discountPercentage;
     }
 
     /**
@@ -280,6 +280,6 @@ class Subscription
 
     public function __sleep()
     {
-        return array('id', 'type', 'relation', 'contact', 'customprice', 'discountprice', 'discountpercentage', 'status');
+        return array('id', 'type', 'relation', 'contact', 'customPrice', 'discountPrice', 'discountPercentage', 'status');
     }
 }
