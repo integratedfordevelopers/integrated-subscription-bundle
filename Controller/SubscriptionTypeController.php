@@ -1,10 +1,13 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Albert-David
- * Date: 19-04-16
- * Time: 12:42
- */
+/*
+* This file is part of the Integrated package.
+*
+* (c) e-Active B.V. <integrated@e-active.nl>
+*
+* For the full copyright and license information, please view the LICENSE
+* file that was distributed with this source code.
+*/
+
 
 namespace Integrated\Bundle\SubscriptionBundle\Controller;
 
@@ -13,11 +16,21 @@ use Integrated\Bundle\SubscriptionBundle\Entity\SubscriptionType;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Form\Forms;
 
+/**
+ * @author Jacob de Graaf <jacob.de.graaf@windesheim.nl> and Albert David Bakker <albert-david.bakker@windesheim.nl>
+ */
 class SubscriptionTypeController extends Controller
 {
-    public function createAction(Request $request) {
+
+    /**
+     * Creates a type
+     *
+     * @param Request $request
+     * @return Response
+     */
+    public function createAction(Request $request)
+    {
 
         $type = new SubscriptionType();
 

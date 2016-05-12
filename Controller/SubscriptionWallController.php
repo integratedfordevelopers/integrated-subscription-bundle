@@ -1,21 +1,31 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Albert-David
- * Date: 19-04-16
- * Time: 12:42
- */
+/*
+* This file is part of the Integrated package.
+*
+* (c) e-Active B.V. <integrated@e-active.nl>
+*
+* For the full copyright and license information, please view the LICENSE
+* file that was distributed with this source code.
+*/
 
 namespace Integrated\Bundle\SubscriptionBundle\Controller;
 
 use Integrated\Bundle\SubscriptionBundle\Entity\SubscriptionWall;
-
 use Integrated\Bundle\SubscriptionBundle\Entity\WallChannel;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * @author Jacob de Graaf <jacob.de.graaf@windesheim.nl> and Albert David Bakker <albert-david.bakker@windesheim.nl>
+ */
 class SubscriptionWallController extends Controller
 {
+
+    /**
+     * List walls
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function indexAction()
     {
         $walls = $this->getDoctrine()
@@ -29,13 +39,19 @@ class SubscriptionWallController extends Controller
         return $this->render('IntegratedSubscriptionBundle:SubscriptionWall:index.html.twig', array('walls' => $walls));
     }
 
+    /**
+     * Creates a wall
+     *
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
     public function createAction(Request $request)
     {
 
         $wall = new SubscriptionWall();
         $channels = $channels = $this->get("integrated_content.channel.manager")->findAll();
         $channelNames = array();
-        foreach($channels as $channel){
+        foreach ($channels as $channel) {
             $channelNames[] = $channel->getName();
         }
 
@@ -53,7 +69,7 @@ class SubscriptionWallController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($wall);
             $em->flush();
-            foreach($request->request->get("form")["channel"] as $channel) {
+            foreach ($request->request->get("form")["channel"] as $channel) {
                 $wallChannel = new WallChannel();
                 $wallChannel->setChannel($channelNames[$channel]);
                 $wallChannel->setWall($wall->getId());
@@ -73,6 +89,13 @@ class SubscriptionWallController extends Controller
         return $this->render('IntegratedSubscriptionBundle:SubscriptionWall:create.html.twig', $build);
     }
 
+    /**
+     * Edit walls
+     *
+     * @param SubscriptionWall $wall
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
     public function editAction(SubscriptionWall $wall, Request $request)
     {
         $channelNames = $selectedChannelNames = $selectedChannels = array();
@@ -80,15 +103,15 @@ class SubscriptionWallController extends Controller
         $em = $this->getDoctrine()->getManager();
         $channels = $this->get("integrated_content.channel.manager")->findAll();
 
-        foreach($channels as $channel) {
+        foreach ($channels as $channel) {
             $channelNames[] = $channel->getName();
         }
 
-        foreach($wall->getWallChannels() as $wallChannel) {
+        foreach ($wall->getWallChannels() as $wallChannel) {
             $selectedChannelNames[] = $wallChannel->getChannel();
         }
 
-        foreach($selectedChannelNames as $selectedChannelName) {
+        foreach ($selectedChannelNames as $selectedChannelName) {
             $selectedChannels[] = array_search($selectedChannelName, $channelNames);
         }
 
@@ -110,22 +133,22 @@ class SubscriptionWallController extends Controller
             // Store changed data
             $wall->setName($request->get("form")["name"]);
             $wall->setTeaser($request->get("form")["teaser"]);
-            if(isset($request->get("form")["disabled"])) {
+            if (isset($request->get("form")["disabled"])) {
                 $wall->setDisabled($request->get("form")["disabled"]);
             }
             $wall->setFreetier($request->get("form")["freetier"]);
 
             // Delete all existing WallChannel records
             $entities = $em->getRepository('IntegratedSubscriptionBundle:WallChannel')->findBy(array('wall' => $wall->getId()));
-            foreach($entities as $entity) {
-                if ($entity != null){
+            foreach ($entities as $entity) {
+                if ($entity != null) {
                     $em->remove($entity);
                     $em->flush();
                 }
             }
 
             // Store new WallChannel data
-            foreach($request->get("form")["channel"] as $channel) {
+            foreach ($request->get("form")["channel"] as $channel) {
                 $wallChannel = new WallChannel();
                 $wallChannel->setWall($wall->getId());
                 $wallChannel->setChannel($channelNames[$channel]);
@@ -144,7 +167,14 @@ class SubscriptionWallController extends Controller
         $build['form'] = $form->createView();
         return $this->render('IntegratedSubscriptionBundle:SubscriptionWall:edit.html.twig', $build);
     }
-    
+
+    /**
+     * Deletes a wall
+     *
+     * @param $id
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
     public function deleteAction($id, Request $request)
     {
         $em = $this->getDoctrine()->getManager();
