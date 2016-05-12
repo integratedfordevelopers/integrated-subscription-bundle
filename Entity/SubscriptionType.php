@@ -37,14 +37,29 @@ class SubscriptionType
      */
     protected $startDate;
 
+    /**
+     * @var \DateTime
+     */
     protected $endDate;
 
+    /**
+     * @var string
+     */
     protected $condition;
 
+    /**
+     * @var int
+     */
     protected $disabled;
 
+    /**
+     * @var string
+     */
     protected $channels;
 
+    /**
+     * @var string
+     */
     protected $typeVat;
 
     protected $subscriptions;

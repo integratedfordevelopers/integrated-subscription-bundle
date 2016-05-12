@@ -16,16 +16,34 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class SubscriptionTypeVariant
 {
+    /**
+     * @var string
+     */
     protected $subscription_type_id;
 
+    /**
+     * @var decimal
+     */
     protected $price;
 
+    /**
+     * @var decimal
+     */
     protected $vat;
 
+    /**
+     * @var decimal
+     */
     protected $priceVat;
 
+    /**
+     * @var string
+     */
     protected $periodType;
 
+    /**
+     * @var int
+     */
     protected $periodLength;
 
     protected $subscriptionType;

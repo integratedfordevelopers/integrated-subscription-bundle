@@ -16,8 +16,14 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class WallChannel
 {
+    /**
+     * @var string
+     */
     protected $wall;
 
+    /**
+     * @var string
+     */
     protected $channel;
 
     protected $subscriptionWall;

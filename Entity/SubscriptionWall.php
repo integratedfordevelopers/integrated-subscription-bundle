@@ -17,14 +17,29 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class SubscriptionWall
 {
+    /**
+     * @var string
+     */
     protected $id;
 
+    /**
+     * @var string
+     */
     protected $name;
 
+    /**
+     * @var string
+     */
     protected $teaser;
 
+    /**
+     * @var int
+     */
     protected $disabled;
 
+    /**
+     * @var string
+     */
     protected $freetier;
 
     protected $wallChannels;

@@ -17,12 +17,24 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class VatContinent
 {
+    /**
+     * @var string
+     */
     protected $continentCode;
 
+    /**
+     * @var decimal
+     */
     protected $percentage;
 
+    /**
+     * @var string
+     */
     protected $code;
 
+    /**
+     * @var int
+     */
     protected $disableWithVatId;
 
     protected $vatTypes;

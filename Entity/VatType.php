@@ -17,18 +17,39 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class VatType
 {
+    /**
+     * @var string
+     */
     protected $id;
 
+    /**
+     * @var string
+     */
     protected $name;
 
+    /**
+     * @var decimal
+     */
     protected $percentage;
 
+    /**
+     * @var string
+     */
     protected $code;
 
+    /**
+     * @var int
+     */
     protected $disableWithVatId;
 
+    /**
+     * @var string
+     */
     protected $country;
 
+    /**
+     * @var string
+     */
     protected $continent;
 
     protected $subscriptionTypes;
