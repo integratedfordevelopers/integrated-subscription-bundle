@@ -1,9 +1,12 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Albert-David
- * Date: 19-04-16
- * Time: 12:42
+
+/*
+ * This file is part of the Integrated package.
+ *
+ * (c) e-Active B.V. <integrated@e-active.nl>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace Integrated\Bundle\SubscriptionBundle\Controller;
@@ -13,9 +16,18 @@ use Integrated\Bundle\SubscriptionBundle\Entity\WallChannel;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * @author Jacob de Graaf <jacob.de.graaf@windesheim.nl>
+ * @author Albert Bakker <albert-david.bakker@windesheim.nl>
+ */
 class SubscriptionWallController extends Controller
 {
 
+    /**
+     * Lists the walls
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function indexAction()
     {
         $walls = $this->getDoctrine()
@@ -26,16 +38,21 @@ class SubscriptionWallController extends Controller
             throw $this->createNotFoundException('No walls found!');
         }
 
-        return $this->render('IntegratedSubscriptionBundle:SubscriptionWall:index.html.twig',
-            array('walls' => $walls));
+        return $this->render('IntegratedSubscriptionBundle:SubscriptionWall:index.html.twig', array('walls' => $walls));
     }
 
+    /**
+     * Creates a wall
+     *
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
     public function createAction(Request $request)
     {
         $wall = new SubscriptionWall();
         $channels = $channels = $this->get("integrated_content.channel.manager")->findAll();
         $channelNames = array();
-        foreach($channels as $channel){
+        foreach ($channels as $channel) {
             $channelNames[] = $channel->getName();
         }
 
@@ -54,7 +71,7 @@ class SubscriptionWallController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($wall);
             $em->flush();
-            foreach($request->request->get("form")["channel"] as $channel) {
+            foreach ($request->request->get("form")["channel"] as $channel) {
                 $wallChannel = new WallChannel();
                 $wallChannel->setChannel($channelNames[$channel]);
                 $wallChannel->setWall($wall->getId());
@@ -75,27 +92,9 @@ class SubscriptionWallController extends Controller
 
     public function editAction()
     {
-        $walls = $this->getDoctrine()
-            ->getRepository('IntegratedSubscriptionBundle:SubscriptionWall')
-            ->findAll();
-        if (!$walls) {
-            throw $this->createNotFoundException('No walls found!');
-        }
-
-        return $this->render('IntegratedSubscriptionBundle:SubscriptionWall:index.html.twig',
-            array('walls' => $walls));
     }
 
     public function deleteAction()
     {
-        $walls = $this->getDoctrine()
-            ->getRepository('IntegratedSubscriptionBundle:SubscriptionWall')
-            ->findAll();
-        if (!$walls) {
-            throw $this->createNotFoundException('No walls found!');
-        }
-
-        return $this->render('IntegratedSubscriptionBundle:SubscriptionWall:index.html.twig',
-            array('walls' => $walls));
     }
 }
