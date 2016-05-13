@@ -51,7 +51,7 @@ class SubscriptionWall
      * @ORM\OneToMany(targetEntity="WallChannel", mappedBy="subscriptionWall")
      * @ORM\JoinColumn(name="id", referencedColumnName="wall", nullable=false)
      */
-    protected $wallChannels;
+    public $wallChannels;
 
     /**
      * @ORM\ManyToMany(targetEntity="SubscriptionType", mappedBy="subscriptionWalls")
