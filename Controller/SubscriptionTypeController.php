@@ -11,11 +11,9 @@
 namespace Integrated\Bundle\SubscriptionBundle\Controller;
 
 use Integrated\Bundle\SubscriptionBundle\Entity\SubscriptionType;
-
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Form\Forms;
 
 /**
  * @author Jacob de Graaf <jacob.de.graaf@windesheim.nl>
@@ -31,9 +29,7 @@ class SubscriptionTypeController extends Controller
      */
     public function createAction(Request $request)
     {
-
         $type = new SubscriptionType();
-
         $form = $this->createFormBuilder($type)
             ->add('name', 'text')
             ->add('save', 'submit')
