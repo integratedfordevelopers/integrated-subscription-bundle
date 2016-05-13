@@ -1,4 +1,5 @@
 <?php
+
 /*
 * This file is part of the Integrated package.
 *
@@ -29,20 +30,24 @@ class SubscriptionWallController extends Controller
             ->getRepository('Integrated\Bundle\SubscriptionBundle\Model\SubscriptionWall')
             ->findAll();
         if (!$walls) {
-            return $this->render('IntegratedSubscriptionBundle:SubscriptionWall:index.html.twig', array('walls' => null));
+            return $this->render('IntegratedSubscriptionBundle:SubscriptionWall:index.html.twig', ['walls' => null]);
         }
 
-        return $this->render('IntegratedSubscriptionBundle:SubscriptionWall:index.html.twig', array('walls' => $walls));
+        return $this->render('IntegratedSubscriptionBundle:SubscriptionWall:index.html.twig', ['walls' => $walls]);
     }
+
     public function editAction()
     {
     }
+
     public function createAction()
     {
     }
+
     public function showAction()
     {
     }
+
     public function deleteAction()
     {
     }
