@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+  <entity name="Integrated\Bundle\SubscriptionBundle\Entity\SubscriptionType" table="subscription_type">
+
+    <indexes>
+      <index columns="type_vat"/>
+    </indexes>
+
+    <id name="id" type="string" column="id" length="36">
+      <generator strategy="UUID"/>
+    </id>
+
+    <field name="name" type="string" column="name" length="200" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+
+    <field name="teaser" type="string" column="teaser" length="1000" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+
+    </field>
+
+    <field name="startDate" type="datetime" column="start_date" nullable="true"/>
+
+    <field name="endDate" type="datetime" column="end_date" nullable="true"/>
+
+    <field name="condition" type="string" column="condition" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+
+    <field name="disabled" type="boolean" column="disabled" nullable="true"/>
+
+    <field name="channels" type="string" column="channels" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+
+    <many-to-one field="typeVat" target-entity="VatType" fetch="LAZY">
+      <join-columns>
+        <join-column name="type_vat" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+
+    <many-to-many field="subscriptionWalls" target-entity="SubscriptionWall" inversed-by="subscriptionType" fetch="LAZY">
+      <join-table name="subscription_configuration">
+        <join-columns>
+          <join-column name="subscription_type" referenced-column-name="id"/>
+        </join-columns>
+        <inverse-join-columns>
+          <join-column name="subscription_walls" referenced-column-name="id"/>
+        </inverse-join-columns>
+      </join-table>
+    </many-to-many>
+
+  </entity>
+
+</doctrine-mapping>
