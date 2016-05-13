@@ -1,11 +1,11 @@
-# IntegratedBlockBundles #
-This bundle provides block management
+# IntegratedSubscriptionWallBundle #
+This bundle provides SubscriptionWall management
 
 ## Requirements ##
 * See the require section in the composer.json
 
 ## Features ##
-* Block management
+* SubscriptionWall management
 
 ## Documentation ##
 * [Integrated for Developers](http://integratedfordevelopers.com/ "Integrated for Developers")
@@ -15,16 +15,16 @@ This bundle can be installed following these steps:
 
 ### Install using composer ###
 
-    $ php composer.phar require integrated/block-bundle:~0.3
+    $ php composer.phar require integrated/subscription-bundle:dev-master
 
 ### Enable the bundle ###
 
     // app/AppKernel.php
     public function registerBundles()
     {
-        return array(
+        $bundles = array(
             // ...
-            new Integrated\Bundle\BlockBundle\IntegratedBlockBundle()
+            new Integrated\Bundle\SubscriptionBundle\IntegratedSubscriptionBundle(),
             // ...
         );
     }
@@ -32,8 +32,8 @@ This bundle can be installed following these steps:
 ### Import the routing ###
 
     # app/config/routing.yml
-    integrated_block:
-        resource: "@IntegratedBlockBundle/Resources/config/routing.xml"
+    integrated_subscription:
+        resource: "@IntegratedSubscriptionBundle/Resources/config/routing.xml"
         prefix: "/admin"
 
 ## License ##
