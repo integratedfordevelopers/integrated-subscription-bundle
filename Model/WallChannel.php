@@ -34,10 +34,10 @@ class WallChannel
     protected $subscriptionWall;
 
     /**
-     * @param string $wall
+     * @param SubscriptionWall $wall
      * @return WallChannel
      */
-    public function setWall($wall)
+    public function setWall(SubscriptionWall $wall)
     {
         $this->wall = $wall;
 
@@ -45,7 +45,7 @@ class WallChannel
     }
 
     /**
-     * @return string
+     * @return SubscriptionWall
      */
     public function getWall()
     {

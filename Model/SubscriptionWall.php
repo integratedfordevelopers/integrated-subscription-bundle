@@ -142,9 +142,9 @@ class SubscriptionWall
      * @param string $freetier
      * @return SubscriptionWall
      */
-    public function setFreetier($freetier)
+    public function setFreetier($freeTier)
     {
-        $this->freetier = $freetier;
+        $this->freeTier = $freeTier;
 
         return $this;
     }
@@ -154,7 +154,7 @@ class SubscriptionWall
      */
     public function getFreetier()
     {
-        return $this->freetier;
+        return $this->freeTier;
     }
 
     /**

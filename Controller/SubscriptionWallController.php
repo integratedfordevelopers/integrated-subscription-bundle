@@ -11,8 +11,8 @@
 
 namespace Integrated\Bundle\SubscriptionBundle\Controller;
 
-use Integrated\Bundle\SubscriptionBundle\Entity\SubscriptionWall;
-use Integrated\Bundle\SubscriptionBundle\Entity\WallChannel;
+use Integrated\Bundle\SubscriptionBundle\Model\SubscriptionWall;
+use Integrated\Bundle\SubscriptionBundle\Model\WallChannel;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -40,7 +40,6 @@ class SubscriptionWallController extends Controller
 
         return $this->render('IntegratedSubscriptionBundle:SubscriptionWall:index.html.twig', ['walls' => $walls]);
     }
-    public function createAction(Request $request) {
 
     /**
      * Creates a wall
@@ -59,10 +58,10 @@ class SubscriptionWallController extends Controller
 
         $form = $this->createFormBuilder($wall)
             ->add('name', 'text')
-            ->add('teaser', 'textarea', array('label' => 'Description'))
+            ->add('teaser', 'textarea', array('label' => 'Teaser'))
             ->add('disabled', 'checkbox', array('required' => false))
-            ->add('freetier', 'integer', array('required' => false))
-            ->add('channel', 'choice', ['choices'=>$channelNames,'multiple'=> true, 'expanded'=> true, 'mapped' => false])
+            ->add('freeTier', 'integer', array('required' => false))
+            ->add('channel', 'choice', ['choices' => $channelNames, 'multiple'=> true, 'expanded'=> true, 'mapped' => false])
             ->add('save', 'submit')
             ->getForm();
 
@@ -72,13 +71,16 @@ class SubscriptionWallController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($wall);
             $em->flush();
-            foreach ($request->request->get("form")["channel"] as $channel) {
-                $wallChannel = new WallChannel();
-                $wallChannel->setChannel($channelNames[$channel]);
-                $wallChannel->setWall($wall->getId());
-                $wallChannel->setSubscriptionWall($wall);
-                $em->persist($wallChannel);
-                $em->flush();
+
+            if (isset($request->get("form")["channel"])) {
+                foreach ($request->get("form")["channel"] as $channel) {
+                    $wallChannel = new WallChannel();
+                    $wallChannel->setChannel($channelNames[$channel]);
+                    $wallChannel->setWall($wall);
+                    $wallChannel->setSubscriptionWall($wall);
+                    $em->persist($wallChannel);
+                    $em->flush();
+                }
             }
             
             $this->addFlash(
@@ -92,18 +94,8 @@ class SubscriptionWallController extends Controller
     }
 
     public function editAction()
-    {
-    }
-
-    public function createAction()
-    {
-    }
-
-    public function showAction()
-    {
-    }
+    {}
 
     public function deleteAction()
-    {
-    }
+    {}
 }
