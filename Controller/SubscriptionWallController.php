@@ -31,15 +31,16 @@ class SubscriptionWallController extends Controller
     public function indexAction()
     {
         $walls = $this->getDoctrine()
-            ->getRepository('IntegratedSubscriptionBundle:SubscriptionWall')
+            ->getRepository('Integrated\Bundle\SubscriptionBundle\Model\SubscriptionWall')
             ->findAll();
 
         if (!$walls) {
-            throw $this->createNotFoundException('No walls found!');
+            return $this->render('IntegratedSubscriptionBundle:SubscriptionWall:index.html.twig', ['walls' => null]);
         }
 
-        return $this->render('IntegratedSubscriptionBundle:SubscriptionWall:index.html.twig', array('walls' => $walls));
+        return $this->render('IntegratedSubscriptionBundle:SubscriptionWall:index.html.twig', ['walls' => $walls]);
     }
+    public function createAction(Request $request) {
 
     /**
      * Creates a wall
@@ -91,6 +92,14 @@ class SubscriptionWallController extends Controller
     }
 
     public function editAction()
+    {
+    }
+
+    public function createAction()
+    {
+    }
+
+    public function showAction()
     {
     }
 
