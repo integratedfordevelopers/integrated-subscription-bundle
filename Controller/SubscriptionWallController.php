@@ -34,5 +34,16 @@ class SubscriptionWallController extends Controller
 
         return $this->render('IntegratedSubscriptionBundle:SubscriptionWall:index.html.twig', array('walls' => $walls));
     }
-
+    public function editAction()
+    {
+    }
+    public function createAction()
+    {
+    }
+    public function showAction()
+    {
+    }
+    public function deleteAction()
+    {
+    }
 }
