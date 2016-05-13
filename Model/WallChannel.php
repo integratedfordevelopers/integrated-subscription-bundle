@@ -1,11 +1,20 @@
 <?php
 
-namespace Integrated\Bundle\SubscriptionBundle\Entity;
+/*
+ * This file is part of the Integrated package.
+ *
+ * (c) e-Active B.V. <integrated@e-active.nl>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+namespace Integrated\Bundle\SubscriptionBundle\Model;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Integrated\Bundle\SubscriptionBundle\Entity\WallChannel
+ * Integrated\Bundle\SubscriptionBundle\Model\WallChannel
  */
 class WallChannel
 {
@@ -19,6 +28,9 @@ class WallChannel
      */
     protected $channel;
 
+    /**
+     * @var SubscriptionWall|null
+     */
     protected $subscriptionWall;
 
     /**
@@ -75,7 +87,7 @@ class WallChannel
     /**
      * Get SubscriptionWall entity (many to one).
      *
-     * @return SubscriptionWall
+     * @return SubscriptionWall|null
      */
     public function getSubscriptionWall()
     {
