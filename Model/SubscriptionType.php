@@ -1,12 +1,21 @@
 <?php
 
-namespace Integrated\Bundle\SubscriptionBundle\Entity;
+/*
+ * This file is part of the Integrated package.
+ *
+ * (c) e-Active B.V. <integrated@e-active.nl>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+namespace Integrated\Bundle\SubscriptionBundle\Model;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * Integrated\Bundle\SubscriptionBundle\Entity\SubscriptionType
+ * @author Jacob de Graaf <jacob.de.graaf@windesheim.nl> and Albert Bakker <albert-david.bakker@windesheim.nl>
  */
 class SubscriptionType
 {
@@ -55,12 +64,24 @@ class SubscriptionType
      */
     protected $typeVat;
 
+    /**
+     * @var Subscription[]
+     */
     protected $subscriptions;
 
+    /**
+     * @var SubscriptionTypeVariant[]
+     */
     protected $subscriptionTypeVariants;
 
+    /**
+     * @var VatType
+     */
     protected $vatType;
 
+    /**
+     * @var SubscriptionWall[]
+     */
     protected $subscriptionWalls;
 
     public function __construct()

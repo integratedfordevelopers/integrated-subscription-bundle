@@ -1,11 +1,20 @@
 <?php
 
-namespace Integrated\Bundle\SubscriptionBundle\Entity;
+/*
+ * This file is part of the Integrated package.
+ *
+ * (c) e-Active B.V. <integrated@e-active.nl>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+namespace Integrated\Bundle\SubscriptionBundle\Model;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Integrated\Bundle\SubscriptionBundle\Entity\Subscription
+ * @author Jacob de Graaf <jacob.de.graaf@windesheim.nl> and Albert Bakker <albert-david.bakker@windesheim.nl>
  */
 class Subscription
 {
@@ -30,7 +39,7 @@ class Subscription
     protected $contact;
 
     /**
-     * @var string
+     * @var float
      */
     protected $customPrice;
 
@@ -45,7 +54,7 @@ class Subscription
     protected $discountPercentage;
 
     /**
-     * @var float
+     * @var string
      */
     protected $status;
 

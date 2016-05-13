@@ -1,19 +1,28 @@
 <?php
 
-namespace Integrated\Bundle\SubscriptionBundle\Entity;
+/*
+ * This file is part of the Integrated package.
+ *
+ * (c) e-Active B.V. <integrated@e-active.nl>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+namespace Integrated\Bundle\SubscriptionBundle\Model;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * Integrated\Bundle\SubscriptionBundle\Entity\VatContinent
+ * @author Jacob de Graaf <jacob.de.graaf@windesheim.nl> and Albert Bakker <albert-david.bakker@windesheim.nl>
  */
-class VatContinent
+class VatCountry
 {
     /**
      * @var string
      */
-    protected $continentCode;
+    protected $countryCode;
 
     /**
      * @var float
@@ -30,6 +39,9 @@ class VatContinent
      */
     protected $disableWithVatId;
 
+    /**
+     * @var VatType[]
+     */
     protected $vatTypes;
 
     public function __construct()
@@ -38,12 +50,12 @@ class VatContinent
     }
 
     /**
-     * @param string $continentCode
-     * @return VatContinent
+     * @param string $countryCode
+     * @return VatCountry
      */
-    public function setContinentCode($continentCode)
+    public function setCountryCode($countryCode)
     {
-        $this->continentCode = $continentCode;
+        $this->countryCode = $countryCode;
 
         return $this;
     }
@@ -51,14 +63,14 @@ class VatContinent
     /**
      * @return string
      */
-    public function getContinentCode()
+    public function getCountryCode()
     {
-        return $this->continentCode;
+        return $this->countryCode;
     }
 
     /**
      * @param float $percentage
-     * @return VatContinent
+     * @return VatCountry
      */
     public function setPercentage($percentage)
     {
@@ -77,7 +89,7 @@ class VatContinent
 
     /**
      * @param string $code
-     * @return VatContinent
+     * @return VatCountry
      */
     public function setCode($code)
     {
@@ -96,7 +108,7 @@ class VatContinent
 
     /**
      * @param boolean $disableWithVatId
-     * @return VatContinent
+     * @return VatCountry
      */
     public function setDisableWithVatId($disableWithVatId)
     {
@@ -117,7 +129,7 @@ class VatContinent
      * Add VatType entity to collection (one to many).
      *
      * @param VatType $vatType
-     * @return VatContinent
+     * @return VatCountry
      */
     public function addVatType(VatType $vatType)
     {
@@ -130,7 +142,7 @@ class VatContinent
      * Remove VatType entity from collection (one to many).
      *
      * @param VatType $vatType
-     * @return VatContinent
+     * @return VatCountry
      */
     public function removeVatType(VatType $vatType)
     {
