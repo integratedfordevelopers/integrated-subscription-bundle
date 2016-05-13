@@ -19,6 +19,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
  */
 class SubscriptionWallController extends Controller
 {
+
     /**
      * Lists the walls
      *
