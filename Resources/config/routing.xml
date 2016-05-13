@@ -3,4 +3,24 @@
 <routes xmlns="http://symfony.com/schema/routing"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
+
+    <route id="integrated_subscription_show_wall" path="/wall">
+        <default key="_controller">IntegratedSubscriptionBundle:SubscriptionWall:index</default>
+    </route>
+    <route id="integrated_subscription_create_wall" path="/wall/create">
+        <default key="_controller">IntegratedSubscriptionBundle:SubscriptionWall:create</default>
+    </route>
+    <route id="integrated_subscription_edit_wall" path="/wall/edit/{id}">
+        <default key="_controller">IntegratedSubscriptionBundle:SubscriptionWall:edit</default>
+    </route>
+    <route id="integrated_subscription_delete_wall" path="/wall/delete/{id}">
+        <default key="_controller">IntegratedSubscriptionBundle:SubscriptionWall:delete</default>
+    </route>
+
+    <route id="integrated_subscription_create_type" path="/type/create">
+        <default key="_controller">IntegratedSubscriptionBundle:SubscriptionType:create</default>
+    </route>
+    <route id="integrated_subscription_show_type" path="/type/show">
+        <default key="_controller">IntegratedSubscriptionBundle:SubscriptionType:show</default>
+    </route>
 </routes>

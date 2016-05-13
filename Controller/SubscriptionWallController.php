@@ -8,72 +8,31 @@
 
 namespace Integrated\Bundle\SubscriptionBundle\Controller;
 
-use Integrated\Bundle\SubscriptionBundle\Entity\SubscriptionWall;
-
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
-    use Symfony\Component\Form\Forms;
 
 class SubscriptionWallController extends Controller
 {
-    public function indexAction(){
-//        $news = $this->getDoctrine()
-//            ->getRepository('Integrated\Bundle\SubscriptionBundle\Entity\SubscriptionWall')
-//            ->find('1c285820-088c-11e6-86ad-080027d8aa75');
-//        if (!$news) {
-//            throw $this->createNotFoundException('No news found by id ');
-//        }
-
+    public function indexAction()
+    {
         $walls = $this->getDoctrine()
-            ->getRepository('IntegratedSubscriptionBundle:SubscriptionWall')
+            ->getRepository('Integrated\Bundle\SubscriptionBundle\Model\SubscriptionWall')
             ->findAll();
         if (!$walls) {
-            throw $this->createNotFoundException('No walls found!');
+            throw $this->createNotFoundException('');
         }
 
-        return $this->render('IntegratedSubscriptionBundle:SubscriptionWall:index.html.twig', array('walls' => $walls));
-    }
-    public function createAction(Request $request) {
-
-        $wall = new SubscriptionWall();
-
-        $form = $this->createFormBuilder($wall)
-            ->add('name', 'text')
-            ->add('save', 'submit')
-            ->getForm();
-
-        $form->handleRequest($request);
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($wall);
-            $em->flush();
-            return new Response('Wall added successfuly');
-        }
-
-        $build['form'] = $form->createView();
-        return $this->render('IntegratedSubscriptionBundle:SubscriptionWall:create.html.twig', $build);
+        return $this->render('IntegratedSubscriptionBundle:SubscriptionWall:index.html.twig', ['walls' => $walls]);
     }
     public function editAction()
     {
-        $walls = $this->getDoctrine()
-            ->getRepository('IntegratedSubscriptionBundle:SubscriptionWall')
-            ->findAll();
-        if (!$walls) {
-            throw $this->createNotFoundException('No walls found!');
-        }
-
-        return $this->render('IntegratedSubscriptionBundle:SubscriptionWall:index.html.twig', array('walls' => $walls));
+    }
+    public function createAction()
+    {
+    }
+    public function showAction()
+    {
     }
     public function deleteAction()
     {
-        $walls = $this->getDoctrine()
-            ->getRepository('IntegratedSubscriptionBundle:SubscriptionWall')
-            ->findAll();
-        if (!$walls) {
-            throw $this->createNotFoundException('No walls found!');
-        }
-
-        return $this->render('IntegratedSubscriptionBundle:SubscriptionWall:index.html.twig', array('walls' => $walls));
     }
 }
