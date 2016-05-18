@@ -30,19 +30,10 @@ class SubscriptionWallController extends Controller
         $walls = $this->getDoctrine()
             ->getRepository('Integrated\Bundle\SubscriptionBundle\Model\SubscriptionWall')
             ->findAll();
-        if (!$walls) {
-            $walls = null;
-        }
 
         return $this->render('IntegratedSubscriptionBundle:SubscriptionWall:index.html.twig', ['walls' => $walls]);
     }
 
-    /**
-     * Creates a wall
-     *
-     * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
-     */
     public function createAction(Request $request)
     {
     }

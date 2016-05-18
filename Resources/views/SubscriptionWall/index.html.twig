@@ -1,10 +1,11 @@
-{% extends 'IntegratedSubscriptionBundle::base.html.twig' %}
+{% extends 'IntegratedContentBundle::base.html.twig' %}
+
 {% block body %}
 
 <div id="wrapper-holder">
     <div class="container">
         <div class="content_columns_holder">
-            {% if walls is null %}
+            {% if walls|length == 0 %}
 
                 <h1>{% trans %}There are no walls{% endtrans %}</h1>
 
@@ -19,10 +20,10 @@
                         </colgroup>
                         <thead>
                         <tr>
-                            <th>Name</th>
-                            <th>Teaser</th>
-                            <th>Disabled</th>
-                            <th>Actions</th>
+                            <th>{% trans %}Name{% endtrans %}</th>
+                            <th>{% trans %}Teaser{% endtrans %}</th>
+                            <th>{% trans %}Disabled{% endtrans %}</th>
+                            <th>{% trans %}Actions{% endtrans %}</th>
                         </tr>
                         </thead>
                         <tbody>
