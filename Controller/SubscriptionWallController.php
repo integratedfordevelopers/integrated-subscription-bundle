@@ -47,16 +47,16 @@ class SubscriptionWallController extends Controller
     {
         $wall = new SubscriptionWall();
         $channels = $channels = $this->get("integrated_content.channel.manager")->findAll();
-        $channelNames = array();
+        $channelNames = [];
         foreach ($channels as $channel) {
             $channelNames[] = $channel->getName();
         }
 
         $form = $this->createFormBuilder($wall)
             ->add('name', 'text')
-            ->add('teaser', 'textarea', array('label' => 'Teaser'))
-            ->add('disabled', 'checkbox', array('required' => false))
-            ->add('freeTier', 'integer', array('required' => false))
+            ->add('teaser', 'textarea', ['label' => 'Teaser'])
+            ->add('disabled', 'checkbox', ['required' => false])
+            ->add('freeTier', 'integer', ['required' => false])
             ->add('channel', 'choice', ['choices' => $channelNames, 'multiple'=> true, 'expanded'=> true, 'mapped' => false])
             ->add('save', 'submit')
             ->getForm();
@@ -79,10 +79,13 @@ class SubscriptionWallController extends Controller
                 }
             }
             
-            $this->addFlash(
-                'notice',
-                'Your wall is created!'
-            );
+//            $this->addFlash(
+//                'notice',
+//                'Your wall is created!'
+//            );
+
+            $this->get('braincrafted_bootstrap.flash')->success('Wall created');
+            
             return $this->redirectToRoute('integrated_subscription_show_wall');
         }
         $build['form'] = $form->createView();
