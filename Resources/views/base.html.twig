@@ -172,8 +172,21 @@
     </div>
 </div>
 
-{% block body %}
-{% endblock body %}
+<div id="wrapper-holder">
+    <div class="container">
+
+        {% for flash_message in app.session.flashBag.get('notice') %}
+            <div class="flash-notice alert alert-success">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>{{ flash_message }}</strong>
+            </div>
+        {% endfor %}
+
+        {% block body %}
+        {% endblock body %}
+
+    </div>
+</div>
 
 <script src="//code.jquery.com/jquery.js"></script>
 <script src="/js/bootstrap.js"></script>
