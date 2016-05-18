@@ -52,15 +52,7 @@ class SubscriptionWallController extends Controller
             $channelNames[] = $channel->getName();
         }
 
-        $form = $this->createFormBuilder($wall)
-            ->add('name', 'text')
-            ->add('teaser', 'textarea', ['label' => 'Teaser'])
-            ->add('disabled', 'checkbox', ['required' => false])
-            ->add('freeTier', 'integer', ['required' => false])
-            ->add('channel', 'choice', ['choices' => $channelNames, 'multiple'=> true, 'expanded'=> true, 'mapped' => false])
-            ->add('save', 'submit')
-            ->getForm();
-
+        $form = $this->createCreateForm($wall, $channelNames);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -68,8 +60,8 @@ class SubscriptionWallController extends Controller
             $em->persist($wall);
             $em->flush();
 
-            if (isset($request->get("form")["channel"])) {
-                foreach ($request->get("form")["channel"] as $channel) {
+            if (isset($request->request->get("integrated_subscription_wall")["channel"])) {
+                foreach ($request->request->get("integrated_subscription_wall")["channel"] as $channel) {
                     $wallChannel = new WallChannel();
                     $wallChannel->setChannel($channelNames[$channel]);
                     $wallChannel->setWall($wall);
@@ -78,18 +70,37 @@ class SubscriptionWallController extends Controller
                     $em->flush();
                 }
             }
-            
-//            $this->addFlash(
-//                'notice',
-//                'Your wall is created!'
-//            );
 
             $this->get('braincrafted_bootstrap.flash')->success('Wall created');
-            
+
             return $this->redirectToRoute('integrated_subscription_show_wall');
         }
         $build['form'] = $form->createView();
         return $this->render('IntegratedSubscriptionBundle:SubscriptionWall:create.html.twig', $build);
+    }
+
+    /**
+     * @param SubscriptionWall $wall
+     * @param array $channelNames
+     *
+     * @return \Symfony\Component\Form\Form
+     */
+    protected function createCreateForm(SubscriptionWall $wall, $channelNames)
+    {
+
+        $form = $this->createForm(
+            'integrated_subscription_wall',
+            $wall,
+            [
+                'action' => $this->generateUrl('integrated_subscription_create_wall'),
+                'method' => 'POST',
+                'attr' => $channelNames
+            ]
+        );
+
+        $form->add('submit', 'submit', ['label' => 'Save']);
+
+        return $form;
     }
 
     public function editAction()
