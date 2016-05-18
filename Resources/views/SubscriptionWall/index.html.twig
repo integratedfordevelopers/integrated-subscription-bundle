@@ -6,7 +6,7 @@
         <div class="content_columns_holder">
             {% if walls is null %}
 
-                <h1>There are no walls</h1>
+                <h1>{% trans %}There are no walls{% endtrans %}</h1>
 
             {% else %}
             <div class="content_column_inner">
@@ -42,7 +42,7 @@
                 </div>
             </div>
             {% endif %}
-            <a href="{{ path('integrated_subscription_create_wall') }}">Create wall</a>
+            <a href="{{ path('integrated_subscription_create_wall') }}">{% trans %}Create wall{% endtrans %}</a>
         </div>
     </div>
 </div>

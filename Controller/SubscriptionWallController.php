@@ -31,7 +31,7 @@ class SubscriptionWallController extends Controller
             ->getRepository('Integrated\Bundle\SubscriptionBundle\Model\SubscriptionWall')
             ->findAll();
         if (!$walls) {
-            return $this->render('IntegratedSubscriptionBundle:SubscriptionWall:index.html.twig', ['walls' => null]);
+            $walls = null;
         }
 
         return $this->render('IntegratedSubscriptionBundle:SubscriptionWall:index.html.twig', ['walls' => $walls]);
