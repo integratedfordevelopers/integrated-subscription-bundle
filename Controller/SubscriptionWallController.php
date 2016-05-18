@@ -1,4 +1,5 @@
 <?php
+
 /*
 * This file is part of the Integrated package.
 *
@@ -16,7 +17,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * @author Jacob de Graaf <jacob.de.graaf@windesheim.nl> and Albert David Bakker <albert-david.bakker@windesheim.nl>
+ * @author Jacob de Graaf <jacob.de.graaf@windesheim.nl>
+ * @author Albert Bakker <albert-david.bakker@windesheim.nl>
  */
 class SubscriptionWallController extends Controller
 {
@@ -29,74 +31,17 @@ class SubscriptionWallController extends Controller
     public function indexAction()
     {
         $walls = $this->getDoctrine()
-            ->getRepository('IntegratedSubscriptionBundle:SubscriptionWall')
+            ->getRepository('Integrated\Bundle\SubscriptionBundle\Model\SubscriptionWall')
             ->findAll();
 
         if (!$walls) {
-            throw $this->createNotFoundException('No walls found!');
+            return $this->render('IntegratedSubscriptionBundle:SubscriptionWall:index.html.twig', ['walls' => null]);
         }
 
-        return $this->render('IntegratedSubscriptionBundle:SubscriptionWall:index.html.twig', array('walls' => $walls));
+        return $this->render('IntegratedSubscriptionBundle:SubscriptionWall:index.html.twig', ['walls' => $walls]);
     }
 
-    /**
-     * Creates a wall
-     *
-     * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
-     */
-    public function createAction(Request $request)
-    {
-
-        $wall = new SubscriptionWall();
-        $channels = $channels = $this->get("integrated_content.channel.manager")->findAll();
-        $channelNames = array();
-        foreach ($channels as $channel) {
-            $channelNames[] = $channel->getName();
-        }
-
-        $form = $this->createFormBuilder($wall)
-            ->add('name', 'text')
-            ->add('teaser', 'textarea', array('label' => 'Description'))
-            ->add('disabled', 'checkbox', array('required' => false))
-            ->add('freetier', 'integer', array('required' => false))
-            ->add('channel', 'choice', ['choices'=>$channelNames,'multiple'=> true, 'expanded'=> true, 'mapped' => false])
-            ->add('save', 'submit')
-            ->getForm();
-
-        $form->handleRequest($request);
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($wall);
-            $em->flush();
-            foreach ($request->request->get("form")["channel"] as $channel) {
-                $wallChannel = new WallChannel();
-                $wallChannel->setChannel($channelNames[$channel]);
-                $wallChannel->setWall($wall->getId());
-                $wallChannel->setSubscriptionWall($wall);
-                $em->persist($wallChannel);
-                $em->flush();
-            }
-
-            $this->addFlash(
-                'notice',
-                'Your wall is created!'
-            );
-            return $this->redirectToRoute('integrated_subscription_show_wall');
-        }
-
-        $build['form'] = $form->createView();
-        return $this->render('IntegratedSubscriptionBundle:SubscriptionWall:create.html.twig', $build);
-    }
-
-    /**
-     * Edit walls
-     *
-     * @param SubscriptionWall $wall
-     * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
-     */
-    public function editAction(SubscriptionWall $wall, Request $request)
+    public function editAction()
     {
         $channelNames = $selectedChannelNames = $selectedChannels = array();
 
@@ -168,40 +113,11 @@ class SubscriptionWallController extends Controller
         return $this->render('IntegratedSubscriptionBundle:SubscriptionWall:edit.html.twig', $build);
     }
 
-    /**
-     * Deletes a wall
-     *
-     * @param $id
-     * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
-     */
-    public function deleteAction($id, Request $request)
+    public function showAction()
     {
-        $em = $this->getDoctrine()->getManager();
-        $wall = $em->getRepository('IntegratedSubscriptionBundle:SubscriptionWall')->find($id);
-        if (!$wall) {
-            throw $this->createNotFoundException(
-                'No wall found for id ' . $id
-            );
-        }
+    }
 
-        $form = $this->createFormBuilder($wall)
-            ->add('delete', 'submit')
-            ->getForm();
-
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-            $em->remove($wall);
-            $em->flush();
-            $this->addFlash(
-                'notice',
-                'The wall was deleted'
-            );
-            return $this->redirectToRoute('integrated_subscription_show_wall');
-        }
-
-        $build['form'] = $form->createView();
-        return $this->render('IntegratedSubscriptionBundle:SubscriptionWall:delete.html.twig', $build);
+    public function deleteAction()
+    {
     }
 }
