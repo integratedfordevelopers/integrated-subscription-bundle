@@ -96,10 +96,6 @@ class SubscriptionWallController extends Controller
     {
     }
 
-    public function createAction()
-    {
-    }
-
     public function showAction()
     {
     }
