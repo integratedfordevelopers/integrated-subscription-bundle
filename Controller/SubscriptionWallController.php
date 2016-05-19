@@ -12,6 +12,7 @@
 namespace Integrated\Bundle\SubscriptionBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Doctrine\ORM\Query;
 
 /**
  * @author Jacob de Graaf <jacob.de.graaf@windesheim.nl>
@@ -19,7 +20,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
  */
 class SubscriptionWallController extends Controller
 {
-
     /**
      * Lists the walls
      *
