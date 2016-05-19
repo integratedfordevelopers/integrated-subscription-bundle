@@ -13,11 +13,9 @@
     <services>
 
         <service id="integrated_subscription.controller.subscription_wall" class="%integrated_subscription.controller.subscription_wall.class%">
-            <call method="setContainer">
-                <argument type="service" id="service_container" />
-            </call>
+            <argument type="service" id="templating" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
         </service>
 
     </services>
-
 </container>
