@@ -11,15 +11,36 @@
 
 namespace Integrated\Bundle\SubscriptionBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query;
+
+use Symfony\Bundle\TwigBundle\TwigEngine;
 
 /**
  * @author Jacob de Graaf <jacob.de.graaf@windesheim.nl>
  * @author Albert Bakker <albert-david.bakker@windesheim.nl>
  */
-class SubscriptionWallController extends Controller
+class SubscriptionWallController
 {
+    /**
+     * @var TwigEngine
+     */
+    protected $templating;
+
+    /**
+     * @var EntityManager
+     */
+    protected $em;
+
+    /**
+     * @param TwigEngine $templating
+     */
+    public function __construct(TwigEngine $templating, EntityManager $em)
+    {
+        $this->templating = $templating;
+        $this->em = $em;
+    }
+
     /**
      * Lists the walls
      *
@@ -27,11 +48,11 @@ class SubscriptionWallController extends Controller
      */
     public function indexAction()
     {
-        $walls = $this->getDoctrine()
+        $walls = $this->em
             ->getRepository('Integrated\Bundle\SubscriptionBundle\Model\SubscriptionWall')
             ->findAll();
 
-        return $this->render('IntegratedSubscriptionBundle:SubscriptionWall:index.html.twig', ['walls' => $walls]);
+        return $this->templating->renderResponse('IntegratedSubscriptionBundle:SubscriptionWall:index.html.twig', ['walls' => $walls]);
     }
 
     public function createAction(Request $request)
