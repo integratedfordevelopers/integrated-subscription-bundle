@@ -82,11 +82,14 @@ class SubscriptionWallController extends Controller
     /**
      * @param SubscriptionWall $wall
      * @param array $channelNames
+     * @param array $selectedChannelNames
      *
      * @return \Symfony\Component\Form\Form
      */
-    protected function createCreateForm(SubscriptionWall $wall, $channelNames)
+    protected function createCreateForm(SubscriptionWall $wall, $channelNames, $selectedChannelNames)
     {
+
+        $attr = array("channelNames" => $channelNames, "selectedChannelNames" => $selectedChannelNames);
 
         $form = $this->createForm(
             'integrated_subscription_wall',
@@ -94,7 +97,7 @@ class SubscriptionWallController extends Controller
             [
                 'action' => $this->generateUrl('integrated_subscription_create_wall'),
                 'method' => 'POST',
-                'attr' => $channelNames
+                'attr' => $attr
             ]
         );
 
@@ -103,8 +106,9 @@ class SubscriptionWallController extends Controller
         return $form;
     }
 
-    public function editAction()
+    public function editAction(Request $request)
     {
+        $wall = new SubscriptionWall();
         $channelNames = $selectedChannelNames = $selectedChannels = array();
 
         $em = $this->getDoctrine()->getManager();
@@ -124,6 +128,9 @@ class SubscriptionWallController extends Controller
 
         sort($channelNames);
 
+        $form = $this->createCreateForm($wall, $channelNames, $selectedChannelNames);
+        $form->handleRequest($request);
+
         $form = $this->createFormBuilder($wall)
             ->add('name', 'text')
             ->add('teaser', 'textarea', array('label' => 'Description'))
@@ -138,6 +145,8 @@ class SubscriptionWallController extends Controller
         // Form Posted
         if ($form->isValid()) {
             // Store changed data
+
+
             $wall->setName($request->get("form")["name"]);
             $wall->setTeaser($request->get("form")["teaser"]);
             if (isset($request->get("form")["disabled"])) {

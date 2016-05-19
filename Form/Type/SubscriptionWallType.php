@@ -39,9 +39,7 @@ class SubscriptionWallType extends AbstractType
         $builder->add('freeTier', 'integer',
             ['required' => false]
         );
-
-        dump($options);
-
+        
         $builder->add('channel', 'choice',
             [
                 'choices' => $options["attr"],
