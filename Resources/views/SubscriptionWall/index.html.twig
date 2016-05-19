@@ -1,22 +1,17 @@
-{% extends 'IntegratedSubscriptionBundle::base.html.twig' %}
+{% extends 'IntegratedContentBundle::base.html.twig' %}
 
-{% block body %}
+{% block content %}
+
 <div id="wrapper-holder">
     <div class="container">
         <div class="content_columns_holder">
-            {% if walls is null %}
+            {% if walls|length == 0 %}
 
-                <h1>There are no walls</h1>
+                <h1>{% trans %}There are no walls{% endtrans %}</h1>
 
             {% else %}
             <div class="content_column_inner">
                 <div class="results">
-                    {% for flash_message in app.session.flashBag.get('notice') %}
-                        <div class="flash-notice alert alert-success">
-                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                            <strong>{{ flash_message }}</strong>
-                        </div>
-                    {% endfor %}
                     <table class="table table-striped table-hover">
                         <colgroup>
                             <col style="width: 20%"/>
@@ -25,10 +20,10 @@
                         </colgroup>
                         <thead>
                         <tr>
-                            <th>Name</th>
-                            <th>Teaser</th>
-                            <th>Disabled</th>
-                            <th>Actions</th>
+                            <th>{% trans %}Name{% endtrans %}</th>
+                            <th>{% trans %}Teaser{% endtrans %}</th>
+                            <th>{% trans %}Disabled{% endtrans %}</th>
+                            <th>{% trans %}Actions{% endtrans %}</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -45,16 +40,13 @@
                         {% endfor %}
                         </tbody>
                     </table>
-                    <a href="{{ path('integrated_subscription_create_wall') }}">Create wall</a>
                 </div>
             </div>
             {% endif %}
-            <a href="{{ path('integrated_subscription_create_wall') }}">Create wall</a>
+            <a href="{{ path('integrated_subscription_create_wall') }}">{% trans %}Create wall{% endtrans %}</a>
         </div>
     </div>
 </div>
-{% endblock body %}
-
-
+{% endblock content %}
 
 
