@@ -15,6 +15,10 @@
         <service id="integrated_subscription.controller.subscription_wall" class="%integrated_subscription.controller.subscription_wall.class%">
             <argument type="service" id="templating" />
             <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="form.factory" />
+            <argument type="service" id="router" />
+            <argument type="service" id="request_stack" />
+            <argument type="service" id="braincrafted_bootstrap.flash" />
         </service>
 
     </services>
