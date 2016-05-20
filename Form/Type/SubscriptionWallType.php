@@ -13,7 +13,6 @@ namespace Integrated\Bundle\SubscriptionBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Jacob de Graaf <jacob.de.graaf@windesheim.nl>
@@ -21,11 +20,13 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class SubscriptionWallType extends AbstractType
 {
+
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        
         $builder->add('name', 'text');
 
         $builder->add('teaser', 'textarea',
@@ -40,37 +41,15 @@ class SubscriptionWallType extends AbstractType
             ['required' => false]
         );
 
-        if(isset($options["attr"]["selectedChannelNames"])) {
-            $builder->add('channel', 'choice',
-                [
-                    'choices' => $options["attr"]["channelNames"],
-                    'multiple' => true,
-                    'expanded' => true,
-                    'mapped' => false,
-                    'data' => $options["attr"]["selectedChannelNames"]
-                ]
-            );
-        } else {
-            $builder->add('channel', 'choice',
-                [
-                    'choices' => $options["attr"]["channelNames"],
-                    'multiple' => true,
-                    'expanded' => true,
-                    'mapped' => false
-                ]
-            );
-        }
-
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        $resolver->setDefaults([
-            'theme' => 'default',
-        ]);
+        $builder->add('channel', 'document',
+            [
+                'class' => 'Integrated\Bundle\ContentBundle\Document\Channel\Channel',
+                'property'    => 'name',
+                'expanded'    => true,
+                'multiple'    => true,
+                'mapped' => false
+            ]
+        );
     }
 
     /**
@@ -80,4 +59,5 @@ class SubscriptionWallType extends AbstractType
     {
         return 'integrated_subscription_wall';
     }
+
 }
