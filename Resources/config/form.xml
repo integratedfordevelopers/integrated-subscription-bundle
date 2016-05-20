@@ -13,7 +13,6 @@
     <services>
 
         <service id="integrated_subscription.form.type.subscription_wall" class="%integrated_subscription.form.type.subscription_wall.class%">
-            <argument type="service" id="integrated_channel.manager.channel"/>
             <tag name="form.type" alias="integrated_subscription_wall" />
         </service>
 
