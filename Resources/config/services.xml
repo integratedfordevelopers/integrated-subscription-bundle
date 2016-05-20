@@ -6,7 +6,7 @@
 
     <parameters>
 
-        <parameter key="integrated_subscription.services.referenced.class">Integrated\Bundle\SubscriptionBundle\IntegratedSubscriptionBundle\Controller\SubscriptionWallController</parameter>
+        <parameter key="integrated_subscription.services.referenced.class">Integrated\Bundle\SubscriptionBundle\Controller\SubscriptionWallController</parameter>
 
     </parameters>
 

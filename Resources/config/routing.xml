@@ -16,11 +16,4 @@
     <route id="integrated_subscription_delete_wall" path="/wall/delete/{id}">
         <default key="_controller">IntegratedSubscriptionBundle:SubscriptionWall:delete</default>
     </route>
-
-    <route id="integrated_subscription_create_type" path="/type/create">
-        <default key="_controller">IntegratedSubscriptionBundle:SubscriptionType:create</default>
-    </route>
-    <route id="integrated_subscription_show_type" path="/type/show">
-        <default key="_controller">IntegratedSubscriptionBundle:SubscriptionType:show</default>
-    </route>
 </routes>

@@ -11,7 +11,10 @@
 
 namespace Integrated\Bundle\SubscriptionBundle\Controller;
 
+use Integrated\Bundle\SubscriptionBundle\Model\SubscriptionWall;
+
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @author Jacob de Graaf <jacob.de.graaf@windesheim.nl>
@@ -34,7 +37,7 @@ class SubscriptionWallController extends Controller
         return $this->render('IntegratedSubscriptionBundle:SubscriptionWall:index.html.twig', ['walls' => $walls]);
     }
 
-    public function createAction(Request $request)
+    public function createAction()
     {
     }
 
@@ -48,16 +51,18 @@ class SubscriptionWallController extends Controller
     public function deleteAction($id, Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $wall = $em->getRepository('IntegratedSubscriptionBundle:SubscriptionWall')->find($id);
+        $wall = $em->getRepository('Integrated\Bundle\SubscriptionBundle\Model\SubscriptionWall')->find($id);
         if (!$wall) {
             throw $this->createNotFoundException(
                 'No wall found for id ' . $id
             );
         }
 
+        dump($wall);
+
         $form = $this->createFormBuilder($wall)
             ->add('Delete', 'submit')
-            ->add('Cancel', 'button' , array('attr' => array('')))
+            ->add('Cancel', 'button')
             ->getForm();
 
         $form->handleRequest($request);
