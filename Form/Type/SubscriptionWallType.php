@@ -39,15 +39,27 @@ class SubscriptionWallType extends AbstractType
         $builder->add('freeTier', 'integer',
             ['required' => false]
         );
-        
-        $builder->add('channel', 'choice',
-            [
-                'choices' => $options["attr"],
-                'multiple'=> true,
-                'expanded'=> true,
-                'mapped' => false
-            ]
-        );
+
+        if(isset($options["attr"]["selectedChannelNames"])) {
+            $builder->add('channel', 'choice',
+                [
+                    'choices' => $options["attr"]["channelNames"],
+                    'multiple' => true,
+                    'expanded' => true,
+                    'mapped' => false,
+                    'data' => $options["attr"]["selectedChannelNames"]
+                ]
+            );
+        } else {
+            $builder->add('channel', 'choice',
+                [
+                    'choices' => $options["attr"]["channelNames"],
+                    'multiple' => true,
+                    'expanded' => true,
+                    'mapped' => false
+                ]
+            );
+        }
 
     }
 
