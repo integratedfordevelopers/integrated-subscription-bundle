@@ -40,8 +40,6 @@ class SubscriptionWallType extends AbstractType
             ['required' => false]
         );
 
-        dump($options);
-
         $builder->add('channel', 'choice',
             [
                 'choices' => $options["attr"],

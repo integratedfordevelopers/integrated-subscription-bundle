@@ -12,6 +12,7 @@
 namespace Integrated\Bundle\SubscriptionBundle\Controller;
 
 use Braincrafted\Bundle\BootstrapBundle\Session\FlashMessage;
+
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query;
 
@@ -19,7 +20,6 @@ use Integrated\Bundle\ContentBundle\Doctrine\ChannelManager;
 use Integrated\Bundle\SubscriptionBundle\Model\SubscriptionWall;
 use Integrated\Bundle\SubscriptionBundle\Model\WallChannel;
 
-use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Bundle\TwigBundle\TwigEngine;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormFactory;
@@ -27,7 +27,6 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\RouterInterface;
-
 
 /**
  * @author Jacob de Graaf <jacob.de.graaf@windesheim.nl>
@@ -49,6 +48,7 @@ class SubscriptionWallController
      * @var ChannelManager
      */
     protected $cm;
+
     /**
      * @var Request
      */
@@ -58,6 +58,7 @@ class SubscriptionWallController
      * @var FormFactory
      */
     protected $form;
+
     /**
      * @var RouterInterface
      */
@@ -135,6 +136,7 @@ class SubscriptionWallController
             return new RedirectResponse($this->router->generate("integrated_subscription_show_wall"));
         }
         $build['form'] = $form->createView();
+
         return $this->templating->renderResponse('IntegratedSubscriptionBundle:SubscriptionWall:create.html.twig', $build);
     }
 
@@ -156,7 +158,7 @@ class SubscriptionWallController
             ]
         );
 
-        $form->add('submit', 'submit', ['label' => 'Save']);
+        $form->add('submit', 'submit', ['label' => 'Create']);
 
         return $form;
     }
