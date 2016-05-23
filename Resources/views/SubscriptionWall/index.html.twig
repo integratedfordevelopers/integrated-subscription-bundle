@@ -34,7 +34,7 @@
                                 <td>{{ data.disabled }}</td>
                                 <td>
                                     <a href="{{ path('integrated_subscription_edit_wall', {'id': data.id}) }}" title="{% trans %}Edit{% endtrans %}"><span class="glyphicon glyphicon-edit"></span></a>
-                                    <a href="{{ path('integrated_subscription_delete_wall', {'id': data.id}) }}" title="{% trans %}Delete{% endtrans %}"><span class="glyphicon glyphicon-remove-circle"></span></a>
+                                    <a onclick="return confirm('{% trans %}Do you really want to delete this wall?{% endtrans %}');" href="{{ path('integrated_subscription_delete_wall', {'id': data.id}) }}" title="{% trans %}Delete{% endtrans %}"><span class="glyphicon glyphicon-remove-circle"></span></a>
                                 </td>
                             </tr>
                         {% endfor %}
