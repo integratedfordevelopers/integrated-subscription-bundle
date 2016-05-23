@@ -55,10 +55,8 @@ class SubscriptionWallController
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function createAction()
+    public function deleteAction()
     {
-        $wall = new SubscriptionWall();
-
         $form = $this->createFormBuilder($wall)
             ->add('Delete', 'submit')
             ->add('Cancel', 'button')
