@@ -52,6 +52,11 @@ class SubscriptionWall
     public $wallChannels;
 
     /**
+     * @var array
+     */
+    protected $channels;
+
+    /**
      * @var SubscriptionType[]
      */
     protected $subscriptionTypes;
@@ -227,5 +232,21 @@ class SubscriptionWall
     public function getSubscriptionTypes()
     {
         return $this->subscriptionTypes;
+    }
+
+    /**
+     * @return array
+     */
+    public function getChannels()
+    {
+        return $this->channels;
+    }
+
+    /**
+     * @param array $channels
+     */
+    public function setChannels($channels)
+    {
+        $this->channels = $channels;
     }
 }

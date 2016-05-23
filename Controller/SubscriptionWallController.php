@@ -17,7 +17,6 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query;
 
 use Integrated\Bundle\SubscriptionBundle\Model\SubscriptionWall;
-use Integrated\Bundle\SubscriptionBundle\Model\WallChannel;
 
 use Symfony\Bundle\TwigBundle\TwigEngine;
 use Symfony\Component\Form\Form;
@@ -106,16 +105,6 @@ class SubscriptionWallController
 
         if ($form->isValid()) {
             $this->em->persist($wall);
-
-            $channels = $form->get('channel')->getData();
-            foreach ($channels as $channel) {
-                $wallChannel = new WallChannel();
-                $wallChannel->setChannel($channel->getId());
-                $wallChannel->setWall($wall);
-                $wallChannel->setSubscriptionWall($wall);
-                $this->em->persist($wallChannel);
-            }
-
             $this->em->flush();
             $this->flashMessage->success('Wall created');
 
@@ -137,7 +126,6 @@ class SubscriptionWallController
             'integrated_subscription_wall',
             $wall,
             [
-                'action' => $this->router->generate('integrated_subscription_create_wall'),
                 'method' => 'POST',
             ]
         );
@@ -147,67 +135,29 @@ class SubscriptionWallController
         return $form;
     }
 
-    public function editAction()
+    /**
+     * @param SubscriptionWall $wall
+     * @return RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
+    public function editAction(SubscriptionWall $wall)
     {
-        $wall = new SubscriptionWall();
-        $channelNames = $selectedChannelNames = $selectedChannels = array();
-
-        $channels = $this->cm->findAll();
-
-        foreach ($channels as $channel) {
-            $channelNames[] = $channel->getName();
-        }
-
-        foreach ($wall->getWallChannels() as $wallChannel) {
-            $selectedChannelNames[] = $wallChannel->getChannel();
-        }
-
-        foreach ($selectedChannelNames as $selectedChannelName) {
-            $selectedChannels[] = array_search($selectedChannelName, $channelNames);
-        }
-
-        sort($channelNames);
-
-        $form = $this->createCreateForm($wall, $channelNames, $selectedChannelNames);
+        $form = $this->createCreateForm($wall);
         $form->handleRequest($this->request);
 
         // Form Posted
         if ($form->isValid()) {
             // Store changed data
-
-            $wall->setName($this->request->get("form")["name"]);
-            $wall->setTeaser($this->request->get("form")["teaser"]);
-            if (isset($this->request->get("form")["disabled"])) {
-                $wall->setDisabled($this->request->get("form")["disabled"]);
-            }
-            $wall->setFreetier($this->request->get("form")["freetier"]);
-
-            // Delete all existing WallChannel records
-            $entities = $this->em->findBy(array('wall' => $wall->getId()));
-            foreach ($entities as $entity) {
-                if ($entity != null) {
-                    $this->em->remove($entity);
-                    $this->em->flush();
-                }
-            }
-
-            // Store new WallChannel data
-            foreach ($this->request->get("form")["channel"] as $channel) {
-                $wallChannel = new WallChannel();
-                $wallChannel->setWall($wall->getId());
-                $wallChannel->setChannel($channelNames[$channel]);
-                $wallChannel->setSubscriptionWall($wall);
-                $this->em->persist($wallChannel);
-                $this->em->flush();
-            }
+            $this->em->persist($wall);
+            $this->em->flush();
 
             $this->flashMessage->success('Wall has been updated');
 
-            return $this->router->redirectToRoute('integrated_subscription_show_wall');
+            return new RedirectResponse($this->router->generate("integrated_subscription_show_wall"));
         }
 
-        $build['form'] = $form->createView();
-        return $this->templating->renderResponse('IntegratedSubscriptionBundle:SubscriptionWall:edit.html.twig', $build);
+        return $this->templating->renderResponse('IntegratedSubscriptionBundle:SubscriptionWall:edit.html.twig', [
+            'form' => $form->createView()
+        ]);
     }
 
     public function showAction()
