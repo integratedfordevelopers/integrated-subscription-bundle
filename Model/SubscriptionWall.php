@@ -47,9 +47,9 @@ class SubscriptionWall
     protected $freeTier;
 
     /**
-     * @var WallChannel[]
+     * @var array
      */
-    public $wallChannels;
+    protected $channels;
 
     /**
      * @var SubscriptionType[]
@@ -58,7 +58,6 @@ class SubscriptionWall
 
     public function __construct()
     {
-        $this->wallChannels = new ArrayCollection();
         $this->subscriptionTypes = new ArrayCollection();
     }
 
@@ -158,42 +157,6 @@ class SubscriptionWall
     }
 
     /**
-     * Add WallChannel entity to collection (one to many).
-     *
-     * @param WallChannel $wallChannel
-     * @return SubscriptionWall
-     */
-    public function addWallChannel(WallChannel $wallChannel)
-    {
-        $this->wallChannels->add($wallChannel);
-
-        return $this;
-    }
-
-    /**
-     * Remove WallChannel entity from collection (one to many).
-     *
-     * @param WallChannel $wallChannel
-     * @return SubscriptionWall
-     */
-    public function removeWallChannel(WallChannel $wallChannel)
-    {
-        $this->wallChannels->removeElement($wallChannel);
-
-        return $this;
-    }
-
-    /**
-     * Get WallChannel entity collection (one to many).
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getWallChannels()
-    {
-        return $this->wallChannels;
-    }
-
-    /**
      * Add SubscriptionType entity to collection.
      *
      * @param SubscriptionType $subscriptionType
@@ -227,5 +190,21 @@ class SubscriptionWall
     public function getSubscriptionTypes()
     {
         return $this->subscriptionTypes;
+    }
+
+    /**
+     * @return array
+     */
+    public function getChannels()
+    {
+        return $this->channels;
+    }
+
+    /**
+     * @param array $channels
+     */
+    public function setChannels(array $channels = null)
+    {
+        $this->channels = $channels;
     }
 }

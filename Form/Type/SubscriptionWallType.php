@@ -11,6 +11,7 @@
 
 namespace Integrated\Bundle\SubscriptionBundle\Form\Type;
 
+use Integrated\Bundle\ContentBundle\Doctrine\ChannelManager;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -20,6 +21,16 @@ use Symfony\Component\Form\FormBuilderInterface;
  */
 class SubscriptionWallType extends AbstractType
 {
+
+    /**
+     * @var ChannelManager
+     */
+    protected $cm;
+
+    public function __construct(ChannelManager $cm)
+    {
+        $this->cm = $cm;
+    }
 
     /**
      * {@inheritdoc}
@@ -41,13 +52,16 @@ class SubscriptionWallType extends AbstractType
             ['required' => false]
         );
 
-        $builder->add('channel', 'document',
+        $choices = [];
+        foreach ($this->cm->findAll() as $channel) {
+            $choices[$channel->getName()] = $channel->getName();
+        }
+
+        $builder->add('channels', 'choice',
             [
-                'class' => 'Integrated\Bundle\ContentBundle\Document\Channel\Channel',
-                'property'    => 'name',
-                'expanded'    => true,
-                'multiple'    => true,
-                'mapped' => false
+                'choices' => $choices,
+                'expanded' => true,
+                'multiple' => true
             ]
         );
     }

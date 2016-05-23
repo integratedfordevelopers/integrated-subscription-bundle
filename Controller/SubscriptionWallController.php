@@ -17,7 +17,6 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query;
 
 use Integrated\Bundle\SubscriptionBundle\Model\SubscriptionWall;
-use Integrated\Bundle\SubscriptionBundle\Model\WallChannel;
 
 use Symfony\Bundle\TwigBundle\TwigEngine;
 use Symfony\Component\Form\Form;
@@ -106,16 +105,6 @@ class SubscriptionWallController
 
         if ($form->isValid()) {
             $this->em->persist($wall);
-
-            $channels = $form->get('channel')->getData();
-            foreach ($channels as $channel) {
-                $wallChannel = new WallChannel();
-                $wallChannel->setChannel($channel->getId());
-                $wallChannel->setWall($wall);
-                $wallChannel->setSubscriptionWall($wall);
-                $this->em->persist($wallChannel);
-            }
-
             $this->em->flush();
             $this->flashMessage->success('Wall created');
 
@@ -137,7 +126,6 @@ class SubscriptionWallController
             'integrated_subscription_wall',
             $wall,
             [
-                'action' => $this->router->generate('integrated_subscription_create_wall'),
                 'method' => 'POST',
             ]
         );
@@ -147,8 +135,48 @@ class SubscriptionWallController
         return $form;
     }
 
-    public function editAction()
+    /**
+     * @param SubscriptionWall $wall
+     * @return Form
+     */
+    protected function createEditForm(SubscriptionWall $wall)
     {
+        $form = $this->form->create(
+            'integrated_subscription_wall',
+            $wall,
+            [
+                'method' => 'POST',
+            ]
+        );
+
+        $form->add('submit', 'submit', ['label' => 'Edit']);
+
+        return $form;
+    }
+
+    /**
+     * @param SubscriptionWall $wall
+     * @return RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
+    public function editAction(SubscriptionWall $wall)
+    {
+        $form = $this->CreateEditForm($wall);
+        $form->handleRequest($this->request);
+
+        // Form Posted
+        if ($form->isValid()) {
+            // Store changed data
+            $this->em->persist($wall);
+            $this->em->flush();
+
+            $this->flashMessage->success('Wall has been updated');
+
+            return new RedirectResponse($this->router->generate("integrated_subscription_show_wall"));
+        }
+
+        return $this->templating->renderResponse('IntegratedSubscriptionBundle:SubscriptionWall:edit.html.twig', [
+            'form' => $form->createView()
+        ]);
     }
 
     public function showAction()

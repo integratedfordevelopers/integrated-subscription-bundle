@@ -21,13 +21,13 @@
 
     <field name="disabled" type="boolean" column="disabled" nullable="true"/>
 
+    <field name="channels" type="array" nullable="true"/>
+
     <field name="freeTier" type="string" column="freetier" length="45" nullable="true">
       <options>
         <option name="fixed"/>
       </options>
     </field>
-
-    <many-to-many field="subscriptionTypes" target-entity="SubscriptionType" mapped-by="subscriptionWall" fetch="LAZY"/>
 
   </entity>
 
