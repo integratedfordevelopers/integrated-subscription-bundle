@@ -14,6 +14,6 @@
         <default key="_controller">integrated_subscription.controller.subscription_wall:editAction</default>
     </route>
     <route id="integrated_subscription_delete_wall" path="/wall/delete/{id}">
-        <default key="_controller">IntegratedSubscriptionBundle:SubscriptionWall:delete</default>
+        <default key="_controller">integrated_subscription.controller.subscription_wall:deleteAction</default>
     </route>
 </routes>

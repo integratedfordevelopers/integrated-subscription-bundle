@@ -99,11 +99,27 @@ class SubscriptionWallController
     }
 
     /**
-     * Creates a wall
-     *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @param SubscriptionWall $wall
+     * @return RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function deleteAction()
+    public function deleteAction(SubscriptionWall $wall)
     {
+        $form = $this->form->createBuilder()
+            ->add('Delete', 'submit')
+            ->getForm();
+
+         $form->handleRequest($this->request);
+
+        if ($form->isValid()) {
+            $this->em->remove($wall);
+            $this->em->flush();
+            $this->flashMessage->success('Wall deleted');
+
+            return new RedirectResponse($this->router->generate("integrated_subscription_show_wall"));
+        }
+        
+        return $this->templating->renderResponse('IntegratedSubscriptionBundle:SubscriptionWall:delete.html.twig', [
+            'form' => $form->createView(), 'wallName'=>$wall->getName()
+        ]);
     }
 }
