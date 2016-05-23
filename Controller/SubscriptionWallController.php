@@ -92,7 +92,7 @@ class SubscriptionWallController
         $walls = $this->em
             ->getRepository('Integrated\Bundle\SubscriptionBundle\Model\SubscriptionWall')
             ->findAll();
-
+        
         return $this->templating->renderResponse('IntegratedSubscriptionBundle:SubscriptionWall:index.html.twig', [
             'walls' => $walls
         ]);
@@ -108,7 +108,7 @@ class SubscriptionWallController
             ->add('Delete', 'submit')
             ->getForm();
 
-         $form->handleRequest($this->request);
+        $form->handleRequest($this->request);
 
         if ($form->isValid()) {
             $this->em->remove($wall);
@@ -117,7 +117,7 @@ class SubscriptionWallController
 
             return new RedirectResponse($this->router->generate("integrated_subscription_show_wall"));
         }
-        
+
         return $this->templating->renderResponse('IntegratedSubscriptionBundle:SubscriptionWall:delete.html.twig', [
             'form' => $form->createView(), 'wallName'=>$wall->getName()
         ]);

@@ -41,6 +41,11 @@ class SubscriptionWallType extends AbstractType
             ['required' => false]
         );
 
+        $choices = [];
+        foreach ($this->cm->findAll() as $channel) {
+            $choices[$channel->getName()] = $channel->getName();
+        }
+
         $builder->add('channel', 'document',
             [
                 'class' => 'Integrated\Bundle\ContentBundle\Document\Channel\Channel',
