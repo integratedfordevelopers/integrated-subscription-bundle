@@ -29,8 +29,6 @@
       </options>
     </field>
 
-    <!--<many-to-many field="subscriptionTypes" target-entity="SubscriptionType" mapped-by="subscriptionWall" fetch="LAZY"/>-->
-
   </entity>
 
 </doctrine-mapping>

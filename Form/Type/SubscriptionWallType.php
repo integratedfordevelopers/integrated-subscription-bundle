@@ -52,7 +52,7 @@ class SubscriptionWallType extends AbstractType
             ['required' => false]
         );
 
-        $choices = array();
+        $choices = [];
         foreach ($this->cm->findAll() as $channel) {
             $choices[$channel->getName()] = $channel->getName();
         }

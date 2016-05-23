@@ -137,11 +137,30 @@ class SubscriptionWallController
 
     /**
      * @param SubscriptionWall $wall
+     * @return Form
+     */
+    protected function createEditForm(SubscriptionWall $wall)
+    {
+        $form = $this->form->create(
+            'integrated_subscription_wall',
+            $wall,
+            [
+                'method' => 'POST',
+            ]
+        );
+
+        $form->add('submit', 'submit', ['label' => 'Edit']);
+
+        return $form;
+    }
+
+    /**
+     * @param SubscriptionWall $wall
      * @return RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function editAction(SubscriptionWall $wall)
     {
-        $form = $this->createCreateForm($wall);
+        $form = $this->CreateEditForm($wall);
         $form->handleRequest($this->request);
 
         // Form Posted
