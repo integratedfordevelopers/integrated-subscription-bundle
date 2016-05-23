@@ -1,0 +1,24 @@
+{% extends 'IntegratedSubscriptionBundle::base.html.twig' %}
+
+{% block body %}
+    <div id="wrapper-holder">
+        <div class="container">
+            <div class="content_columns_holder">
+                <div class="content_column_inner">
+                    <div class="results">
+                        {% for flash_message in app.session.flashBag.get('notice') %}
+                            <div class="flash-notice alert alert-success">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                <strong>{{ flash_message }}</strong>
+                            </div>
+                        {% endfor %}
+
+                        {{ form(form) }}
+
+                        <a href="{{ path('integrated_subscription_show_wall') }}">Show walls</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock body %}
