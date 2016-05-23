@@ -61,16 +61,7 @@ class SubscriptionWallController
      * @var FlashMessage
      */
     protected $flashMessage;
-
-    /**
-     * SubscriptionWallController constructor.
-     * @param TwigEngine $templating
-     * @param EntityManager $em
-     * @param FormFactory $form
-     * @param RouterInterface $router
-     * @param RequestStack $requestStack
-     * @param FlashMessage $flashMessage
-     */
+    
     public function __construct(TwigEngine $templating, EntityManager $em, FormFactory $form, RouterInterface $router, RequestStack $requestStack, FlashMessage $flashMessage)
     {
         $this->templating = $templating;
