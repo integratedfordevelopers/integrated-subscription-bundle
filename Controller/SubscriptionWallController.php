@@ -1,13 +1,13 @@
 <?php
 
 /*
-* This file is part of the Integrated package.
-*
-* (c) e-Active B.V. <integrated@e-active.nl>
-*
-* For the full copyright and license information, please view the LICENSE
-* file that was distributed with this source code.
-*/
+ * This file is part of the Integrated package.
+ *
+ * (c) e-Active B.V. <integrated@e-active.nl>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace Integrated\Bundle\SubscriptionBundle\Controller;
 
@@ -33,6 +33,54 @@ use Symfony\Component\Routing\RouterInterface;
  */
 class SubscriptionWallController
 {
+    /**
+     * @var TwigEngine
+     */
+    protected $templating;
+
+    /**
+     * @var EntityManager
+     */
+    protected $em;
+
+    /**
+     * @var Request
+     */
+    protected $request;
+
+    /**
+     * @var FormFactory
+     */
+    protected $form;
+
+    /**
+     * @var RouterInterface
+     */
+    protected $router;
+
+    /**
+     * @var FlashMessage
+     */
+    protected $flashMessage;
+
+    /**
+     * SubscriptionWallController constructor.
+     * @param TwigEngine $templating
+     * @param EntityManager $em
+     * @param FormFactory $form
+     * @param RouterInterface $router
+     * @param RequestStack $requestStack
+     * @param FlashMessage $flashMessage
+     */
+    public function __construct(TwigEngine $templating, EntityManager $em, FormFactory $form, RouterInterface $router, RequestStack $requestStack, FlashMessage $flashMessage)
+    {
+        $this->templating = $templating;
+        $this->em = $em;
+        $this->request = $requestStack->getCurrentRequest();
+        $this->form = $form;
+        $this->router = $router;
+        $this->flashMessage = $flashMessage;
+    }
 
     /**
      * Lists the walls
@@ -57,24 +105,5 @@ class SubscriptionWallController
      */
     public function deleteAction()
     {
-        $form = $this->createFormBuilder($wall)
-            ->add('Delete', 'submit')
-            ->add('Cancel', 'button')
-            ->getForm();
-
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-            $em->remove($wall);
-            $em->flush();
-            $this->addFlash(
-                'notice',
-                'The wall was deleted'
-            );
-            return $this->redirectToRoute('integrated_subscription_show_wall');
-        }
-
-        $build['form'] = $form->createView();
-        return $this->render('IntegratedSubscriptionBundle:SubscriptionWall:delete.html.twig', $build);
     }
 }
