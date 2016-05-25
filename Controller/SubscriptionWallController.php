@@ -17,7 +17,6 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query;
 
 use Integrated\Bundle\SubscriptionBundle\Model\SubscriptionWall;
-use Integrated\Bundle\SubscriptionBundle\Model\WallChannel;
 
 use Symfony\Bundle\TwigBundle\TwigEngine;
 use Symfony\Component\Form\Form;
@@ -62,16 +61,7 @@ class SubscriptionWallController
      * @var FlashMessage
      */
     protected $flashMessage;
-
-    /**
-     * SubscriptionWallController constructor.
-     * @param TwigEngine $templating
-     * @param EntityManager $em
-     * @param FormFactory $form
-     * @param RouterInterface $router
-     * @param RequestStack $requestStack
-     * @param FlashMessage $flashMessage
-     */
+    
     public function __construct(TwigEngine $templating, EntityManager $em, FormFactory $form, RouterInterface $router, RequestStack $requestStack, FlashMessage $flashMessage)
     {
         $this->templating = $templating;
@@ -92,7 +82,7 @@ class SubscriptionWallController
         $walls = $this->em
             ->getRepository('Integrated\Bundle\SubscriptionBundle\Model\SubscriptionWall')
             ->findAll();
-
+        
         return $this->templating->renderResponse('IntegratedSubscriptionBundle:SubscriptionWall:index.html.twig', [
             'walls' => $walls
         ]);
@@ -104,22 +94,10 @@ class SubscriptionWallController
      */
     public function deleteAction(SubscriptionWall $wall)
     {
-        $form = $this->form->createBuilder()
-            ->add('Delete', 'submit')
-            ->getForm();
+        $this->em->remove($wall);
+        $this->em->flush();
+        $this->flashMessage->success('Wall deleted');
 
-         $form->handleRequest($this->request);
-
-        if ($form->isValid()) {
-            $this->em->remove($wall);
-            $this->em->flush();
-            $this->flashMessage->success('Wall deleted');
-
-            return new RedirectResponse($this->router->generate("integrated_subscription_show_wall"));
-        }
-        
-        return $this->templating->renderResponse('IntegratedSubscriptionBundle:SubscriptionWall:delete.html.twig', [
-            'form' => $form->createView(), 'wallName'=>$wall->getName()
-        ]);
+        return new RedirectResponse($this->router->generate("integrated_subscription_show_wall"));
     }
 }
