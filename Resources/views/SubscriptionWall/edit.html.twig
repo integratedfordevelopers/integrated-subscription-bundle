@@ -1,15 +1,18 @@
-{% extends 'IntegratedSubscriptionBundle::base.html.twig' %}
+{% extends 'IntegratedContentBundle::base.html.twig' %}
 
-{% block body %}
+{% block content %}
     <div id="wrapper-holder">
         <div class="container">
             <div class="content_columns_holder">
                 <div class="content_column_inner">
-                    {{ form(form) }}
+                    <div class="results">
 
-                    <a href="{{ path('integrated_subscription_show_wall') }}">Show walls</a>
+                        {{ form(form) }}
+
+                        <a href="{{ path('integrated_subscription_show_wall') }}">Show walls</a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-{% endblock body %}
+{% endblock %}

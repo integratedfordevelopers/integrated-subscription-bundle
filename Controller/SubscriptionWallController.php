@@ -123,13 +123,29 @@ class SubscriptionWallController
             'integrated_subscription_wall',
             $wall,
             [
-                'action' => $this->router->generate('integrated_subscription_create_wall'),
                 'method' => 'POST',
             ]
         );
 
         $form->add('submit', 'submit', ['label' => 'Create']);
 
+        return $form;
+    }
+
+    /**
+     * @param SubscriptionWall $wall
+     * @return Form
+     */
+    protected function createEditForm(SubscriptionWall $wall)
+    {
+        $form = $this->form->create(
+            'integrated_subscription_wall',
+            $wall,
+            [
+                'method' => 'POST',
+            ]
+        );
+        $form->add('submit', 'submit', ['label' => 'Edit']);
         return $form;
     }
 
@@ -158,7 +174,11 @@ class SubscriptionWallController
         ]);
     }
 
-    public function deleteAction()
+    /**
+     * @param SubscriptionWall $wall
+     * @return RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
+    public function deleteAction(SubscriptionWall $wall)
     {
         $this->em->remove($wall);
         $this->em->flush();
