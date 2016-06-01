@@ -32,5 +32,6 @@ class IntegratedSubscriptionExtension extends Extension
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('controllers.xml');
         $loader->load('form.xml');
+        $loader->load('checker.xml');
     }
 }
