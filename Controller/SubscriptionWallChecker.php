@@ -62,7 +62,6 @@ class SubscriptionWallChecker
      */
     public function isBlocked(ContentInterface $article)
     {
-        $user = $this->token->getToken()->getUser();
         $channel = $this->channel->getChannel();
 
         $query = "SELECT * FROM subscription_wall WHERE channels LIKE '%".$channel->getName()."%'";
