@@ -69,7 +69,7 @@ class SubscriptionWallChecker
         $walls = $this->em->getConnection()->prepare($query);
         $walls->execute();
 
-        if($walls->rowCount() > 0) {
+        if ($walls->rowCount() > 0) {
             return true;
         }
         return false;
