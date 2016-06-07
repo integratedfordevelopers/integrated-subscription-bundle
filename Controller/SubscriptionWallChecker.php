@@ -73,4 +73,9 @@ class SubscriptionWallChecker
         }
         return false;
     }
+
+    public function isLoggedIn()
+    {
+        
+    }
 }
