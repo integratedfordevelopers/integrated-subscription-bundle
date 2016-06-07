@@ -17,8 +17,8 @@ use Doctrine\ORM\Query;
 use Integrated\Bundle\ContentBundle\Document\Content\Article;
 use Integrated\Bundle\SubscriptionBundle\Model\SubscriptionWall;
 use Integrated\Common\Content\Channel\ChannelContextInterface;
-
 use Integrated\Common\Content\ContentInterface;
+
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
@@ -74,8 +74,12 @@ class SubscriptionWallChecker
         return false;
     }
 
+    /**
+     * @return bool
+     */
     public function isLoggedIn()
     {
-        
+        $user = $this->token->getToken()->getUser();
+        return is_object($user);
     }
 }
