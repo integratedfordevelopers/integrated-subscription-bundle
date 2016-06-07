@@ -14,8 +14,8 @@
 
         <service id="integrated_subscription.controller.subscription_wall_checker" class="%integrated_subscription.controller.subscription_wall_checker.class%">
             <argument id="integrated_content.channel.context" type="service"/>
-            <argument id="security.token_storage" type="service"/>
             <argument id="integrated_workflow.extension.doctrine.object_manager" type="service"/>
+            <argument id="security.authorization_checker" type="service"/>
         </service>
 
     </services>

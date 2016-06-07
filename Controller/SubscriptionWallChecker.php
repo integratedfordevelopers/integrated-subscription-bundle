@@ -21,6 +21,7 @@ use Integrated\Common\Content\ContentInterface;
 
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 
 /**
  * @author Jacob de Graaf <jacob.de.graaf@windesheim.nl>
@@ -35,26 +36,26 @@ class SubscriptionWallChecker
     protected $channel;
 
     /**
-     * @var TokenStorageInterface
-     */
-    protected $token;
-
-    /**
      * @var EntityManager
      */
     protected $em;
 
     /**
+     * @var AuthorizationChecker
+     */
+    protected $ac;
+
+    /**
      * SubscriptionPaywallChecker constructor.
      * @param ChannelContextInterface $channel
-     * @param TokenStorageInterface $token
      * @param EntityManager $em
+     * @param AuthorizationChecker $ac
      */
-    public function __construct(ChannelContextInterface $channel, TokenStorageInterface $token, EntityManager $em)
+    public function __construct(ChannelContextInterface $channel, EntityManager $em, AuthorizationChecker $ac)
     {
         $this->channel = $channel;
-        $this->token = $token;
         $this->em = $em;
+        $this->ac = $ac;
     }
 
     /**
@@ -79,7 +80,6 @@ class SubscriptionWallChecker
      */
     public function isLoggedIn()
     {
-        $user = $this->token->getToken()->getUser();
-        return is_object($user);
+        return $this->ac->isGranted('IS_AUTHENTICATED_FULLY');
     }
 }
