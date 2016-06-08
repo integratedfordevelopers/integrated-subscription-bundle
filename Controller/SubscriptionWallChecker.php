@@ -17,10 +17,11 @@ use Doctrine\ORM\Query;
 use Integrated\Bundle\ContentBundle\Document\Content\Article;
 use Integrated\Bundle\SubscriptionBundle\Model\SubscriptionWall;
 use Integrated\Common\Content\Channel\ChannelContextInterface;
-
 use Integrated\Common\Content\ContentInterface;
+
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 
 /**
  * @author Jacob de Graaf <jacob.de.graaf@windesheim.nl>
@@ -35,26 +36,26 @@ class SubscriptionWallChecker
     protected $channel;
 
     /**
-     * @var TokenStorageInterface
-     */
-    protected $token;
-
-    /**
      * @var EntityManager
      */
-    protected $em;
+    protected $entityManager;
+
+    /**
+     * @var AuthorizationChecker
+     */
+    protected $authorizationChecker;
 
     /**
      * SubscriptionPaywallChecker constructor.
      * @param ChannelContextInterface $channel
-     * @param TokenStorageInterface $token
-     * @param EntityManager $em
+     * @param EntityManager $entityManager
+     * @param AuthorizationChecker $authorizationChecker
      */
-    public function __construct(ChannelContextInterface $channel, TokenStorageInterface $token, EntityManager $em)
+    public function __construct(ChannelContextInterface $channel, EntityManager $entityManager, AuthorizationChecker $authorizationChecker)
     {
         $this->channel = $channel;
-        $this->token = $token;
-        $this->em = $em;
+        $this->entityManager = $entityManager;
+        $this->authorizationChecker = $authorizationChecker;
     }
 
     /**
@@ -62,11 +63,10 @@ class SubscriptionWallChecker
      */
     public function isBlocked(ContentInterface $article)
     {
-        $user = $this->token->getToken()->getUser();
         $channel = $this->channel->getChannel();
 
         $query = "SELECT * FROM subscription_wall WHERE channels LIKE '%".$channel->getName()."%'";
-        $walls = $this->em->getConnection()->prepare($query);
+        $walls = $this->entityManager->getConnection()->prepare($query);
         $walls->execute();
 
         if ($walls->rowCount() > 0) {
@@ -74,4 +74,13 @@ class SubscriptionWallChecker
         }
         return false;
     }
+
+    /**
+     * @return bool
+     */
+    public function isLoggedIn()
+    {
+        return $this->authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY');
+    }
+
 }
