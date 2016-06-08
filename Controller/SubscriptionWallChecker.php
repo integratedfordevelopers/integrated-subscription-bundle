@@ -38,24 +38,24 @@ class SubscriptionWallChecker
     /**
      * @var EntityManager
      */
-    protected $em;
+    protected $entityManager;
 
     /**
      * @var AuthorizationChecker
      */
-    protected $ac;
+    protected $authorizationChecker;
 
     /**
      * SubscriptionPaywallChecker constructor.
      * @param ChannelContextInterface $channel
-     * @param EntityManager $em
-     * @param AuthorizationChecker $ac
+     * @param EntityManager $entityManager
+     * @param AuthorizationChecker $authorizationChecker
      */
-    public function __construct(ChannelContextInterface $channel, EntityManager $em, AuthorizationChecker $ac)
+    public function __construct(ChannelContextInterface $channel, EntityManager $entityManager, AuthorizationChecker $authorizationChecker)
     {
         $this->channel = $channel;
-        $this->em = $em;
-        $this->ac = $ac;
+        $this->entityManager = $entityManager;
+        $this->authorizationChecker = $authorizationChecker;
     }
 
     /**
@@ -66,7 +66,7 @@ class SubscriptionWallChecker
         $channel = $this->channel->getChannel();
 
         $query = "SELECT * FROM subscription_wall WHERE channels LIKE '%".$channel->getName()."%'";
-        $walls = $this->em->getConnection()->prepare($query);
+        $walls = $this->entityManager->getConnection()->prepare($query);
         $walls->execute();
 
         if ($walls->rowCount() > 0) {
@@ -80,6 +80,7 @@ class SubscriptionWallChecker
      */
     public function isLoggedIn()
     {
-        return $this->ac->isGranted('IS_AUTHENTICATED_FULLY');
+        return $this->authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY');
     }
+
 }
