@@ -61,10 +61,7 @@ class SubscriptionWallController
      * @var FlashMessage
      */
     protected $flashMessage;
-
-    /**
-     * @param TwigEngine $templating
-     */
+    
     public function __construct(TwigEngine $templating, EntityManager $em, FormFactory $form, RouterInterface $router, RequestStack $requestStack, FlashMessage $flashMessage)
     {
         $this->templating = $templating;
@@ -148,9 +145,7 @@ class SubscriptionWallController
                 'method' => 'POST',
             ]
         );
-
         $form->add('submit', 'submit', ['label' => 'Edit']);
-
         return $form;
     }
 
@@ -179,11 +174,16 @@ class SubscriptionWallController
         ]);
     }
 
-    public function showAction()
+    /**
+     * @param SubscriptionWall $wall
+     * @return RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
+    public function deleteAction(SubscriptionWall $wall)
     {
-    }
+        $this->em->remove($wall);
+        $this->em->flush();
+        $this->flashMessage->success('Wall deleted');
 
-    public function deleteAction()
-    {
+        return new RedirectResponse($this->router->generate("integrated_subscription_show_wall"));
     }
 }

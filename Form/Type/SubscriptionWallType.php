@@ -26,7 +26,6 @@ class SubscriptionWallType extends AbstractType
      * @var ChannelManager
      */
     protected $cm;
-
     public function __construct(ChannelManager $cm)
     {
         $this->cm = $cm;
@@ -56,7 +55,6 @@ class SubscriptionWallType extends AbstractType
         foreach ($this->cm->findAll() as $channel) {
             $choices[$channel->getName()] = $channel->getName();
         }
-
         $builder->add('channels', 'choice',
             [
                 'choices' => $choices,
