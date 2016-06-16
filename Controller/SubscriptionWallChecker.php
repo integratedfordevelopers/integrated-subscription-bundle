@@ -88,28 +88,32 @@ class SubscriptionWallChecker
      */
     public function hasProperSubscription()
     {
-        $relationId = $this->ts->getToken()->getUser()->getRelation()->getId();
-        $subscribedSubscriptions = $this->em
-            ->getRepository('Integrated\Bundle\SubscriptionBundle\Model\Subscription')
-            ->findByRelation($relationId);
+        if ($this->isLoggedIn()) {
+            $relationId = $this->ts->getToken()->getUser()->getRelation()->getId();
+            $subscribedSubscriptions = $this->em
+                ->getRepository('Integrated\Bundle\SubscriptionBundle\Model\Subscription')
+                ->findByRelation($relationId);
 
-        $subscribedWalls = [];
-        foreach ($subscribedSubscriptions as $subscription) {
-            $wallsOfOneSubscription = $subscription->getType()->getSubscriptionWalls();
+            $subscribedWalls = [];
+            foreach ($subscribedSubscriptions as $subscription) {
+                $wallsOfOneSubscription = $subscription->getType()->getSubscriptionWalls();
 
-            foreach ($wallsOfOneSubscription as $wall) {
-                $subscribedWalls[] = $wall->getId();
+                foreach ($wallsOfOneSubscription as $wall) {
+                    $subscribedWalls[] = $wall->getId();
+                }
             }
+
+            $wallsThatBlockArticle = $this->getWallsThatBlockArticle();
+
+            foreach ($wallsThatBlockArticle as $wallThatBlocksArticle) {
+                if (in_array($wallThatBlocksArticle->getId(), $subscribedWalls)) {
+                    return true;
+                }
+            };
+            return false;
+        } else {
+            return false;
         }
-
-        $wallsThatBlockArticle = $this->getWallsThatBlockArticle();
-        foreach ($wallsThatBlockArticle as $wallThatBlocksArticle) {
-            if (in_array($wallThatBlocksArticle['id'], $subscribedWalls)) {
-                return true;
-            }
-//            return $wallThatBlocksArticle;
-        };
-        return false;
     }
 
     /**
