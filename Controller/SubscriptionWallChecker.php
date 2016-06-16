@@ -46,16 +46,22 @@ class SubscriptionWallChecker
     protected $ac;
 
     /**
+     * @var TokenStorageInterface
+     */
+    protected $ts;
+    /**
      * SubscriptionPaywallChecker constructor.
      * @param ChannelContextInterface $channel
      * @param EntityManager $em
      * @param AuthorizationChecker $ac
+     * @param TokenStorageInterface $ts
      */
-    public function __construct(ChannelContextInterface $channel, EntityManager $em, AuthorizationChecker $ac)
+    public function __construct(ChannelContextInterface $channel, EntityManager $em, AuthorizationChecker $ac, TokenStorageInterface $ts)
     {
         $this->channel = $channel;
         $this->em = $em;
         $this->ac = $ac;
+        $this->ts = $ts;
     }
 
     /**
@@ -81,5 +87,11 @@ class SubscriptionWallChecker
     public function isLoggedIn()
     {
         return $this->ac->isGranted('IS_AUTHENTICATED_FULLY');
+    }
+
+    public function hasProperSubscription()
+    {
+        $person = $this->ts->getToken()->getUser()->getRelation()->getId();
+        return $person;
     }
 }
