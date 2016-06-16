@@ -14,6 +14,8 @@
 
         <service id="integrated_subscription.controller.subscription_wall_process" class="%integrated_subscription.controller.subscription_wall_process.class%">
             <argument type="service" id="templating" />
+            <argument type="service" id="form.factory" />
+            <argument type="service" id="router" />
         </service>
 
     </services>
