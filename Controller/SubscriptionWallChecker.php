@@ -69,13 +69,7 @@ class SubscriptionWallChecker
      */
     public function isBlocked(ContentInterface $article)
     {
-        $channel = $this->channel->getChannel();
-
-        $query = "SELECT * FROM subscription_wall WHERE channels LIKE '%".$channel->getName()."%'";
-        $walls = $this->em->getConnection()->prepare($query);
-        $walls->execute();
-
-        if ($walls->rowCount() > 0) {
+        if (count($this->getWallsThatBlockArticle()) > 0) {
             return true;
         }
         return false;
@@ -89,9 +83,51 @@ class SubscriptionWallChecker
         return $this->ac->isGranted('IS_AUTHENTICATED_FULLY');
     }
 
+    /**
+     * @return mixed
+     */
     public function hasProperSubscription()
     {
-        $person = $this->ts->getToken()->getUser()->getRelation()->getId();
-        return $person;
+        $relationId = $this->ts->getToken()->getUser()->getRelation()->getId();
+        $subscribedSubscriptions = $this->em
+            ->getRepository('Integrated\Bundle\SubscriptionBundle\Model\Subscription')
+            ->findByRelation($relationId);
+
+        $subscribedWalls = [];
+        foreach ($subscribedSubscriptions as $subscription) {
+            $wallsOfOneSubscription = $subscription->getType()->getSubscriptionWalls();
+
+            foreach ($wallsOfOneSubscription as $wall) {
+                $subscribedWalls[] = $wall->getId();
+            }
+        }
+
+        $wallsThatBlockArticle = $this->getWallsThatBlockArticle();
+        foreach ($wallsThatBlockArticle as $wallThatBlocksArticle) {
+            if (in_array($wallThatBlocksArticle['id'], $subscribedWalls)) {
+                return true;
+            }
+//            return $wallThatBlocksArticle;
+        };
+        return false;
+    }
+
+    /**
+     * @return array
+     * @throws \Doctrine\DBAL\DBALException
+     */
+    public function getWallsThatBlockArticle()
+    {
+        $channel = $this->channel->getChannel();
+
+        $q = $this->em->getRepository('Integrated\Bundle\SubscriptionBundle\Model\SubscriptionWall')
+            ->createQueryBuilder('sw');
+
+        $q
+            ->where('sw.channels LIKE :channels')
+            ->setParameter('channels', sprintf('%%%s%%', $channel->getName()))
+            ->andWhere('sw.disabled = false');
+
+        return $walls = $q->getQuery()->getResult();
     }
 }

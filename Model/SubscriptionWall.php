@@ -56,6 +56,9 @@ class SubscriptionWall
      */
     protected $subscriptionTypes;
 
+    /**
+     * SubscriptionWall constructor.
+     */
     public function __construct()
     {
         $this->subscriptionTypes = new ArrayCollection();
@@ -138,7 +141,7 @@ class SubscriptionWall
     }
 
     /**
-     * @param string $freetier
+     * @param string $freeTier
      * @return SubscriptionWall
      */
     public function setFreetier($freeTier)
