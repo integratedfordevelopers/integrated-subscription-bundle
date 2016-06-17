@@ -1,0 +1,65 @@
+{% if blocked is defined and blocked == true %}
+    <script>
+        $(document).on("click",".goBack", function() {
+            $('#loginModal').modal('hide');
+            $('#blockedModal').modal({
+                keyboard: false,
+                backdrop: 'static'
+            });
+        });
+        $(document).on("click",".login",function(){
+            $('#blockedModal').modal('hide');
+            $('#loginModal').modal({
+                keyboard: false,
+                backdrop: 'static'
+            });
+        });
+
+        {% if app.request.get("failure") is not null %}
+        $( document ).ready(function() {
+        $('#blockedModal').modal('hide');
+            $('#loginModal').modal({
+                keyboard: false,
+                backdrop: 'static'
+            });
+        });
+        {% endif %}
+    </script>
+    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 align="center">{% trans %}Login{% endtrans %}</h3>
+                </div>
+                <div class="modal-body" align="center">
+                    {{ form_start(form, {'attr': {'id': 'login'}, 'style': 'horizontal'}) }}
+
+                    <input type="hidden" value="{{ url(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) }}?success" name="_target_path" />
+                    <input type="hidden" value="{{ url(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) }}?failure" name="_failure_path" />
+
+                    {% if app.request.get("failure") is not null %}
+                    <div class="modal-header">
+                        <h4 class="modal-title">
+                            <b>{% trans %}Login failed{% endtrans %}</b>
+                        </h4>
+                    </div>
+                    {% endif %}
+
+                    <div class="modal-body">
+
+                        {{ form_widget(form) }}
+
+                    </div>
+
+                    {{ form_end(form) }}
+                </div>
+                <div class="modal-footer">
+                    {% trans %}Don't have an account yet?{% endtrans %}
+                    <a href="#" class="plans btn btn-primary">{% trans %}See the plans{% endtrans %}</a>
+                    <a href="#" class="goBack btn btn-default">{% trans %}Go back{% endtrans %}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}
+
