@@ -14,12 +14,11 @@ namespace Integrated\Bundle\SubscriptionBundle\Controller;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query;
 
-use Integrated\Bundle\ContentBundle\Document\Content\Article;
+use Integrated\Bundle\SubscriptionBundle\Model\Subscription;
 use Integrated\Bundle\SubscriptionBundle\Model\SubscriptionWall;
 use Integrated\Common\Content\Channel\ChannelContextInterface;
 use Integrated\Common\Content\ContentInterface;
 
-use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 
@@ -67,15 +66,9 @@ class SubscriptionWallChecker
     /**
      * @return bool
      */
-    public function isBlocked(ContentInterface $article)
+    public function isBlocked()
     {
-        $channel = $this->channel->getChannel();
-
-        $query = "SELECT * FROM subscription_wall WHERE channels LIKE '%".$channel->getName()."%'";
-        $walls = $this->em->getConnection()->prepare($query);
-        $walls->execute();
-
-        if ($walls->rowCount() > 0) {
+        if (count($this->getWallsThatBlockArticle()) > 0) {
             return true;
         }
         return false;
@@ -89,9 +82,56 @@ class SubscriptionWallChecker
         return $this->ac->isGranted('IS_AUTHENTICATED_FULLY');
     }
 
+    /**
+     * @return mixed
+     */
     public function hasProperSubscription()
     {
-        $person = $this->ts->getToken()->getUser()->getRelation()->getId();
-        return $person;
+        if ($this->isLoggedIn()) {
+            $relationId = $this->ts->getToken()->getUser()->getRelation()->getId();
+            //Get subscription of person
+            $subscribedSubscriptions = $this->em
+                ->getRepository(Subscription::class)
+                ->findByRelation($relationId);
+
+            $subscribedWalls = [];
+            //Get a list of walls which person has access to
+            foreach ($subscribedSubscriptions as $subscription) {
+                $wallsOfOneSubscription = $subscription->getType()->getSubscriptionWalls();
+
+                foreach ($wallsOfOneSubscription as $wall) {
+                    $subscribedWalls[] = $wall->getId();
+                }
+            }
+            //Get walls that are blocking article
+            $wallsThatBlockArticle = $this->getWallsThatBlockArticle();
+            //See if person is allowed to view article protected by the walls
+            foreach ($wallsThatBlockArticle as $wallThatBlocksArticle) {
+                if (in_array($wallThatBlocksArticle->getId(), $subscribedWalls)) {
+                    return true;
+                }
+            };
+            return false;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * @return array
+     * @throws \Doctrine\DBAL\DBALException
+     */
+    public function getWallsThatBlockArticle()
+    {
+        $channel = $this->channel->getChannel();
+
+        $q = $this->em->getRepository(SubscriptionWall::class)
+            ->createQueryBuilder('sw');
+
+        $q  ->where('sw.channels LIKE :channels')
+            ->setParameter('channels', sprintf('%%%s%%', $channel->getName()))
+            ->andWhere('sw.disabled = false');
+
+        return $walls = $q->getQuery()->getResult();
     }
 }
