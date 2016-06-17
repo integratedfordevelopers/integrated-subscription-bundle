@@ -14,12 +14,11 @@ namespace Integrated\Bundle\SubscriptionBundle\Controller;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query;
 
-use Integrated\Bundle\ContentBundle\Document\Content\Article;
+use Integrated\Bundle\SubscriptionBundle\Model\Subscription;
 use Integrated\Bundle\SubscriptionBundle\Model\SubscriptionWall;
 use Integrated\Common\Content\Channel\ChannelContextInterface;
 use Integrated\Common\Content\ContentInterface;
 
-use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 
@@ -90,11 +89,13 @@ class SubscriptionWallChecker
     {
         if ($this->isLoggedIn()) {
             $relationId = $this->ts->getToken()->getUser()->getRelation()->getId();
+            //Get subscription of person
             $subscribedSubscriptions = $this->em
-                ->getRepository('Integrated\Bundle\SubscriptionBundle\Model\Subscription')
+                ->getRepository(Subscription::class)
                 ->findByRelation($relationId);
 
             $subscribedWalls = [];
+            //Get a list of walls which person has access to
             foreach ($subscribedSubscriptions as $subscription) {
                 $wallsOfOneSubscription = $subscription->getType()->getSubscriptionWalls();
 
@@ -102,9 +103,9 @@ class SubscriptionWallChecker
                     $subscribedWalls[] = $wall->getId();
                 }
             }
-
+            //Get walls that are blocking article
             $wallsThatBlockArticle = $this->getWallsThatBlockArticle();
-
+            //See if person is allowed to view article protected by the walls
             foreach ($wallsThatBlockArticle as $wallThatBlocksArticle) {
                 if (in_array($wallThatBlocksArticle->getId(), $subscribedWalls)) {
                     return true;
@@ -124,7 +125,7 @@ class SubscriptionWallChecker
     {
         $channel = $this->channel->getChannel();
 
-        $q = $this->em->getRepository('Integrated\Bundle\SubscriptionBundle\Model\SubscriptionWall')
+        $q = $this->em->getRepository(SubscriptionWall::class)
             ->createQueryBuilder('sw');
 
         $q

@@ -83,7 +83,7 @@ class SubscriptionWallController
     public function indexAction()
     {
         $walls = $this->em
-            ->getRepository('Integrated\Bundle\SubscriptionBundle\Model\SubscriptionWall')
+            ->getRepository(SubscriptionWall::class)
             ->findAll();
 
         return $this->templating->renderResponse('IntegratedSubscriptionBundle:SubscriptionWall:index.html.twig', [
