@@ -84,11 +84,25 @@ class SubscriptionWallChecker
     /**
      * @return bool
      */
+    private function _getRelationId()
+    {
+        if ($token = $this->ts->getToken()) {
+            if ($user = $token->getUser()) {
+                if ($relation = $user->getRelation()) {
+                    return $relation->getId();
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * @return bool
+     */
     public function hasProperSubscription()
     {
         if ($this->isLoggedIn()) {
-            if ($this->ts->getToken()->getUser() != null && $this->ts->getToken()->getUser()->getRelation() != null && $this->ts->getToken()->getUser()->getRelation()->getId()) {
-                $relationId = $this->ts->getToken()->getUser()->getRelation()->getId();
+            if ($relationId = $this->_getRelationId()) {
                 //Get subscription of person
                 $subscribedSubscriptions = $this->em
                     ->getRepository(Subscription::class)
