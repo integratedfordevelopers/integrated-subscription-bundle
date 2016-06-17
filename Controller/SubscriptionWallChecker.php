@@ -81,7 +81,7 @@ class SubscriptionWallChecker
     /**
      * @return bool
      */
-    public function isBlocked()
+    private function isBlocked()
     {
         if (count($this->getWallsThatBlockArticle()) > 0) {
             return true;
