@@ -33,5 +33,6 @@ class IntegratedSubscriptionExtension extends Extension
         $loader->load('controllers.xml');
         $loader->load('form.xml');
         $loader->load('checker.xml');
+        $loader->load('process.xml');
     }
 }

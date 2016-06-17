@@ -16,6 +16,7 @@
             <argument id="integrated_content.channel.context" type="service"/>
             <argument id="integrated_workflow.extension.doctrine.object_manager" type="service"/>
             <argument id="security.authorization_checker" type="service"/>
+            <argument id="security.token_storage" type="service"/>
         </service>
 
     </services>

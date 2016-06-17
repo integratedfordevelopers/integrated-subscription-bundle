@@ -38,38 +38,38 @@ class SubscriptionWallChecker
     /**
      * @var EntityManager
      */
-    protected $entityManager;
+    protected $em;
 
     /**
      * @var AuthorizationChecker
      */
-    protected $authorizationChecker;
+    protected $ac;
 
+    /**
+     * @var TokenStorageInterface
+     */
+    protected $ts;
     /**
      * SubscriptionPaywallChecker constructor.
      * @param ChannelContextInterface $channel
-     * @param EntityManager $entityManager
-     * @param AuthorizationChecker $authorizationChecker
+     * @param EntityManager $em
+     * @param AuthorizationChecker $ac
+     * @param TokenStorageInterface $ts
      */
-    public function __construct(ChannelContextInterface $channel, EntityManager $entityManager, AuthorizationChecker $authorizationChecker)
+    public function __construct(ChannelContextInterface $channel, EntityManager $em, AuthorizationChecker $ac, TokenStorageInterface $ts)
     {
         $this->channel = $channel;
-        $this->entityManager = $entityManager;
-        $this->authorizationChecker = $authorizationChecker;
+        $this->em = $em;
+        $this->ac = $ac;
+        $this->ts = $ts;
     }
 
     /**
      * @return bool
      */
-    public function isBlocked(ContentInterface $article)
+    public function isBlocked()
     {
-        $channel = $this->channel->getChannel();
-
-        $query = "SELECT * FROM subscription_wall WHERE channels LIKE '%".$channel->getName()."%'";
-        $walls = $this->entityManager->getConnection()->prepare($query);
-        $walls->execute();
-
-        if ($walls->rowCount() > 0) {
+        if (count($this->getWallsThatBlockArticle()) > 0) {
             return true;
         }
         return false;
@@ -80,7 +80,30 @@ class SubscriptionWallChecker
      */
     public function isLoggedIn()
     {
-        return $this->authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY');
+        return $this->ac->isGranted('IS_AUTHENTICATED_FULLY');
     }
 
+    public function hasProperSubscription()
+    {
+        $person = $this->ts->getToken()->getUser()->getRelation()->getId();
+        return $person;
+    }
+
+    /**
+     * @return array
+     * @throws \Doctrine\DBAL\DBALException
+     */
+    public function getWallsThatBlockArticle()
+    {
+        $channel = $this->channel->getChannel();
+
+        $q = $this->em->getRepository(SubscriptionWall::class)
+            ->createQueryBuilder('sw');
+
+        $q  ->where('sw.channels LIKE :channels')
+            ->setParameter('channels', sprintf('%%%s%%', $channel->getName()))
+            ->andWhere('sw.disabled = false');
+
+        return $walls = $q->getQuery()->getResult();
+    }
 }
