@@ -66,7 +66,22 @@ class SubscriptionWallChecker
     /**
      * @return bool
      */
-    public function isBlocked()
+    public function needWall()
+    {
+        if ($this->isBlocked()) {
+            if ($this->hasProperSubscription()) {
+                return false;
+            }
+        } else {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * @return bool
+     */
+    private function isBlocked()
     {
         if (count($this->getWallsThatBlockArticle()) > 0) {
             return true;
@@ -85,7 +100,7 @@ class SubscriptionWallChecker
     /**
      * @return mixed
      */
-    public function hasProperSubscription()
+    private function hasProperSubscription()
     {
         if ($this->isLoggedIn()) {
             $relationId = $this->ts->getToken()->getUser()->getRelation()->getId();
@@ -121,7 +136,7 @@ class SubscriptionWallChecker
      * @return array
      * @throws \Doctrine\DBAL\DBALException
      */
-    public function getWallsThatBlockArticle()
+    private function getWallsThatBlockArticle()
     {
         $channel = $this->channel->getChannel();
 
