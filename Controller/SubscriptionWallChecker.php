@@ -64,6 +64,7 @@ class SubscriptionWallChecker
     }
 
     /**
+     * @param ContentInterface $article
      * @return bool
      */
     public function isBlocked(ContentInterface $article)
@@ -130,6 +131,24 @@ class SubscriptionWallChecker
 
         $q
             ->where('sw.channels LIKE :channels')
+            ->setParameter('channels', sprintf('%%%s%%', $channel->getName()))
+            ->andWhere('sw.disabled = false');
+
+        return $walls = $q->getQuery()->getResult();
+    }
+
+    /**
+     * @return array
+     * @throws \Doctrine\DBAL\DBALException
+     */
+    public function getWallsThatBlockArticle()
+    {
+        $channel = $this->channel->getChannel();
+
+        $q = $this->em->getRepository(SubscriptionWall::class)
+            ->createQueryBuilder('sw');
+
+        $q  ->where('sw.channels LIKE :channels')
             ->setParameter('channels', sprintf('%%%s%%', $channel->getName()))
             ->andWhere('sw.disabled = false');
 
