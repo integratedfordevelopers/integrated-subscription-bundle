@@ -70,7 +70,7 @@ class SubscriptionWallChecker
      */
     public function isBlocked(ContentInterface $article)
     {
-        if(count($this->getWallsThatBlockArticle()) > 0) {
+        if (count($this->getWallsThatBlockArticle()) > 0) {
             return true;
         }
         return false;
